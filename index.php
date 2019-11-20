@@ -1,4 +1,5 @@
 <?php phpinfo(); ?>
+<?php echo "555"; ?>
 <!DOCTYPE html>
 <html>
 <head>
