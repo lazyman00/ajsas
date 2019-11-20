@@ -1,9 +1,5 @@
 <?php  include('../../connect/connect.php'); ?>
-<?php 
-        $sql = "SELECT * FROM `type_article`";  
-        $query = $conn->query($sql);
-        $conn->close();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('header.php'); ?>
@@ -24,7 +20,12 @@
 
 <body>
 	<?php include('menu.php'); ?>
-	<?php include('menu_index.php'); ?>
+    <?php include('menu_index.php'); ?>
+    <?php 
+        $sql = "SELECT * FROM `type_article`";  
+        $query = $conn->query($sql);
+        $conn->close();
+    ?>
 	<div class="container">
 		
 		<div class="card" >
@@ -35,11 +36,44 @@
                                           <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลเกี่ยวกับบทความ</h7></li>
                                         </ol>
                                       </nav>
-                          <!-- <h5 class="card-title">ข้อมูลเกี่ยวกับบทความ</h5> -->
                           
                           <form role="form" action="insert_article.php" method="post" enctype="multipart/form-data">
                           <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
+                                        <div class="row" style="height: 46px;">
+                                            <div class="col-md-4 mb-3" style="text-align:right">
+                                                <label for="name" class="a" >ปี<span style="color: red">*</span></label>                                                
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                            <select name="semester" class="form-control" style="width: 100px;" required>
+                                                <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
+                                                    ปี
+                                                </option>
+                                                <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
+                                                    2562
+                                                </option>
+                                                <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
+                                                    2563
+                                                </option>
+                                            </select>                                                                                    
+                                            </div>    
+                                            <div class="col-md-1 mb-3" style="text-align:right">
+                                                <label for="name" class="a" >ฉบับที่<span style="color: red">*</span></label>                                                
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                            <select name="semester" class="form-control" style="width: 100px;" required>
+                                                <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
+                                                    ปี
+                                                </option>
+                                                <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
+                                                    1
+                                                </option>
+                                                <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
+                                                    2
+                                                </option>
+                                            </select>                                                                                    
+                                            </div>                                      
+                                        </div>
                                         <div class="row" style="height: 46px;">
                                             <div class="col-md-4 mb-3" style="text-align:right">
                                                 <label for="name" class="a" >สาขา<span style="color: red">*</span></label>                                                
@@ -97,20 +131,6 @@
                                                 <span style="color:#778899">(กรุณาพิมพ์บทคัดย่อลงในช่องข้อมูล)</span>
                                             </div>                                            
                                         </div>
-                                        <!-- <div class="row" style="height: 469px;">
-                                            <div class="col-md-4 mb-3" style="text-align:right">
-                                                <label for="name">บทคัดย่อ(ภาษาอังกฤษ)<span style="color: red">*</span> </label>                                                
-                                            </div>
-                                            <div class="col-md-6 mb-3" >
-                                                <textarea name="detail_en" id="detail_en"></textarea>
-                                            </div>                                            
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 mb-3"></div>
-                                            <div class="col-md-6 mb-3">
-                                                <span style="color:#778899">(กรุณาพิมพ์บทคัดย่อลงในช่องข้อมูล)</span>
-                                            </div>                                            
-                                        </div> -->
                                         <div class="row" style="height: 33px;">
                                             <div class="col-md-4 mb-3" style="text-align:right">
                                                 <label for="name">คำสำคัญ(ภาษาไทย)<span style="color: red">*</span></label>                                                
@@ -140,7 +160,6 @@
                                             </div>                                            
                                         </div>
                                         <hr class="mb-4">
-                                    <!-- </form> -->
                                 </div>
                             </div> 
 
@@ -150,10 +169,9 @@
                                       <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลผู้แต่งบทความร่วม</h7></li>
                                     </ol>
                                   </nav>
-                            <!-- <h5 class="card-title">ข้อมูลผู้แต่งบทความร่วม</h5> -->
+
                           <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
-                                    <!-- <form class="needs-validation" novalidate> -->
                                         <div class="row" style="height: 38px;">
                                             <div class="col-md-4 mb-3">                                               
                                             </div>
@@ -171,7 +189,6 @@
                                             </div>                                         
                                         </div>
                                         <hr class="mb-4">
-                                    <!-- </form> -->
                                 </div>
                             </div>
 
@@ -180,7 +197,6 @@
                                       <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลไฟล์บทความต้นฉบับ</h7></li>
                                     </ol>
                                   </nav>
-                            <!-- <h5 class="card-title">ข้อมูลไฟล์บทความต้นฉบับ</h5> -->
                           <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
                                     <!-- <form class="needs-validation" novalidate> -->
@@ -199,7 +215,8 @@
                                             </div>                 	                           
                                         </div>
                                         <hr class="mb-4">
-                                    <!-- </form> -->
+                                   
+                                        
                                 </div>
                             </div>
 

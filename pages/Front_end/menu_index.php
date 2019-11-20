@@ -9,9 +9,15 @@
 		<?php if($_SERVER["SCRIPT_NAME"]=="/ajsas/pages/Front_end/article_data.php"){ ?>
 			<li class="breadcrumb-item"><b>ข้อมูลบทความ</b></li>
 		<?php } ?>
+		<?php if($_SERVER["SCRIPT_NAME"]=="/ajsas/pages/Front_end/searching_article.php"){ ?>
+			<li class="breadcrumb-item"><a href="/ajsas/pages/Front_end/article_data.php">ข้อมูลบทความ</a></li>
+			<li class="breadcrumb-item active" aria-current="page">ค้นหาสารสารวิชาการ</li>
+			<!-- <li class="breadcrumb-item active" aria-current="page">วารสาร</li> -->
+		<?php } ?>
 		<?php if($_SERVER["SCRIPT_NAME"]=="/ajsas/pages/Front_end/send_article.php"){ ?>
 			<li class="breadcrumb-item"><a href="/ajsas/pages/Front_end/article_data.php">ข้อมูลบทความ</a></li>
 			<li class="breadcrumb-item active" aria-current="page">ส่งบทความ</li>
+			<!-- <li class="breadcrumb-item active" aria-current="page">วารสาร</li> -->
 		<?php } ?>
 		<?php if($_SERVER["SCRIPT_NAME"]=="/ajsas/pages/Front_end/update_article.php"){ ?>
 			<li class="breadcrumb-item"><a href="/ajsas/pages/Front_end/article_data.php">ข้อมูลบทความ</a></li>

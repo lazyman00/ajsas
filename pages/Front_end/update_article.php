@@ -1,17 +1,5 @@
 <?php  include('../../connect/connect.php'); ?>
-<?php 
 
-        $article_id=$_GET['article_id'];
-
-        $sql2 = "SELECT * FROM type_article";
-        $result2 = $conn->query($sql2);
-
-        $sql3 = "SELECT * FROM article WHERE article_id=$article_id";          
-        $result3 = $conn->query($sql3);
-
-        $data = mysqli_fetch_assoc($result3);
-        $conn->close(); 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +27,19 @@
        
     <?php include('menu.php'); ?>
 	<?php include('menu_index.php'); ?>
+    <?php 
 
+        $article_id=$_GET['article_id'];
+
+        $sql2 = "SELECT * FROM type_article";
+        $result2 = $conn->query($sql2);
+
+        $sql3 = "SELECT * FROM article WHERE article_id=$article_id";          
+        $result3 = $conn->query($sql3);
+
+        $data = mysqli_fetch_assoc($result3);
+        $conn->close(); 
+    ?>
 <div class="container">
 
 
