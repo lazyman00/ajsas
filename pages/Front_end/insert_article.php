@@ -1,13 +1,6 @@
 <?php
           include('../../connect/connect.php'); 
 		mysqli_set_charset($conn,"utf8");
-
-          function Convert_name_file($file_name){
-               $re_name=time()."_".rand(1,9999);	
-               $info = pathinfo( $file_name , PATHINFO_EXTENSION ) ;
-               $new_type = $re_name.".".$info ;
-               return $new_type;
-          }
 		   
           $type_article_id = $_POST['type_article_id'];
           $article_name_th = $_POST['article_name_th'];

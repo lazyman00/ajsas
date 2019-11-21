@@ -262,14 +262,13 @@
                     // alert(response);
                     $('#view').html(response);
                     if(response==1){
-                        location.href = "/ajsas/pages/Back_end/home_backend.php";
+                        location.href = "/ajsas/pages/Front_end/allarticle.php";
+                        // location.href = "/ajsas/pages/Back_end/home_backend.php";
                     // sessionStorage.setItem('acc_id', response);
                 }else if(response==2){
-                    location.href = "/ajsas/pages/Front_end/allarticle.php";
+                    location.href = "/ajsas/pages/Front_end/article_data.php";
                 }else if(response==3){
                     location.href = "/ajsas/pages/Front_end/readarticle.php";
-                }else if(response==4){
-                    location.href = "/ajsas/pages/Front_end/article_data.php";
                 }else{
                     
                     $('#msg').modal('show');
