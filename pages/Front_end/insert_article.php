@@ -1,6 +1,5 @@
 <?php
           include('../../connect/connect.php'); 
-		mysqli_set_charset($conn,"utf8");
 		   
           $type_article_id = $_POST['type_article_id'];
           $article_name_th = $_POST['article_name_th'];
@@ -12,7 +11,7 @@
 
           $attach_article = Convert_name_file($_FILES['attach_article']["name"]);
 
-       echo  $sql = "INSERT INTO `article`(`type_article_id`,`article_name_th`, `article_name_en`, `abstract_th`, `abstract_en`, `keyword_th`, `keyword_en`, `attach_article`) VALUES ( '$type_article_id','$article_name_th','$article_name_en','$abstract_th' ,'$abstract_en' ,'$keyword_th' ,'$keyword_en','$attach_article' )";
+          $sql = "INSERT INTO `article`(`type_article_id`,`article_name_th`, `article_name_en`, `abstract_th`, `abstract_en`, `keyword_th`, `keyword_en`, `attach_article`) VALUES ( '$type_article_id','$article_name_th','$article_name_en','$abstract_th' ,'$abstract_en' ,'$keyword_th' ,'$keyword_en','$attach_article' )";
           
           
           $result = $conn->query($sql);
