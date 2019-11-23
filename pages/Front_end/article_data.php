@@ -22,42 +22,39 @@
 	<?php include('menu.php'); ?>
 	<?php include('menu_index.php'); ?>
 
-	<?php 
-	$userid = $_SESSION['user_id'];
-	$sql = "SELECT * FROM `article` where user_id =  $userid";
-	$query = $conn->query($sql);
-	?>
+	
 
 	<div class="container">
 		<div class="card" >
 			<div class="card-body">
 				<div class="card border-light mb-3" style="max-width: 100rem;">
 					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-1"></div>
-							<div class="col-lg-2" style="padding-left: 0px; max-width: 13.666667%;">
-								<select name="year" class="form-control" required>
-									<option value="">กรุณาเลือกปี</option>
-									<?php for($i=date('Y'); $i>=date('Y')-20; $i--){ ?> 
-										<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i+543; ?></option>
-									<?php } ?>
-									
-								</select>
-							</div>
 
-							<div class="col-lg-1" style="padding-left: 0px;">
-								<select name="semester" class="form-control" style="width: 100px;" required>
-									<option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
-										ครั้งที่
-									</option>
-									<?php for($i=1; $i<=2; $i++){ ?> 
-										<option <?php if($i==1){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
-									<?php } ?>
-								</select>
-							</div>
-							<div class="col-lg-8"><a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button type="button" class="btn btn-outline-success" style="float: right;">ส่งบทความ</button></a></div>
+						<form>
+							<div class="form-row">
+								<div class="form-group col-md-2">
+									<label for="inputEmail4">ปีที่ : </label>
+									<select id="year" name="year" class="form-control" required>
+										<?php for($i=date('Y')+543; $i>=date('Y')+543-20; $i--){ ?> 
+											<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+										<?php } ?>
 
-						</div>
+									</select>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="inputPassword4">ครั้ง : </label>
+									<select id="time" name="time" class="form-control" style="width: 100px;" required>
+										<?php for($i=1; $i<=2; $i++){ ?> 
+											<option <?php if($i==1){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+										<?php } ?>
+									</select>
+								</div>
+								<div class="form-group col-md-7">
+									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" style="float: right;" disabled="">ส่งบทความ</button></a>
+								</div>
+							</div>
+						</form>	
+						
 						<br>
 						<span id="view_table"></span>
 					</div>
@@ -68,12 +65,28 @@
 		<?php include('js.php'); ?>	
 
 
-	<script type="text/javascript">
-		var year = $('[name=year]').val();
-		var semester = $('[name=semester]').val();
-		$.post('/article_data/view_table.php', {year: year, semester:semester }, function(data) {
-			$('#view_table').html(data);
-		});
-	</script>
+		<script type="text/javascript">
+			var year = $('[name=year]').val();
+			var time = $('[name=time]').val();
+			$.post('article_data/view_table.php', {year: year, time:time }, function(data) {
+				$('#view_table').html(data);
+			});
+
+			$('#year').change(function(event) {
+				var year = $('[name=year]').val();
+				var time = $('[name=time]').val();
+				$.post('article_data/view_table.php', {year: year, time:time }, function(data) {
+					$('#view_table').html(data);
+				});
+			});
+
+			$('#time').change(function(event) {
+				var year = $('[name=year]').val();
+				var time = $('[name=time]').val();
+				$.post('article_data/view_table.php', {year: year, time:time }, function(data) {
+					$('#view_table').html(data);
+				});
+			});
+		</script>
 	</body>
 	</html>
