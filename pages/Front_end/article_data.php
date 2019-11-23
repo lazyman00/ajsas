@@ -23,9 +23,9 @@
 	<?php include('menu_index.php'); ?>
 
 	<?php 
-		$userid = $_SESSION['user_id'];
-		$sql = "SELECT * FROM `article` where user_id =  $userid";
-		$query = $conn->query($sql);
+	$userid = $_SESSION['user_id'];
+	$sql = "SELECT * FROM `article` where user_id =  $userid";
+	$query = $conn->query($sql);
 	?>
 
 	<div class="container">
@@ -35,122 +35,45 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-lg-1"></div>
-							<div class="col-lg-1" style="padding-left: 0px;">
-								<select name="semester" class="form-control" style="width: 100px;" required>
-									<option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
-										ปี
-									</option>
-									<option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
-										55
-									</option>
-									<option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
-										2
-									</option>
+							<div class="col-lg-2" style="padding-left: 0px; max-width: 13.666667%;">
+								<select name="year" class="form-control" required>
+									<option value="">กรุณาเลือกปี</option>
+									<?php for($i=date('Y'); $i>=date('Y')-20; $i--){ ?> 
+										<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i+543; ?></option>
+									<?php } ?>
+									
 								</select>
 							</div>
 
-							<div class="col-lg-1">
+							<div class="col-lg-1" style="padding-left: 0px;">
 								<select name="semester" class="form-control" style="width: 100px;" required>
 									<option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
 										ครั้งที่
 									</option>
-									<option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
-										1
-									</option>
-									<option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
-										2
-									</option>
+									<?php for($i=1; $i<=2; $i++){ ?> 
+										<option <?php if($i==1){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+									<?php } ?>
 								</select>
 							</div>
 							<div class="col-lg-8"><a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button type="button" class="btn btn-outline-success" style="float: right;">ส่งบทความ</button></a></div>
 
 						</div>
 						<br>
-						<div class="row">                      
-							<div class="col-md-12 mb-3">                        
-								<div class="table-responsive">
-									<h4>ข้อมูลบทความ</h4>
+						<span id="view_table"></span>
+					</div>
+				</div>
+			</div>
+		</div> 
 
-									<table class="table table-striped" >
-										<thead>
-											<tr>
-												<th scope="col" style="width: 5%">#</th>
-												<th scope="col">ชื่อบทความ</th>
-												<th scope="col" style="width: 10%">ดาวน์โหลด</th>
-												<th scope="col" style="width: 15%;text-align:center">วันที่ดำเนินการ</th>
-												<th scope="col" style="width: 5%"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php $selectdata=1; while($row = $query->fetch_assoc()){ ?>
-												<tr>
-													<th scope="row" ><?php echo $selectdata; ?></th>
-													<td><?php echo $row["article_name_th"] ?></td>
-													<td><a href="../files_work/<?php echo $row["attach_article"] ?>">ไฟล์เอกสาร</a></td>
-													<td align="center">                                
-														<?php
-														$date=date_create($row["date_article"]);
-														echo date_format($date,"Y/m/d");
-														?>
-													</td>
-													<td align="center"><a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"<button class="btn btn-danger btn-sm">แก้ไข</button></a></td>
-												</tr>
-												<?php $selectdata++; } ?>
-											</tbody>
-										</table>     
-									</div>
-                </div>                   
+		<?php include('js.php'); ?>	
 
 
-                <div class="container">
-                	<hr class="mb-4">
-                </div>
-
-                <div class="container">
-                	<div class="row">
-                		<h4>ผลการประเมิน</h4>
-                	</div>
-                </div>
-
-
-                <div class="container">
-                	<div class="row">
-                		<div class="col-md-9">
-                			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"></textarea>
-                		</div>
-                		<div class="col-md-3">
-                			<button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button>
-                		</div>
-                	</div><br>
-                </div>
-
-
-                <div class="container">
-                	<div class="row">
-                		<div class="col-md-12 md-3">
-                			<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
-                			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
-                			<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
-                		</div> 
-                	</div>
-                </div>
-                <div class="container">
-                	<hr class="mb-4">
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-
-
-</div>
-</div> 
-
-<?php include('js.php'); ?>	
-
-
-
-</body>
-</html>
+	<script type="text/javascript">
+		var year = $('[name=year]').val();
+		var semester = $('[name=semester]').val();
+		$.post('/article_data/view_table.php', {year: year, semester:semester }, function(data) {
+			$('#view_table').html(data);
+		});
+	</script>
+	</body>
+	</html>
