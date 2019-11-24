@@ -50,7 +50,7 @@
 									</select>
 								</div>
 								<div class="form-group col-md-7">
-									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" style="float: right;" disabled="">ส่งบทความ</button></a>
+									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" style="float: right;margin-top: 32px;" disabled="" >ส่งบทความ</button></a>
 								</div>
 							</div>
 						</form>	
