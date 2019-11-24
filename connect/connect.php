@@ -3,7 +3,7 @@
 # FileName="Connection_php_mysql.htm"
 # Type="MYSQL"
 # HTTP="true"
-echo "asd";
+
 $hostname_connect = "localhost";
 $username_connect = "root";
 $password_connect = "1150"; //1150
