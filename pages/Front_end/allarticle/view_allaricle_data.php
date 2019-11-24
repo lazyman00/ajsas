@@ -1,6 +1,6 @@
 <?php  include('../../../connect/connect.php'); ?>
 <?php 
-$sql = sprintf("SELECT * FROM `article` WHERE `article_id` = %s",GetSQLValueString($_POST['article_id'], 'int'));
+$sql = sprintf("SELECT * FROM `article` left join type_article on article.type_article_id = type_article.type_article_id WHERE `article_id` = %s",GetSQLValueString($_POST['article_id'], 'int'));
 $query = $conn->query($sql);
 $row = $query->fetch_assoc();
 ?>
@@ -26,7 +26,7 @@ $row = $query->fetch_assoc();
 </div>
 <div class="form-group">
     <label for="type_article_name">ประเภทบทความ :</label>
-    <input type="text" readonly="" class="form-control" id="type_article_name">
+    <input type="text" readonly="" class="form-control" id="type_article_name" value="<?php echo $row['type_article_name']; ?>">
     <input type="hidden" name="type_article_name" value="">
 </div>
 <div class="form-group">

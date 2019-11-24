@@ -79,11 +79,11 @@ if($type=="showdata_table"){
                         ?>
                         <tr>
                             <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"] ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"] ?></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
                             <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"] ?>">ดาวน์โหลด</a></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><button data-row='<?php  echo json_encode($fetch); ?>' class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-row='<?php  echo json_encode($fetch); ?>' class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
                         </tr>
                         <?php
                         $i++; 
@@ -293,8 +293,9 @@ if ($total_record > 0) {
 
     $('.btnUp').click(function(event) {
         var row = $(this).data( "row" );
-        
-        $.post('allarticle/view_allaricle_data.php',{ article_id: row.article_id }, function(data) {
+        var article_id = $(this).attr('data-article_id');
+
+        $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
         });
 
