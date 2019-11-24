@@ -89,6 +89,122 @@ $numRow = $query->num_rows;
 	<div class="container">
 		<hr class="mb-4">
 	</div>
+	<style type="text/css">
+	.form-wizard {
+		padding: 25px; 
+		background: #fff;
+		-moz-border-radius: 4px; 
+		-webkit-border-radius: 4px; 
+		border-radius: 4px; 
+		box-shadow: 0px 0px 6px 3px #777;
+		font-family: 'Roboto', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		color: #888;
+		line-height: 30px;
+		text-align: center;
+	}
+	
+	.form-wizard strong { font-weight: 500; }
+
+
+	.form-wizard-steps{  /*ซ่อน*/
+		margin:auto; 
+		overflow: hidden; 
+		position: relative; 
+		margin-top: 20px;
+	}
+
+	.form-wizard-step{ /*เอียง*/
+		padding-top:10px !important;
+		border:2px solid #fff;
+		background:#ccc;
+		-ms-transform: skewX(-30deg); /* IE 9 */
+		-webkit-transform: skewX(-30deg); /* Safari */
+		transform: skewX(-30deg); /* Standard syntax */
+	}
+	.form-wizard-step.active{
+		background:#ea2803;
+	}
+
+	.form-wizard-tolal-steps-7 .form-wizard-step { 
+		position: relative;
+		float: left;
+		width: 13%;
+		padding: 0 5px;
+	}
+
+	.form-wizard-step-icon {
+		display: inline-block;
+		width: 40px; 
+		height: 40px; 
+		margin-top: 4px; 
+		background: #ddd;
+		font-size: 16px; 
+		color: #777; 
+		line-height: 40px;
+		-moz-border-radius: 50%; 
+		-webkit-border-radius: 50%; 
+		border-radius: 50%;
+		-ms-transform: skewX(30deg); /* IE 9 */
+		-webkit-transform: skewX(30deg); /* Safari */
+		transform: skewX(30deg); /* Standard syntax */
+	}
+	.form-wizard-step.activated .form-wizard-step-icon {
+		background: #ea2803; 
+		border: 1px solid #fff; 
+		color: #fff; 
+		line-height: 38px;
+	}
+	.form-wizard-step.active .form-wizard-step-icon {
+		background: #fff; 
+		border: 1px solid #fff; 
+		color: #ea2803; 
+		line-height: 38px;
+	}
+
+	.form-wizard-step p { 
+		color: #fff;
+		-ms-transform: skewX(30deg); /* IE 9 */
+		-webkit-transform: skewX(30deg); /* Safari */
+		transform: skewX(30deg); /* Standard syntax */
+	}
+</style>
+	<div class="container">
+	<div class="col-md-8 col-md-offset-2 form-wizard">
+		<div class="form-wizard-steps form-wizard-tolal-steps-7">
+			<div class="form-wizard-step active">
+				<div class="form-wizard-step-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+				<p>Personal</p>
+			</div>
+			<div class="form-wizard-step active">
+				<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+				<p>Contact</p>
+			</div>
+			<div class="form-wizard-step">
+				<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+				<p>Official</p>
+			</div>
+			<div class="form-wizard-step">
+				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+				<p>Payment</p>
+			</div>
+			<div class="form-wizard-step">
+				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+				<p>Payment</p>
+			</div>
+			<div class="form-wizard-step">
+				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+				<p>Payment</p>
+			</div>
+			<div class="form-wizard-step">
+				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+				<p>Payment</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 </div>
 <script type="text/javascript">
 	var sent = $('[name=numRow]').val();
