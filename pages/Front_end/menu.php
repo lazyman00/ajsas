@@ -51,7 +51,7 @@
             <a class="p-2 text-dark" href="#">ติดต่อ</a>
         <?php } ?>     
     </nav>
-    <li class="nav-item dropdown my-lg-0" style="padding-bottom: 22px;">
+    <li class="nav-item dropdown my-lg-0" style="padding-bottom: 22px;list-style-type: none;top: 10px;">
         <a class="btn btn-outline-warning nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
           Logout
       </a>

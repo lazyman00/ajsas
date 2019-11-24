@@ -47,72 +47,72 @@ if($type=="showdata_table"){
     }
 
     $sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
-    ) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
+) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
 
-    $result = $conn->query($sql);
-    $fetch = $result->fetch_assoc();
-    $nom_row = $result->num_rows;
+$result = $conn->query($sql);
+$fetch = $result->fetch_assoc();
+$nom_row = $result->num_rows;
 
-    $display_n2 = ($search_name != "") ? "" :  "display:none" ;
+$display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
-    ?>  
-    <div class="container">    
-     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col" style="width: 5%">ลำดับ</th>
-                    <th scope="col" style="width: 35%">ชื่อบทความ</th>
-                    <th scope="col" style="width: 20%">สาขา</th>
-                    <th scope="col" style="width: 10%">ปี</th>
-                    <th scope="col" style="width: 15%">Download</th>  
-                    <th scope="col" style="width: 15%">ส่งบทความ</th>                               
-                </tr>
-            </thead>
-            <tbody>
-                <?php           $i=1; 
-                if($nom_row >0)
-                {
-                    do{ 
-                        $select_yesr = $fetch['date_article']; 
-                        $yesr_show = date("Y",strtotime($select_yesr))+543;
-                        ?>
-                        <tr>
-                            <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-row='<?php  echo json_encode($fetch); ?>' class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
-                        </tr>
-                        <?php
-                        $i++; 
-                    }while($fetch = $result->fetch_assoc()); 
-                }   
-                else
-                {
+?>  
+<div class="container">    
+   <div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 5%">ลำดับ</th>
+                <th scope="col" style="width: 35%">ชื่อบทความ</th>
+                <th scope="col" style="width: 20%">สาขา</th>
+                <th scope="col" style="width: 10%">ปี</th>
+                <th scope="col" style="width: 15%">Download</th>  
+                <th scope="col" style="width: 15%">ส่งบทความ</th>                               
+            </tr>
+        </thead>
+        <tbody>
+            <?php           $i=1; 
+            if($nom_row >0)
+            {
+                do{ 
+                    $select_yesr = $fetch['date_article']; 
+                    $yesr_show = date("Y",strtotime($select_yesr))+543;
                     ?>
                     <tr>
-                        <td align="center" colspan="6">
-                            ไม่พบข้อมูลที่ท่านค้นหา
-                        </td>
+                        <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-row='<?php  echo json_encode($fetch); ?>' class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
                     </tr>
                     <?php
-                }
+                    $i++; 
+                }while($fetch = $result->fetch_assoc()); 
+            }   
+            else
+            {
                 ?>
-            </tbody>
-        </table>   
-    </div> 
+                <tr>
+                    <td align="center" colspan="6">
+                        ไม่พบข้อมูลที่ท่านค้นหา
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>   
+</div> 
 
-    <?php
+<?php
 
 
-    $sql_page = "SELECT count(*) AS COUNT FROM ( 
-    SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
-    m.article_id, m.article_name_th, m.date_article, ta.type_article_name
-    FROM article AS m
-    left join type_article as ta on ta.type_article_id = m.type_article_id
-    WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+$sql_page = "SELECT count(*) AS COUNT FROM ( 
+SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+m.article_id, m.article_name_th, m.date_article, ta.type_article_name
+FROM article AS m
+left join type_article as ta on ta.type_article_id = m.type_article_id
+WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
 ) AS tb ";
 
 $result_page = $conn->query($sql_page);
@@ -294,6 +294,8 @@ if ($total_record > 0) {
     $('.btnUp').click(function(event) {
         var row = $(this).data( "row" );
         var article_id = $(this).attr('data-article_id');
+
+        $('#article_id').val(row.article_id);
 
         $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
