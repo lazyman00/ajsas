@@ -96,7 +96,7 @@ $numRow = $query->num_rows;
 		-moz-border-radius: 4px; 
 		-webkit-border-radius: 4px; 
 		border-radius: 4px; 
-		box-shadow: 0px 0px 6px 3px #777;
+		box-shadow: 2px 3px 20px 0px #ececec;
 		font-family: 'Roboto', sans-serif;
 		font-size: 16px;
 		font-weight: 300;
@@ -110,21 +110,21 @@ $numRow = $query->num_rows;
 
 	.form-wizard-steps{  /*ซ่อน*/
 		margin:auto; 
-		overflow: hidden; 
+		/* overflow: hidden;  */
 		position: relative; 
 		margin-top: 20px;
 	}
 
 	.form-wizard-step{ /*เอียง*/
 		padding-top:10px !important;
-		border:2px solid #fff;
-		background:#ccc;
+		border:5px solid #fff;
+		background:#f5a0a0;
 		-ms-transform: skewX(-30deg); /* IE 9 */
 		-webkit-transform: skewX(-30deg); /* Safari */
 		transform: skewX(-30deg); /* Standard syntax */
 	}
 	.form-wizard-step.active{
-		background:#ea2803;
+		background:#15907c;
 	}
 
 	.form-wizard-tolal-steps-7 .form-wizard-step { 
@@ -157,7 +157,7 @@ $numRow = $query->num_rows;
 		line-height: 38px;
 	}
 	.form-wizard-step.active .form-wizard-step-icon {
-		background: #fff; 
+		background: #eefb27; 
 		border: 1px solid #fff; 
 		color: #ea2803; 
 		line-height: 38px;
@@ -171,11 +171,17 @@ $numRow = $query->num_rows;
 	}
 </style>
 	<div class="container">
-	<div class="col-md-8 col-md-offset-2 form-wizard">
-		<div class="form-wizard-steps form-wizard-tolal-steps-7">
+	<div class="container">
+		<div class="row">
+			<h4>สถานะบทความ</h4>
+		</div>
+	</div>
+	<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
+		<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
+		 <!-- style="left: 34px;bottom: 43px;" -->
 			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-				<p>Personal</p>
+				<div class="form-wizard-step-icon" ><i class="fa fa-user" aria-hidden="true"></i></div>
+				<p>ส่งบทความ</p>
 			</div>
 			<div class="form-wizard-step active">
 				<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
