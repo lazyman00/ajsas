@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
-   <div class="table-responsive">
+ <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -83,7 +83,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-row='<?php  echo json_encode($fetch); ?>' class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
                     </tr>
                     <?php
                     $i++; 
@@ -249,19 +249,34 @@ if ($total_record > 0) {
 
 
                     <hr>
-                    <p><b>ข้อมูลผู้ทรวคุณวุฒิ</b></p>
-                    <span id="view_Professional"></span>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">ตกลง</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
 
-                </div>
-                <input type="text" name="article_id" id="article_id">
-            </form>
-        </div>
+                <p><b>ข้อมูลผู้ทรวคุณวุฒิ</b></p>
+                <span id="view_Professional"></span>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">ตกลง</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+
+            </div>
+            <input type="text" name="article_id" id="article_id">
+        </form>
     </div>
+</div>
 </div> 
 
 <div class="modal fade bd-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -292,16 +307,18 @@ if ($total_record > 0) {
     // });
 
     $('.btnUp').click(function(event) {
-        var row = $(this).data( "row" );
+        var type_article_id = $(this).attr('data-type_article_id');
         var article_id = $(this).attr('data-article_id');
 
-        $('#article_id').val(row.article_id);
+
+
+        $('#article_id').val(article_id);
 
         $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
         });
 
-        $.get('allarticle/view_Professional.php',{ type_article_id: row.type_article_id }, function(data) {
+        $.get('allarticle/view_Professional.php',{ type_article_id: type_article_id }, function(data) {
             $('#view_Professional').html(data);
         });
 
