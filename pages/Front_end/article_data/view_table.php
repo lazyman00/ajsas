@@ -58,37 +58,6 @@ $numRow = $query->num_rows;
 		<hr class="mb-4">
 	</div>
 
-	<div class="container">
-		<div class="row">
-			<h4>ผลการประเมิน</h4>
-		</div>
-	</div>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"></textarea>
-			</div>
-			<div class="col-md-3">
-				<button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button>
-			</div>
-		</div><br>
-	</div>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 md-3">
-				<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
-				<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
-				<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
-			</div> 
-		</div>
-	</div>
-	<div class="container">
-		<hr class="mb-4">
-	</div>
 	<style type="text/css">
 	.form-wizard {
 		padding: 25px; 
@@ -180,7 +149,7 @@ $numRow = $query->num_rows;
 		<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
 		 <!-- style="left: 34px;bottom: 43px;" -->
 			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon" ><i class="fa fa-user" aria-hidden="true"></i></div>
+				<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
 				<p>ส่งบทความ</p>
 			</div>
 			<div class="form-wizard-step active">
@@ -212,6 +181,39 @@ $numRow = $query->num_rows;
 </div>
 
 </div>
+
+	
+	<div class="container">
+		<hr class="mb-4">
+	</div>
+	<div class="container">
+		<div class="row">
+			<h4>ผลการประเมิน</h4>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"></textarea>
+			</div>
+			<div class="col-md-3">
+				<button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button>
+			</div>
+		</div><br>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 md-3">
+				<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
+				<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
+				<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
+			</div> 
+		</div>
+	</div>
+
+
 <script type="text/javascript">
 	var sent = $('[name=numRow]').val();
 	if(sent==1){
