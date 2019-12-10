@@ -6,7 +6,7 @@ $result = $conn->query($sql);
 ?>  
 <!DOCTYPE html>
 <html lang="en">
-<?php include('header.php'); ?>
+<?php  include('header.php'); ?>
 <style type="text/css">
     .a{
         font-size: 14px;
@@ -22,8 +22,8 @@ $result = $conn->query($sql);
     }
 </style>
 <body class="bg-light">
-    <?php include('menu.php'); ?>
-    <?php include('menu_index.php'); ?>
+    <?php  include('menu.php'); ?>
+    <?php  include('menu_index.php'); ?>
     <div class="container">
         <div class="card" >
             <div class="card-body">

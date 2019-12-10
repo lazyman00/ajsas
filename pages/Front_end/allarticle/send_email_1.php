@@ -3,6 +3,10 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 
+$sql_article = sprintf("SELECT * FROM `article` left join type_article on article.type_article_id = type_article.type_article_id WHERE `article_id` = %s",GetSQLValueString($_POST['article_id'], 'int'));
+$query_article = $conn->query($sql_article);
+$row_article = $query_article->fetch_assoc();
+
 for($i=0; $i<count($_POST['user_id']); $i++){
 	if($_POST['user_id'][$i]!=""){
 
@@ -59,23 +63,23 @@ $email_content = "<!DOCTYPE html>
 </head>
 <body>
 <p><b>Dear ".$row['pre_en_short']." ".$row['name_en']." ".$row['surname_en']."</b></p>
-<p style='text-indent: 50px;' >I believe that you would serve as an excellent reviewer of the manuscript, ".$_POST['article_name_en']." </p>
+<p style='text-indent: 50px;' >I believe that you would serve as an excellent reviewer of the manuscript, ".$row_article['article_name_en']." </p>
 <p>which has been submitted to Academic Journal of Science and Applied Science.  The submission's abstract is</p>
 <p>inserted below, and I hope that you will consider undertaking this important task for us.</p>
 
-<p style='text-indent: 50px;'>Please log into the journal web site by ".$_POST['date_article']." to indicate whether you will undertake the</p>
+<p style='text-indent: 50px;'>Please log into the journal web site by ".$row_article['date_article']." to indicate whether you will undertake the</p>
 <p>review or not, as well as to access the submission and to record your review and recommendation. After this job</p>
 <p>is done, you will receive a THB 1,000 cash prize.</p>
 
-<p style='text-indent: 50px;'>The review itself is due ".$_POST['date_article'].".</p>
-<p style='text-indent: 50px;'>Submission URL: <a href='http://localhost/ajsas/rechack_email.php?u=".$_POST['user_id'][$i]."&e=".$_POST['article_name_en']."&t=".$_POST['article_name_th']."&i=".$_POST['article_id']."'>>> ระบบวารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ <<</a></p>
+<p style='text-indent: 50px;'>The review itself is due ".$row_article['date_article'].".</p>
+<p style='text-indent: 50px;'>Submission URL: <a href='http://localhost/ajsas/rechack_email.php?u=".$_POST['user_id'][$i]."&e=".$row_article['article_name_en']."&t=".$row_article['article_name_th']."&i=".$row_article['article_id']."'>>> ระบบวารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ <<</a></p>
 <br/>
 <p>Assoc. Prof. Dr. Issara Inchan </p>
 <p>Faculty of Science and Technology, Uttaradit Rajabhat University.</p>
 <p>ajsas@uru.ac.th </p>
 <br/>
-<p>".$_POST['article_name_en']." </p>
-<p>".$_POST['abstract_en']."</p>
+<p>".$row_article['article_name_en']." </p>
+<p>".$row_article['abstract_en']."</p>
 <p>................. </p>
 </body>
 </html>";
@@ -83,7 +87,14 @@ $email_content = "<!DOCTYPE html>
 //  ถ้ามี email ผู้รับ
 if($email_receiver){
 	$mail->msgHTML($email_content);
-	$mail->send();	
+
+	if ($mail->send()) {  
+		$sql = sprintf("INSERT INTO `tb_sendmail`(`user_id`, `article_id`) VALUES (%s,%s)",
+			GetSQLValueString($_POST['user_id'][$i],'text'),
+			GetSQLValueString($row_article['article_id'],'text'));
+		$query = $conn->query($sql);
+	}
+	
 }
 
 $mail->smtpClose();

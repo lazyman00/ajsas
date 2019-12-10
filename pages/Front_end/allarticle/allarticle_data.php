@@ -46,7 +46,7 @@ if($type=="showdata_table"){
         $search_name3 ="";
     }
 
-    $sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+    $sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time, m.sta_work FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
 ) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
 
 $result = $conn->query($sql);
@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
- <div class="table-responsive">
+   <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -83,7 +83,13 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">send</button></td>
+
+                        <td style="padding-bottom: 6px; padding-top: 6px;">
+                            <?php if($fetch["sta_work"]==0){ ?> 
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
+                            <?php } ?>
+                            
+                        </td>
                     </tr>
                     <?php
                     $i++; 
@@ -233,7 +239,9 @@ if ($total_record > 0) {
 </div>
 <?php } ?>
 <!-- Modal -->
-<div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<div class="modal fade" id="myModalA" tabindex="-1" style="padding-right: 0px;" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -242,42 +250,64 @@ if ($total_record > 0) {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form  method="POST" id="send_email">
+            <form  method="POST">
                 <div class="modal-body">
-
-                    <span id="view_allaricle_data"></span>
-
+                    <div style="overflow-x: hidden; overflow-y: scroll; height: 350px;">
+                        <span id="view_allaricle_data"></span>
+                    </div>
 
                     <hr>
                     <ul class="nav nav-tabs">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-pages="4" data-type_article_id="" data-article_id="" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                    <span id="view_del_all"></span>
+                    
+                </div>
+                <div class="modal-footer">
+                   <!--  <button type="submit" class="btn btn-primary">ตกลง</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button> -->
 
-                <p><b>ข้อมูลผู้ทรวคุณวุฒิ</b></p>
-                <span id="view_Professional"></span>
+                </div>
                 
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">ตกลง</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+            </form>
+        </div>
+    </div>
+</div> 
 
+<div class="modal fade bd-example-modal-lg" id="modal_Professional" style="z-index: 1060; padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">เทียบเชิญผู้ทรงคุณวุฒิ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <input type="text" name="article_id" id="article_id">
-        </form>
+            <form id="send_email">
+                <div class="modal-body">
+                    <span id="view_Professional"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">ส่งเมล์</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+
+                </div>
+                <input type="hidden" name="article_id" id="article_id">
+            </form>
+        </div>
     </div>
 </div>
-</div> 
 
 <div class="modal fade bd-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xm">
@@ -296,7 +326,14 @@ if ($total_record > 0) {
     </center>
 </div>
 
+
+
 <script type="text/javascript">
+
+    $('#msg').modal({
+        'show' : true,
+        'hide' : true
+    });
 
     // $(document).ajaxStart(function(){
     //     $("#wait").css("display", "block");
@@ -305,24 +342,56 @@ if ($total_record > 0) {
     // $(document).ajaxComplete(function(){
     //     $("#wait").css("display", "none");
     // });
+    $('#modal_Professional').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
+
+    $('#msg').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
+
+    $('.nav-link').click(function(e) {
+        var type_article_id = $(this).attr('data-type_article_id');
+        var article_id = $(this).attr('data-article_id');
+
+        var pages = $(this).index('.nav-link');
+        $('.nav-link').removeClass('active');
+        $(this).toggleClass('active');
+
+        if(pages==0){
+            var  url = "allarticle/view_Professional_pages.php";
+        }if(pages==1){
+            var  url = "allarticle/view_checkMail.php";
+        }
+
+        $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+            $('#view_del_all').html(data);
+        });
+        e.preventdefault();
+
+    });
 
     $('.btnUp').click(function(event) {
         var type_article_id = $(this).attr('data-type_article_id');
         var article_id = $(this).attr('data-article_id');
 
-
-
         $('#article_id').val(article_id);
-
+        $('.nav-link').attr({
+            'data-type_article_id': type_article_id,
+            'data-article_id': article_id
+        });
+        
         $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
         });
 
-        $.get('allarticle/view_Professional.php',{ type_article_id: type_article_id }, function(data) {
-            $('#view_Professional').html(data);
+        $.get('allarticle/view_Professional_pages.php',{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+            $('#view_del_all').html(data);
         });
 
         $("#myModalA").modal({backdrop: true});
+        $('body').removeAttr('style');
+        $('#myModalA').css('padding-right', '0px');
     });
 
 
@@ -355,7 +424,7 @@ if ($total_record > 0) {
         },submitHandler: function(e) {
 
 
-            $('#myModalA').modal('hide').next('#msg').modal('show');
+            $('#modal_Professional').modal('hide').next('#msg').modal('show');
 
             var formData = new FormData($("#send_email")[0]);
             setTimeout(function(){  
@@ -383,6 +452,39 @@ if ($total_record > 0) {
             return false;
         }
     });
+
+
+    // submitHandler: function(e) {
+
+
+    //         $('#myModalA').modal('hide').next('#msg').modal('show');
+
+    //         var formData = new FormData($("#send_email")[0]);
+    //         setTimeout(function(){  
+    //             $.ajax({ 
+    //                 url: 'allarticle/send_email_1.php',
+    //                 type: 'POST',
+    //                 data: formData,
+    //                 async: false,
+    //                 cache: false,
+    //                 contentType: false,
+    //                 processData: false
+    //             }).then(function(){ 
+    //                 $('#msg').modal('hide');
+
+    //                 Swal.fire({
+    //                     icon: 'success',
+    //                     title: "<font color=#009900>สำเร็จ!</font>", 
+    //                     text: "ส่งเมลสำเร็จแล้ว!",
+    //                     type: "success",
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             }); 
+    //         }, 300);
+    //         return false;
+    //     }
+
 
 
     // $.ajax({
