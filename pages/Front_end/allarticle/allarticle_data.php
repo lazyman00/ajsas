@@ -356,6 +356,10 @@ if ($total_record > 0) {
             var  url = "allarticle/view_Professional_pages.php";
         }if(pages==2){
             var  url = "allarticle/view_checkMail.php";
+        }if(pages==3){
+            var  url = "allarticle/view_checkMail.php";
+        }if(pages==4){
+            var  url = "allarticle/view_checkMail.php";
         }
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
