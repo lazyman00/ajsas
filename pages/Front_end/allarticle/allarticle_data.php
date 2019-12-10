@@ -329,12 +329,6 @@ if ($total_record > 0) {
 
 
 <script type="text/javascript">
-
-    $('#msg').modal({
-        'show' : true,
-        'hide' : true
-    });
-
     // $(document).ajaxStart(function(){
     //     $("#wait").css("display", "block");
     // });
@@ -354,13 +348,13 @@ if ($total_record > 0) {
         var type_article_id = $(this).attr('data-type_article_id');
         var article_id = $(this).attr('data-article_id');
 
-        var pages = $(this).index('.nav-link');
+        var pages = $(this).attr('data-pages');
         $('.nav-link').removeClass('active');
         $(this).toggleClass('active');
 
-        if(pages==0){
+        if(pages==1){
             var  url = "allarticle/view_Professional_pages.php";
-        }if(pages==1){
+        }if(pages==2){
             var  url = "allarticle/view_checkMail.php";
         }
 
