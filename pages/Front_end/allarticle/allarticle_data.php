@@ -265,10 +265,10 @@ if ($total_record > 0) {
                             <a class="nav-link" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">Link</a>
+                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-pages="4" data-type_article_id="" data-article_id="" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">การแก้ไขบทความ</a>
                         </li>
                     </ul>
                     <span id="view_del_all"></span>

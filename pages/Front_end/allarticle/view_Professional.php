@@ -4,13 +4,31 @@ $type_article_id = "";
 if(isset($_REQUEST["type_article_id"]) && $_REQUEST["type_article_id"] !=""){
    $type_article_id = $_REQUEST["type_article_id"];
 }
-$sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `user` left join spacialization on user.user_id = spacialization.user_id ORDER BY `spacialization`.`type_article_id` DESC";
+
+$sql1 = sprintf("SELECT user_id FROM `tb_sendmail` WHERE `tb_sendmail`.`article_id` = %s and sta_sendMail = 2",GetSQLValueString($_GET['article_id'],'text'));
+$query1 = $conn->query($sql1);
+$row1 = $query1->fetch_all(MYSQLI_ASSOC);
+
+$txt_user_id = "";
+for($i=0; $i<count($row1); $i++){
+
+    $txt_user_id .= "'".$row1[$i]['user_id']."'";
+    if(count($row1)-1!=$i){
+        $txt_user_id .= ",";
+    }  
+}
+if($txt_user_id!=""){
+echo $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `user` left join spacialization on user.user_id = spacialization.user_id WHERE user.user_id NOT IN($txt_user_id) and spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC";
+}else{
+     echo $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `user` left join spacialization on user.user_id = spacialization.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC";   
+}
 $query = $conn->query($sql);
 $row = $query->fetch_all(MYSQLI_ASSOC);
+
 ?>
 <div class="form-row">
     <div class="form-group col-md-6">
-        <label for="date_article">ผู้ทรงคุณวุฒิ คนที่ 1 :</label>
+        <label for="date_article">ผู้ทรงคุณวุฒิ :</label>
         <select class="form-control a1" name="user_id[]">
             <option value="">กรุณาเลือก</option>
             <span class="a1"></span>
@@ -30,55 +48,10 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
 </div>
 
 
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="date_article">ผู้ทรงคุณวุฒิ คนที่ 2 :</label>
-
-        <select class="form-control a2" name="user_id[]">
-            <option value="">กรุณาเลือก</option>
-            <?php for($i=0; $i<count($row); $i++){ ?>
-                <option value="<?php echo $row[$i]['user_id']; ?>"><?php echo $row[$i]['pre_id']; ?> <?php echo $row[$i]['name_th']; ?> <?php echo $row[$i]['surname_th']; ?></option>
-            <?php } ?>
-        </select>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="date_article">อีเมล :</label>
-        <input type="email" name="email[]" class="form-control b2" readonly="">
-    </div>
-</div>
-
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="date_article">ผู้ทรงคุณวุฒิ คนที่ 3 :</label>
-        <select class="form-control a3" name="user_id[]">
-            <option value="">กรุณาเลือก</option>
-            <?php for($i=0; $i<count($row); $i++){ ?>
-                <option value="<?php echo $row[$i]['user_id']; ?>"><?php echo $row[$i]['pre_id']; ?> <?php echo $row[$i]['name_th']; ?> <?php echo $row[$i]['surname_th']; ?></option>
-            <?php } ?>
-        </select>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="date_article">อีเมล :</label>
-        <input type="email" name="email[]" class="form-control b3" readonly="">
-    </div>
-</div>
-
 <script type="text/javascript">
     $('.a1').change(function(){
         var type_article_id = "<?php echo $_REQUEST["type_article_id"]; ?>";
         var a1 =  $('.a1').val();
-        var a2 =  $('.a2').val();
-        var a3 =  $('.a3').val();
-
-        $.get('allarticle/view_value.php',{ type_article_id: type_article_id ,user_id1: a1, user_id3: a3}, function(data) {
-            $('.a2').html(data);
-            $('.a2').val(a2);
-        });
-
-        $.get('allarticle/view_value.php',{ type_article_id: type_article_id ,user_id1: a1, user_id2: a2}, function(data) {
-            $('.a3').html(data);
-            $('.a3').val(a3);
-        });
 
         if(a1==""){
             $('.b1').val('');
