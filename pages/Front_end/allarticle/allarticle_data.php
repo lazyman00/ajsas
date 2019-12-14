@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
-   <div class="table-responsive">
+ <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -423,6 +423,9 @@ if ($total_record > 0) {
 
 
             $('#modal_Professional').modal('hide').next('#msg').modal('show');
+            
+            var type_article_id = $('[name=type_article_id]').val();
+            var article_id = $('[name=article_id]').val();
 
             var formData = new FormData($("#send_email")[0]);
             setTimeout(function(){  
@@ -445,6 +448,11 @@ if ($total_record > 0) {
                         showConfirmButton: false,
                         timer: 1500
                     });
+
+                    $.get('allarticle/view_Professional_pages.php',{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+                        $('#view_del_all').html(data);
+                    });
+
                 }); 
             }, 300);
             return false;

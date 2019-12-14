@@ -2,12 +2,13 @@
 <?php 
 $type_article_id = "";
 if(isset($_REQUEST["type_article_id"]) && $_REQUEST["type_article_id"] !=""){
-   $type_article_id = $_REQUEST["type_article_id"];
+ $type_article_id = $_REQUEST["type_article_id"];
 }
 
-$sql1 = sprintf("SELECT user_id FROM `tb_sendmail` WHERE `tb_sendmail`.`article_id` = %s and sta_sendMail = 2",GetSQLValueString($_GET['article_id'],'text'));
+$sql1 = sprintf("SELECT user_id FROM `tb_sendmail` WHERE `tb_sendmail`.`article_id` = %s and sta_sendMail != 2",GetSQLValueString($_GET['article_id'],'text'));
 $query1 = $conn->query($sql1);
 $row1 = $query1->fetch_all(MYSQLI_ASSOC);
+$num = $query1->num_rows;
 
 $txt_user_id = "";
 for($i=0; $i<count($row1); $i++){
@@ -17,10 +18,10 @@ for($i=0; $i<count($row1); $i++){
         $txt_user_id .= ",";
     }  
 }
-if($txt_user_id!=""){
-echo $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `user` left join spacialization on user.user_id = spacialization.user_id WHERE user.user_id NOT IN($txt_user_id) and spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC";
+if($num>0){
+    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `spacialization` left join user on spacialization.user_id = user.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 and user.user_id NOT IN($txt_user_id)  ORDER BY `spacialization`.`type_article_id` DESC";
 }else{
-     echo $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `user` left join spacialization on user.user_id = spacialization.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC";   
+    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `spacialization` left join user on spacialization.user_id = user.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC"; 
 }
 $query = $conn->query($sql);
 $row = $query->fetch_all(MYSQLI_ASSOC);
@@ -45,6 +46,9 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
     <input type="hidden" name="date" value="<?php echo date("Y-m-d"); ?>">
     <input type="hidden" name="link" value="https:www.google.com">
     <input type="hidden" name="abstract" value="หนังสือ Made To Stick คนเขียนมีแนวทางให้เราลอง เป็นหลักการ 6 อย่าง เป็นคุณสมบัติของไอเดียที่จะทำให้มันปัง">
+
+    <input type="hidden" name="type_article_id" value="<?php echo $type_article_id; ?>">
+    <input type="hidden" name="article_id" value="<?php echo $_GET['article_id']; ?>">
 </div>
 
 
