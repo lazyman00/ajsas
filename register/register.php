@@ -1,13 +1,20 @@
 <?php
-    include './config/connect.php'; 
+    include '../connect/connect.php'; 
 ?>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 <title>register</title>
+
+<!-- Bootstrap core JavaScript-->
+<script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+<script src="../bootstrap/vendor/jquery/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>   
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+
 <style>
     .error{
         color:red;
@@ -272,10 +279,6 @@
     </div>
 </div> 
 
-<script src="../node_modules/jquery/dist/jquery.min.js"></script> 
-<script src="node_modules/jquery/dist/jquery.validate.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>   
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <script>
 

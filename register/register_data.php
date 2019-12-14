@@ -1,5 +1,5 @@
 <?php
-    include './config/connect.php'; 
+    include '../connect/connect.php';
 
     $type = $_GET["action"];  
 
