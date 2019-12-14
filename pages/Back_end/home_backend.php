@@ -19,7 +19,7 @@
    // $row_data = $query->fetch_assoc();   
 ?>
  <!-- Topbar -->
- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="margin-top: -;top: 0px;height: 96px;background-color:#000000;" >
+ <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="margin-top: -;top: 0px;height: 96px;" >
 
  <img src="../../img/banner2-01.png">
 <!-- Sidebar Toggle (Topbar) -->
