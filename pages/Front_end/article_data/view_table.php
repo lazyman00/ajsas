@@ -57,7 +57,7 @@ $numRow = $query->num_rows;
 	<div class="container">
 		<hr class="mb-4">
 	</div>
-
+	
 	<style type="text/css">
 	.form-wizard {
 		padding: 25px; 
@@ -65,7 +65,8 @@ $numRow = $query->num_rows;
 		-moz-border-radius: 4px; 
 		-webkit-border-radius: 4px; 
 		border-radius: 4px; 
-		box-shadow: 2px 3px 20px 0px #ececec;
+		box-shadow: 2px 3px 20px 0px #ffffff;
+		
 		font-family: 'Roboto', sans-serif;
 		font-size: 16px;
 		font-weight: 300;
@@ -154,27 +155,27 @@ $numRow = $query->num_rows;
 			</div>
 			<div class="form-wizard-step active">
 				<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-				<p>Contact</p>
+				<p>ผู้ทรงคุณ</p>
 			</div>
 			<div class="form-wizard-step">
 				<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-				<p>Official</p>
+				<p>ประเมินบทความ</p>
 			</div>
 			<div class="form-wizard-step">
 				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>Payment</p>
+				<p>รอการแก้ไข</p>
 			</div>
 			<div class="form-wizard-step">
 				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>Payment</p>
+				<p>กำลังตรวจสอบ</p>
 			</div>
 			<div class="form-wizard-step">
 				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>Payment</p>
+				<p>รอการตีพิมพ์</p>
 			</div>
 			<div class="form-wizard-step">
 				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>Payment</p>
+				<p>ตีพิมพ์เรียบร้อย</p>
 			</div>
 		</div>
 	</div>
