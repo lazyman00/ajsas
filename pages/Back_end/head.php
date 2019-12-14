@@ -41,6 +41,10 @@
       .errors{
         color:red;
       }
+      #name_add_row-error
+      {
+          color: "rad";
+      }
       .toggle-handle{
         background-color: white;
       }
@@ -68,9 +72,29 @@
           background-color: #F5F5F5;
           border-color: #bccbda;
           outline: 0;
-          box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0); 
+          box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0);  
           cursor: default;
       }
+      .sech {
+            padding:0 10px;
+            height: 33px;
+            box-sizing: border-box;
+            border: 1px solid #CFCFCF;
+            border-radius: 4px;
+        }
+        .sech:focus {     
+            border: 1px solid #17a2b8;  
+        }
+        .sele_c {
+            padding:0 10px;
+            height: 40px;
+            box-sizing: border-box;
+            border: 1px solid #CFCFCF;
+            border-radius: 4px;
+        }
+        .sele_c:focus {     
+            border: 1px solid #17a2b8;  
+        }
       
     </style>
   </head>

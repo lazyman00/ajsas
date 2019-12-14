@@ -5,7 +5,7 @@
     LEFT JOIN academe ON user.academe_id = academe.academe_id 
     LEFT JOIN pre ON user.pre_id = pre.pre_id 
     LEFT JOIN type_title ON user.type_title_id = type_title.type_title_id 
-    ";
+    ORDER BY user.user_id DESC ";
     
     $result_user = $conn->query($sql_user);
     $fetch_user = $result_user->fetch_assoc();
@@ -15,7 +15,7 @@
 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
     <h6 class="m-0 font-weight-bold text-primary"><?php echo $name_type; ?></h6>
     <div class="dropdown no-arrow">
-    <buttom class="btn btn-primary btn-primary-split btn-sm add_pointer" data-toggle="modal" data-target="#add_mange_user_user">
+    <buttom class="btn btn-primary btn-primary-split btn-sm add_pointer" data-toggle="modal" data-target="#add_mange_user_user" id="click_add_mange_user_user">
         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
         เพิ่มข้อมูล
     </buttom>
@@ -129,7 +129,7 @@
                     <div class="col-md-3">
                         <label for="">คำนำหน้าทางวิชาการ <span style="color: red;">* </span></label>
                         <select class="form-control" id="add_pre_name" name="add_pre_name">
-                            <option value="0">กรุณาเลือก</option>
+                            <option value="">กรุณาเลือก</option>
 <?php
                             $sql_sel_pre = "SELECT pre_id, pre_th FROM pre ";
                             $result_sel_pre = $conn->query($sql_sel_pre);
@@ -212,11 +212,20 @@
                 </div>
                 <br>
                 <div class="row">
+                    <div class="col-md-5">
+                        <label for="">ที่อยู่ปัจจุบัน <span style="color: red;">* </span></label>
+                        <textarea rows="3" cols="50" id="add_address" name="add_address" class="form-control"></textarea>
+                    </div>
                     <div class="col-md-3">
                         <label for="">หมายเลขโทรศัพท์ <span style="color: red;">* </span></label>
                         <input type="text" class="form-control" id="add_phone" name="add_phone" value="" placeholder="">
                     </div>
-                    <div class="col-md-9"></div>
+                    <div class="col-md-4" id="show_name_add_row" style="display:none">
+                        <label for="">ความเชี่ยวชาญ <span style="color: red;">* ( กรุณาเลือกอย่างน้อย 1 รายการ ) </span></label><br>
+                        <div id="show_add_row"></div>
+                        <select class="sele_c" id="name_add_row" name="name_add_row" style="width: 260px;"></select>&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="button" id="show_table_add_row" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
@@ -237,19 +246,7 @@
                         <label for="">รหัสผ่าน (ยืนยันรหัสผ่าน)<span style="color: red;"> * </span></label>
                         <input type="password" class="form-control" id="add_conf_pass" name="add_conf_pass" value="" placeholder="">
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for=""><h4 style="font-weight: 600;">ที่อยู่ปัจจุบัน</h4></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9"> 
-                        <textarea rows="4" cols="50" id="add_address" name="add_address" class="form-control"></textarea>
-                    </div>
-                    <div class="col-md-9"></div>
-                </div>
+                </div>               
             </form>
         </div>
         <div class="modal-footer">
@@ -513,7 +510,7 @@
                     equalTo: "#add_pass"
                 },
                 add_pre_name: {
-                    valueNotEquals: "0"
+                    required: true
                 },
                 add_title_name: {
                     valueNotEquals: "0"
@@ -556,7 +553,7 @@
                     equalTo: "ยืนยันรหัสผ่าน ของท่านไม่ตรงกัน"
                 },
                 add_pre_name: {
-                    valueNotEquals: "กรุณาเลือกคำนำหน้าทางวิชาการของท่าน"
+                    required: "กรุณาเลือกคำนำหน้าทางวิชาการของท่าน"
                 },
                 add_title_name: {
                     valueNotEquals: "กรุณาเลือกคำนำหน้าของท่าน"
@@ -616,6 +613,9 @@
                 edit_academe:{
                         valueNotEquals: "0"
                 },
+                name_add_row: {
+					required: true
+				},
                 edit_phone: {
                         required: true
                 },
@@ -649,6 +649,9 @@
                 edit_academe:{
                         valueNotEquals: "กรุณาเลือกสถานศึกษาของท่าน"
                 },
+                name_add_row: {
+					required: "<font color=red size=2>*เลือกก่อนสิวะ!</font>"
+				},
                 edit_phone: {
                         required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน"
                 },
@@ -657,7 +660,107 @@
                 }
 			}
 		});
+
+        show_selection();
+        show_table_add_row();
+
 	});
+
+    $("#click_add_mange_user_user").click(function(){
+        var myform_1 = $("#form_add_mange_user_user").validate();
+        var myform_2 = $("#form_edit_mange_user_user").validate();
+        myform_1.resetForm();
+        myform_2.resetForm(); 
+    });
+
+    function show_add_row_all()
+    {
+        $.ajax({
+            type: 'POST',
+            url: "Manage_Add_Row.php?action=show_add_row_all", 
+            data: {
+                name_add_row : $("#name_add_row").val()
+            },
+            success: function(data) {
+                $("#show_add_row").html(data);
+            }
+        });
+    }
+
+    function show_selection()
+    {
+        $.ajax({
+            type: 'POST',
+            url: "Manage_Add_Row.php?action=show_sel", 
+            data: {
+                name_add_row : $("#name_add_row").val()
+            },
+            success: function(data) {
+                $("#name_add_row").html(data);
+            }
+        });
+    }
+
+    function show_table_add_row()
+    {
+        $.ajax({  
+            url:"Manage_Add_Row.php?action=d_add_row",  
+            method:"POST",  
+            data: {
+                name_add_row : $("#name_add_row").val()
+            }, 
+            success:function(data){   
+                var res_data = data.trim();		
+
+				if(res_data == "R_repeat")
+                {
+                    alert("ซ้ำกัน!");
+                }
+                else
+                {
+                    show_add_row_all();
+                    show_selection();
+                }
+                $("#name_add_row").val("0");
+            }
+        });  
+    }
+
+    function delete_row(n_num_row)
+    {
+        $.ajax({  
+            url:"Manage_Add_Row.php?action=d_del_row",  
+            method:"POST",  
+            data: {
+                Id_Row_delete : n_num_row
+            }, 
+            success:function(data){  
+                show_add_row_all();
+                show_selection();
+                $("#name_add_row").val("0");
+            }
+        });  
+    }
+
+    $("#name_add_row").change(function(){
+        var form_add_mange_user_user = $( "#form_add_mange_user_user" ).validate();
+        form_add_mange_user_user.resetForm();
+    });
+
+    $("#show_table_add_row").click(function(){
+        var form = $( "#form_add_mange_user_user" );
+
+        // if(form.valid())
+        // {
+            show_table_add_row();
+        // }
+        // else
+        // {
+        //     form ="";
+        // }
+        
+    });
+
 
     $("#colse_mo_add_user").click(function(){
         window.location.href = 'home_backend.php?type=manage_user_user'; 
@@ -844,15 +947,18 @@
         {
             $("#hid_show_add_pass").show();
             $("#hid_show_add_conf_pass").show();
+            $("#show_name_add_row").hide();
         }
         else
         {
             $("#hid_show_add_pass").hide();
             $("#hid_show_add_conf_pass").hide();
+            $("#show_name_add_row").show();
         }
     });
 
-    $("#save_form_add_mange_user_user").click(function(){
+
+    function add_insert_user(){ /// function เพิ่มข้อมูล user
 
         var form            = "";
         var form            = $("#form_add_mange_user_user");
@@ -916,8 +1022,54 @@
         {
             var form = "";
         }
+    }
+
+    $("#save_form_add_mange_user_user").click(function(){ /// click add data users.
+
+        chk_type_user = $("#add_type_user").val();
+        
+        if(chk_type_user == 3)
+        {
+            $.ajax({
+                type: "POST",
+                url: "Manage_Add_Row.php?action=chk_add_row",  
+                data: {
+                    add_email : $("#add_email").val()
+                },
+                success: function(data, status) {
+                    response = data.trim();
+                    if(response == "true") 
+                    {
+                        add_insert_user();
+                    }
+                    else 
+                    {
+                        Swal.fire(
+                            '<font color=#facea8>คำเตือน!</font>',
+                            'กรุณาเลือก <font color=red><u>ความเชี่ยวชาญ</u></font> อย่างน้อย 1 รายการ!',
+                            'warning'
+                        );
+                    }
+                },
+                error: function(data, status, error) {
+
+                    Swal.fire(
+                        '<font color=red>ไม่สำเร็จ!</font>',
+                        'เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง!',
+                        'error'
+                    ).then(function(){ 
+                        location.reload(true);
+                    });
+                }
+            });
+        }
+        else
+        {
+            add_insert_user();
+        }
     });
 
+   
     $("#save_form_edit_mange_user").click(function(){
 
         var form = $("#form_edit_mange_user_user");

@@ -1,5 +1,4 @@
 <?php
-
 include '../../connect/connect.php'; 
 
 $type = $_GET["action"]; 
@@ -261,6 +260,26 @@ else if($type=="insert_manage_user_user")
         ('$add_type_user', '$add_email', '$add_pass', '$add_academe', '$add_title_name', '$add_pre_name', '$add_name_thai', '$add_last_names_thai', '$add_name_eng', '$add_last_names_eng', '$add_address', '$add_phone')";
         $result = $conn->query($sql);
 
+        if(isset($_SESSION["session_Add_Row"])) // ตรวจสอบ 
+        {
+            if(count($_SESSION["session_Add_Row"]) > 0) // ถ้ามีค่า 
+            {
+                $sql_top_user ="SELECT MAX(user_id) AS t_top FROM user"; // ตรวจสอบ ค่าแรก
+                $result_top_user = $conn->query($sql_top_user);
+                $fetch_top_user = $result_top_user->fetch_assoc(); 
+
+                $t_top_id = $fetch_top_user['t_top'];
+
+                foreach ($_SESSION['session_Add_Row'] as $key_se => $value_se) {  
+
+                    $inser_name_ex = $value_se['Id_Add_Row'];
+                    $sql_int = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$t_top_id', '$inser_name_ex')";
+                    $result_int = $conn->query($sql_int);
+                    
+                }
+            }
+        }
+        unset($_SESSION['session_Add_Row']);
         echo "true";
     }
     else
