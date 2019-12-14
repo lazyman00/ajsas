@@ -238,24 +238,24 @@
      $(document).ready(function() {
 
          $('#form_edit_reset_password_data_user_editor').validate({
-			errorClass: "errors",
-			rules: {
+            errorClass: "errors",
+            rules: {
                 reset_old: {
                     required: true,
-					remote: { 
-						url: "header_data.php?action=check_reset_old",
-						type: "post",
-						cache: false,
-						global: false,
-						data: { 
-							reset_old: function() {
-								return $("#reset_old").val();
-							},
+                    remote: { 
+                        url: "header_data.php?action=check_reset_old",
+                        type: "post",
+                        cache: false,
+                        global: false,
+                        data: { 
+                            reset_old: function() {
+                                return $("#reset_old").val();
+                            },
                             id_reset_password_manage_user_editor: function() {
-								return $("#id_reset_password_manage_user_editor").val();
-							}
-						}
-					}
+                                return $("#id_reset_password_manage_user_editor").val();
+                            }
+                        }
+                    }
                 },
                 new_reset_old: {
                     required: true
@@ -264,8 +264,8 @@
                     required: true,
                     equalTo : "#new_reset_old"
                 }
-			},
-			messages: {
+            },
+            messages: {
                 reset_old: {
                     required: "กรุณากรอก รหัสผ่านเดิม",
                     remote: "รหัสผ่านเดิมไม่ถูกต้อง"
@@ -278,8 +278,8 @@
                     equalTo: "หรัสผ่านไม่ตรงกัน"
                 }
 
-			}
-		});
+            }
+        });
 
      });
      
