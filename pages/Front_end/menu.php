@@ -31,21 +31,15 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
     <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../../img/banner3-01.png"></h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <?php if($_SESSION['type_user_id']==1){ // admin ?>
+        <?php if($_SESSION['type_user_id']==1){ // admin บรรณาธิการ?>
             <a class="p-2 text-dark" href="../Back_end/home_backend.php">จัดการข้อมูลหลัก</a>
-        <?php }else if($_SESSION['type_user_id']==2){ //บรรณาธิการ ?>
+        <?php }else if($_SESSION['type_user_id']==2){ //ผู้ส่ง ?>
             <a class="p-2 text-dark" href="#">เกี่ยวกับวารสาร</a>
             <a class="p-2 text-dark" href="#">บรรณาธิการ</a>
             <a class="p-2 text-dark" href="#">การส่ง</a>
             <a class="p-2 text-dark" href="#">ประกาศ</a>
             <a class="p-2 text-dark" href="#">ติดต่อ</a>
         <?php }else if($_SESSION['type_user_id']==3){ //ผู้ทรง ?>
-            <a class="p-2 text-dark" href="#">เกี่ยวกับวารสาร</a>
-            <a class="p-2 text-dark" href="#">การส่ง</a>
-            <a class="p-2 text-dark" href="#">ติดต่อ</a>
-            
-        <?php }else if($_SESSION['type_user_id']==4){ //สมาชิก ?>
-            <a class="p-2 text-dark" href="searching_article.php">ค้นหาวารสารวิชาการ</a>
             <a class="p-2 text-dark" href="#">เกี่ยวกับวารสาร</a>
             <a class="p-2 text-dark" href="#">การส่ง</a>
             <a class="p-2 text-dark" href="#">ติดต่อ</a>

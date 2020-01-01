@@ -15,6 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>   
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 
+<!-- sweetalert --> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
+
 <style>
     .error{
         color:red;
@@ -88,7 +92,7 @@
                             <div class="card-header">ข้อมูลเกี่ยวกับผู้ส่งบทความ</div>
                             <div class="card-body">
                                     <form class="needs-validation" novalidate id="form_2" name="form_2">
-                                            <div class="row" >
+                                            <!-- <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
                                                     <label for="name">สมัครตำแหน่ง<span style="color: red">*</span></label>
                                                 </div>
@@ -99,7 +103,7 @@
                                                         <option value="2">ผู้ทรงวุฒิฯ</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
                                                     <label for="name">ชื่อภาษาไทย<span style="color: red">*</span></label>
@@ -138,7 +142,7 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <select class="form-control form-control-sm" id="department" name="department">
-                                                        <option value="0">กรุณาเลือก</option>
+                                                        <option value="">กรุณาเลือก</option>
 <?php
                                                         $sql_depar = "SELECT * FROM department ";
                                                         $result_depar = $conn->query($sql_depar);
@@ -168,7 +172,7 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <select class="form-control form-control-sm" id="t_type_article_id" name="t_type_article_id">
-                                                        <option value="0">กรุณาเลือก</option>
+                                                        <option value="">กรุณาเลือก</option>
 <?php
                                                         $sql_t_a = "SELECT * FROM type_article ";
                                                         $result_t_a = $conn->query($sql_t_a);
@@ -189,7 +193,7 @@
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <select class="form-control form-control-sm" id="title_name" name="title_name">
-                                                        <option value="0">กรุณาเลือก</option>
+                                                        <option value="">กรุณาเลือก</option>
                                                         <option value="1">นาย</option>
                                                         <option value="2">นาง</option>
                                                         <option value="3">นางสาว</option>
@@ -203,7 +207,7 @@
                                                 <div class="col-md-4 mb-3">
                                                     <!-- <input type="text" class="form-control form-control-sm" id="position_thai" name="position_thai"> -->
                                                     <select class="form-control form-control-sm" id="position_thai" name="position_thai">
-                                                        <option value="0">กรุณาเลือก</option>
+                                                        <option value="">กรุณาเลือก</option>
 <?php
                                                         $sql_pre_thai = "SELECT * FROM pre ";
                                                         $result_pre_thai = $conn->query($sql_pre_thai);
@@ -257,7 +261,7 @@
                             </div>
                             </div>
 
-                    
+                    <div id="ga"></div>
                 
                 <div class="row">
                         <div class="col-md-12 order-md-1" style="align-items: center">
@@ -286,40 +290,51 @@ $(document).ready(function(){
     fu_show_data_register();
     fu_show_data_register_position_eng();
 
-    $.validator.addMethod("valueNotEquals", function(value, element, arg){
-        return arg !== value;
-    }, "Value must not equal arg.");
-
     $('#form_1').validate({
         rules: {
             e_eail: {
-                required: true
+                required: true,
+                email: true,
+                remote: { 
+					url: "check_register.php?action=check_email", 
+					type: "post",
+					cache: false,
+					global: false,
+					data: {
+						e_eail: function() {
+							return $( "#e_eail" ).val();
+						}
+					}
+				}
             },
             p_pass: {
-                required: true
+                required: true,
+                minlength: 4
             },
             conf_pass: {
-                required: true
+                required: true,
+                equalTo: "#p_pass"
             }
         },
         messages: {
             e_eail: {
-                required: "* กรุณากรอก อีเมล์"
+                required: "* กรุณากรอก อีเมล์",
+                email: "รูปแบของ Email ของท่านไม่ถูกต้อง!",
+                remote: "<font color=red>E-mail นี้ถูกใช้งานแล้ว</font>"
             },
             p_pass: {
-                required: "* กรุณากรอก รหัสผ่าน"
+                required: "* กรุณากรอก รหัสผ่าน",
+                minlength: "* กรุณากรอก รหัสผ่าน 4 หลักขึ้นไป"
             },
             conf_pass: {
-                required: "* กรุณากรอก รหัสผ่านยืนยัน"
+                required: "* กรุณากรอก รหัสผ่านยืนยัน",
+                equalTo: "ยืนยันรหัสผ่าน ของท่านไม่ตรงกัน"
             }
         }
     });
 
     $('#form_2').validate({
         rules: {
-            position:{
-                valueNotEquals: '0'
-            },
             name_th: {
                 required: true
             },
@@ -333,19 +348,19 @@ $(document).ready(function(){
                 required: true
             },
             department: {
-                valueNotEquals: '0'
+                required: true
             },
             e_education: {
-                valueNotEquals: '0'
+                required: true
             },
             t_type_article_id: {
-                valueNotEquals: '0'
+                required: true
             },
             title_name: {
-                valueNotEquals: '0'
+                required: true
             },
             position_thai: {
-                valueNotEquals: '0'
+                required: true
             },
             a_add: {
                 required: true
@@ -358,35 +373,32 @@ $(document).ready(function(){
             }
         },
         messages: {
-            position:{
-                valueNotEquals: "* กรุณาเลือก"
-            },
             name_th: {
-                required: "* กรุณากรอก อีเมล์"
+                required: "* กรุณากรอก "
             },
             last_th: {
-                required: "* กรุณากรอก รหัสผ่าน"
+                required: "* กรุณากรอก "
             },
             name_eng: {
-                required: "* กรุณากรอก รหัสผ่านยืนยัน"
+                required: "* กรุณากรอก "
             },
             last_eng: {
-                required: "* กรุณากรอก รหัสผ่านยืนยัน"
+                required: "* กรุณากรอก "
             },
             department: {
-                valueNotEquals: "* กรุณาเลือก"
+                required: "* กรุณาเลือก "
             },
             e_education: {
-                valueNotEquals: "* กรุณาเลือก"
+                required: "* กรุณาเลือก "
             },
             t_type_article_id:{
-                valueNotEquals: "* กรุณาเลือก"
+                required: "* กรุณาเลือก "
             },
             title_name: {
-                valueNotEquals: "* กรุณาเลือก"
+                required: "* กรุณาเลือก "
             },
             position_thai: {
-                valueNotEquals: "* กรุณาเลือก"
+                required: "* กรุณาเลือก "
             },
             a_add: {
                 required: "* กรุณากรอก"
@@ -503,7 +515,7 @@ $("#aaa").click(function(){
             e_eail              = $("#e_eail").val();
             p_pass              = $("#p_pass").val();
             conf_pass           = $("#conf_pass").val();
-            position            = $("#position").val();
+            position            = 2;
             name_th             = $("#name_th").val();
             last_th             = $("#last_th").val();
             name_eng            = $("#name_eng").val();
@@ -542,20 +554,39 @@ $("#aaa").click(function(){
                     },
                     success: function(data, status) {
                         response = data.trim(); 
-  
+                        //$("#ga").html(response);
+                        //alert(response);
                         if(response == "true") // Success
                         {
-                            alert("บันทึกข้อมูลสำเร็จ");
-                            window.location.href = 'register.php'; 
+                            Swal.fire({
+                                title: "<font color=#009900>สำเร็จ!</font>", 
+                                text: "บันทึกข้อมูลสำเร็จ!",
+                                type: "success"
+                            }).then(function(){ 
+                                location.reload();
+                            });
                         }
                         else // Err
                         {
-                            alert("บันทึกข้อมูลไม่สำเร็จ");
+                            Swal.fire(
+                                '<font color=red>ไม่สำเร็จ!</font>',
+                                'เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง!',
+                                'error'
+                            ).then(function(){ 
+                                location.reload(true);
+                            });
                         }
 
                     },
                     error: function(data, status, error) {
-                        alert("Error");
+
+                        Swal.fire(
+                            '<font color=red>ไม่สำเร็จ!</font>',
+                            'เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง!',
+                            'error'
+                        ).then(function(){ 
+                            location.reload(true);
+                        });
                     }
                 });
             }
@@ -569,12 +600,20 @@ $("#aaa").click(function(){
         }
         else
         {   
-            alert("ไม่ได้กรอก form2");
+            Swal.fire(
+				'<font color=#ffc592>คำเตือน!</font>',
+				'กรุณากรอกส่วน ข้อมูลที่ใช้ในการเข้าสู่ระบบ!',
+				'warning'
+			);
         }
     }
     else
     {   
-        alert("ไม่ได้กรอก form1");
+        Swal.fire(
+            '<font color=#ffc592>คำเตือน!</font>',
+            'กรุณากรอกส่วน ข้อมูลเกี่ยวกับผู้ส่งบทความ!',
+            'warning'
+        );
     }
 
 });

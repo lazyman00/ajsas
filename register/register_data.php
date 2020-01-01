@@ -11,7 +11,7 @@
 
 ?>
         <select class="form-control form-control-sm" id="e_education" name="e_education">
-            <option value="0">กรุณาเลือก</option>
+            <option value="">กรุณาเลือก</option>
         <?php
             $sql_ac = "SELECT * FROM academe where department_id = '$id_d'";
             $result_ac = $conn->query($sql_ac);
