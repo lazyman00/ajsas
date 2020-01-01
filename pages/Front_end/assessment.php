@@ -42,7 +42,7 @@
                       <li class="breadcrumb-item active" aria-current="page">ประเมินบทความ</li>
                   </ol>
               </nav>
-              <form class="form-signin role="form" action="insert_assessment.php" method="post" enctype="multipart/form-data">
+              <form class="form-signin" role="form" action="insert_assessment.php" method="post" enctype="multipart/form-data">
                 <div class="row" style="height: 38px;">
                     <div class="col-md-4 mb-3" style="text-align:right">
                         <label for="name">ชื่อบทความ</label>                                                
@@ -88,7 +88,7 @@
                         <label for="name">แนบไฟล์ Comment</label>                                                
                     </div>
                     <div class="col-md-4 mb-3">
-                        <input name="comment_eva" type="file" class="btn btn-outline-success btn-sm" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        <input name="comment_eva" type="file" class="btn btn-outline-success btn-sm" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                     </div>                                         
                 </div>
                 <div class="row" style="height: 30px;">
@@ -108,15 +108,12 @@
                         </div>    
                     </div>
                 </div>  
-                <input type="hidden" name="article_id" value="<?php echo $article_id; ?>"  >
-            </form>
+                <input type="hidden" name="article_id" value="<?php echo $cl1; ?>"  >
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"  >
 
         </div>
     </div>
 </div> 
-
-
-
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -8,6 +8,8 @@ $search_name   = $_POST['search_name'];
 $search_name2  = $_POST['search_name2'];
 $search_name3  = $_POST['search_name3'];
 
+$user_id =  $_SESSION['user_id'];
+
 $total_record  ="";
 $total_page    ="";
 
@@ -50,10 +52,12 @@ if($type=="showdata_table"){
         
         $sql = "SELECT * FROM ( 
             SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
-            m.article_id, m.article_name_th, m.date_article, ta.type_article_name
-            FROM article AS m
+            m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name
+            FROM tb_sendmail AS ma
+            left join article as m on ma.article_id = m.article_id
             left join type_article as ta on ta.type_article_id = m.type_article_id
-            WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+            left join evaluation as tb on m.article_id = tb.article_id
+            WHERE m.article_id is not null AND ma.user_id = ".$user_id." ".$search_name." ".$search_name2." ".$search_name3."
         ) AS tb 
         WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
 
@@ -90,7 +94,13 @@ if($type=="showdata_table"){
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]  ?></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]  ?></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"] ?>">ดาวน์โหลด</a></td>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" <button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;">
+                        <?php if($fetch['sta_rate']==0){ ?>
+                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a>
+                    <?php }else{ ?> 
+                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><button class="btn btn-outline-secondary btn-sm">แสดงรายละเอียด *ยังไม่ได้ทำ</button></a>
+                    <?php } ?>
+                    </td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                     </tr>
                     
@@ -117,7 +127,7 @@ if($type=="showdata_table"){
         <?php
 
 
-$sql_page = "SELECT count(*) AS COUNT FROM ( 
+    $sql_page = "SELECT count(*) AS COUNT FROM ( 
     SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
     m.article_id, m.article_name_th, m.date_article, ta.type_article_name
     FROM article AS m
@@ -127,6 +137,7 @@ $sql_page = "SELECT count(*) AS COUNT FROM (
 
 $result_page = $conn->query($sql_page);
 $fetch_page = $result_page->fetch_assoc();
+
 $nom_row_page = $result_page->num_rows;
 
 if($nom_row_page > 0){

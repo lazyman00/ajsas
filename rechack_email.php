@@ -5,6 +5,10 @@ include('connect/connect.php');
 $sql = sprintf("SELECT * FROM `user` left join pre on user.pre_id = pre.pre_id WHERE user.`user_id` = %s ",GetSQLValueString($_GET['u'], 'text'));
 $query = $conn->query($sql);
 $row = $query->fetch_assoc();
+
+$sql_1 = sprintf("SELECT `sta_sendMail` FROM `tb_sendmail` WHERE `id_sendMail` = %s ",GetSQLValueString($_GET['sm'], 'text'));
+$query_1 = $conn->query($sql_1);
+$row_1 = $query_1->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,12 +64,12 @@ $row = $query->fetch_assoc();
     <!-- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
         <h5 class="my-0 mr-md-auto font-weight-normal"><img src="img/banner3-01.png"></h5>
     </div> -->
-    <?php if(1==1){ ?>
+    <?php if($row_1['sta_sendMail']==0){ ?>
 
         <div class="container">
             <div class="card" >
                 <div class="card-body">
-                   <form id="form_add_mange_user_user">
+                 <form id="form_add_mange_user_user">
                     <div class="container" style="padding-left: 0px;padding-right: 0px;">
                         <p class="utxt"><b>เรียนคุณ <?php echo $row['pre_th_short']; ?><?php echo $row['name_th']; ?> <?php echo $row['surname_th']; ?> จะรับอ่านวารสารเรื่อง <?php echo $_GET['t']; ?> ( <?php echo $_GET['e']; ?> ) หรือไม่</b></p>
 
@@ -75,7 +79,7 @@ $row = $query->fetch_assoc();
                             <label class="form-check-label"  for="a1">&nbsp;รับ</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-inpu a"  type="radio" name="accept_status" id="a2" value="0">
+                            <input class="form-check-inpu a"  type="radio" name="accept_status" id="a2" value="2">
                             <label class="form-check-label" for="a2">&nbsp;ไม่รับ</label>
                         </div>
                         <hr/>
@@ -184,6 +188,7 @@ $row = $query->fetch_assoc();
                     <input type="hidden" name="user_id" value="<?php echo $_GET['u']; ?>">
                     <input type="hidden" name="article_id" value="<?php echo $_GET['i']; ?>">
                     <input type="hidden" name="e" value="<?php echo $_GET['e']; ?>">
+                    <input type="hidden" name="sm" value="<?php echo $_GET['sm']; ?>">
                 </form>
             </div>         
         </div>
@@ -191,7 +196,7 @@ $row = $query->fetch_assoc();
 
 <?php }else{ ?> 
 
-    <p style="color: red;">*ลิ้งค์หมดอายุแล้ว ไม่สามารถเข้าระบบได้</p>
+    <a href="/ajsas"><p style="color: red;">*ลิ้งค์หมดอายุแล้ว ไม่สามารถเข้าระบบได้</p></a>
 
 <?php } ?>
 
@@ -302,14 +307,10 @@ $( "#form_add_mange_user_user" ).validate( {
     submitHandler: function(e) {
         var u = $('[name=user_id]').val();
         var e = $('[name=e]').val();
+        var sm = $('[name=sm]').val();
         $.post('rechack_email/sql.php',$('#form_add_mange_user_user').serialize(),function(response){
 
-
-
             $('#msg').modal('show');
-
-
-
             
             if(response==1){
                 $.post('rechack_email/reSent_mail.php',{ u:u, e:e },function(response){

@@ -26,6 +26,8 @@ if($num>0){
 $query = $conn->query($sql);
 $row = $query->fetch_all(MYSQLI_ASSOC);
 
+
+
 ?>
 <div class="form-row">
     <div class="form-group col-md-6">
@@ -49,6 +51,13 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
 
     <input type="hidden" name="type_article_id" value="<?php echo $type_article_id; ?>">
     <input type="hidden" name="article_id" value="<?php echo $_GET['article_id']; ?>">
+
+    <?php 
+    $sql = "SELECT id_sendMail FROM `tb_sendmail`  ORDER BY `id_sendMail`";        
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    ?>
+    <input type="text" name="id_sendMail" value="<?php echo $row['id_sendMail']+1; ?>">
 </div>
 
 
