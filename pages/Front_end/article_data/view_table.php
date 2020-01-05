@@ -1,5 +1,23 @@
 <?php  include('../../../connect/connect.php'); ?>
 <?php 
+if(isset($_POST['mm']) && $_POST['mm']=='sent_files'){
+	$files_comback = Convert_name_file($_FILES['files_comback']["name"]);
+	$sql = sprintf("INSERT INTO `tb_sentcomment_back`(`files_comback`, `article_id`) VALUES (%s,%s)",
+		GetSQLValueString($files_comback, 'text'),
+		GetSQLValueString($_POST['article_id'], 'text'));
+	$query = $conn->query($sql);
+	if($query){
+		if(isset($_FILES['files_comback']["name"])&&($_FILES['files_comback']["name"]!="")){			
+			move_uploaded_file($_FILES["files_comback"]["tmp_name"],"../../../files_comment/".$files_comback);
+		}
+		$sql = sprintf('UPDATE `article` SET `sta_work`=%s WHERE `article_id`=%s',
+			GetSQLValueString(3,'text'),
+			GetSQLValueString($_POST['article_id'],'text'));
+		$query = $conn->query($sql);
+	}
+}
+?>
+<?php 
 $userid = $_SESSION['user_id'];
 
 $sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
@@ -210,19 +228,113 @@ $numRow = $query->num_rows;
 	</div><br>
 </div>
 
-
+<?php 
+$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($row['article_id'],'text'));
+$query_a = $conn->query($sql_a);
+$row_a =$query_a->fetch_assoc();
+?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 md-3">
-			<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
-			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
-			<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
+			<a>ส่งบทความแก้ไข :</a>&nbsp;
+			<?php if($row['sta_work']>=2){ ?>
+				<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
+			<?php }else{ ?> 
+				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+			<?php } ?>
+			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด : <?php echo $row_a['date_comback']; ?></a>&nbsp;&nbsp;&nbsp;
+			ดาวน์โหลดบทความ :<?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>" style="border-left-width: -;padding-left: 72px;"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a style="border-left-width: -;padding-left: 72px;">เอกสาร</a><?php } ?>
 		</div> 
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="mymodel_upfilecomment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">อัพโหลดไฟล์</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="sent_commentfiles" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="exampleFormControlFile1">แบบไฟล์แก้ไขวารสาร : </label>
+						<input type="file" class="form-control-file" name="files_comback" id="exampleFormControlFile1">
+					</div>
+
+				</div>
+				<div class="modal-footer">   
+					<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+				</div>
+				<input type="text" name="article_id" value="<?php echo $row['article_id'];  ?>">
+				<input type="text" name="userid" value="<?php echo $userid; ?>">
+				<input type="text" name="year" value="<?php echo $_POST['year']; ?>">
+				<input type="text" name="time" value="<?php echo $_POST['time']; ?>">	
+
+				<input type="text" name="mm" value="sent_files">
+
+			</form>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
+	$('#upfilecomment').click(function(event) {
+		$('#mymodel_upfilecomment').modal({ show : true});
+	});
+
+	$( "#sent_commentfiles" ).validate( {
+
+		rules: {
+			files_comback: "required"
+		},
+		messages: {
+			files_comback: "*กรุณาเลือกแนบไฟล์"
+		},
+		errorElement: "em",
+		errorPlacement: function ( error, element ) {
+			error.addClass( "help-block" );
+
+			if ( element.prop( "type" ) === "checkbox" ) {
+				error.insertAfter( element.parent( "label" ) );
+			} else {
+				error.insertAfter( element );
+			}
+		},
+		highlight: function ( element, errorClass, validClass ) {
+			$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+		},
+		unhighlight: function (element, errorClass, validClass) {
+			$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+		},
+		submitHandler: function(e) {
+
+			var formData = new FormData($("#sent_commentfiles")[0]);
+			$('#mymodel_upfilecomment').modal('hide');
+			setTimeout(function(){ 
+				$.ajax({
+					url: 'article_data/view_table.php',
+					type: 'POST',
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(result) {
+						$('#view_table').html(result);
+					}
+				});
+			}, 300);
+			return false;
+		}
+	} );	
+	
+
+
 	var sent = $('[name=numRow]').val();
 	if(sent==1){
 		$('#sent').prop('disabled', true );
@@ -231,6 +343,12 @@ $numRow = $query->num_rows;
 	}
 
 	var sta_work = $('[name=sta_work]').val();
+
+	if(sta_work==3){
+		$('#upfilecomment').html('อัพไฟล์แล้ว');
+		$('#upfilecomment').prop('disabled', true);
+	}
+
 	var i;
 	for(i=0; i<=sta_work; i++){
 		$('.form-wizard-step').eq(i).addClass('active');
