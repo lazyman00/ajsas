@@ -55,7 +55,7 @@
                     </div>
                     <div  class="col-md-7 " style="align:right">
                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-sm" style="width: 180px;margin-left: 249px;">เข้าสู่ระบบวารสาร</button>
-                        <button type="button" class="btn btn-outline-success" style="width: 190px;margin-left: 10px;">สมัครสมาชิกส่งบทความ</button>
+                        <a href="register/register.php"><button  type="button" class="btn btn-outline-success" style="width: 190px;margin-left: 10px;">สมัครสมาชิกส่งบทความ</button></a>
                     </div>
                 </div><br><br><br>           
             </nav>
