@@ -1,5 +1,24 @@
 <?php
-    include '../connect/connect.php'; 
+    //include '../connect/connect.php'; 
+    $hostname_connect = "localhost";
+$username_connect = "root";
+$password_connect = "1150"; //1150
+$database_connect = "ajsas"; // ajsas
+$conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
+if ($conn->connect_errno) {
+	echo $conn->connect_error;
+	exit;
+} else
+{
+  //echo "Database Connected.";
+}
+
+$conn->set_charset("utf8");	
+mysqli_query($conn, "SET NAMES UTF8");
+date_default_timezone_set('Asia/Bangkok');
+if (!isset($_SESSION)) {
+	session_start();
+}
 ?>
 <html lang="en">
 <head>
@@ -29,25 +48,26 @@
 </head>
 
 <body class="bg-light">
-<!-- <nav class="navbar navbar-default navbar-static-top no_print_" role="navigation"style="margin-bottom: 0px; height: 80px; background-color: rgb(255, 255, 255); padding-top: 10px;">
-<div class="navbar-header" style="background-color: #2980B9; box-shadow: 4px 4px 1px #888888;">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-<a href="index.html"><img src="\img\logo.png"  class="logo" /></a>
-<a class="navbar-brand" style="color: #ffffff;">ฐานข้อมูลเพื่อสนับสนุนการดำเนินงานเครือข่ายจิตอาสาประชารัฐ จังหวัดอุตรดิตถ์</a> 
-</button>
-</div>
-</nav> -->
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-<h5 class="my-0 mr-md-auto font-weight-normal">วารสารวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์</h5>
-<nav class="my-2 my-md-0 mr-md-3">
-<a class="p-2 text-dark" href="#">เกี่ยวกับวารสาร</a>
-<a class="p-2 text-dark" href="#">บรรณาธิการ</a>
-<a class="p-2 text-dark" href="#">การส่ง</a>
-<a class="p-2 text-dark" href="#">ประกาศ</a>
-<a class="p-2 text-dark" href="#">ติดต่อ</a>
-</nav>
-<a class="btn btn-outline-primary" href="#">เข้าสู่ระบบ</a>
-</div>
+
+<style>
+       .modal-header {
+        background-color: #e9ecef;
+        color: #585f65;
+    }
+    .modal-footer{
+        display: block;
+        text-align: -webkit-center;
+    }.bg-white {
+        background-color: #429476!important;
+        
+    }
+</style>
+<!-- background-color: #5d3333!important; -->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
+    <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../img/banner3-01.png"></h5>
+    
+</div>       
+
 <div class="container">
 <div class="card" style="width: 100%">
     <div class="card-body">   
@@ -563,7 +583,8 @@ $("#aaa").click(function(){
                                 text: "บันทึกข้อมูลสำเร็จ!",
                                 type: "success"
                             }).then(function(){ 
-                                location.reload();
+                                //location.reload();
+                                window.location.href = '../index.php';
                             });
                         }
                         else // Err

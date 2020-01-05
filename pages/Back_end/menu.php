@@ -1,9 +1,15 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
+<style>
+       .icon-color {
+        color: #112314;
+    }
+</style>
 
 <li class="nav-item">
   <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+  <!-- <a class="icon-color"><i class="fa fa-edit"></i></a> -->
   <i class="fa fa-edit"></i>
     <span>จัดการข้อมูลหลัก</span>
   </a>
