@@ -2,7 +2,7 @@
 <?php 
 $userid = $_SESSION['user_id'];
 
-$sql = sprintf("SELECT * FROM `article` where user_id = %s and year = %s and `time` = %s",
+$sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
 	GetSQLValueString($userid, 'text'),
 	GetSQLValueString($_POST['year'], 'text'),
 	GetSQLValueString($_POST['time'], 'text'));
@@ -10,55 +10,8 @@ $query = $conn->query($sql);
 $row = $query->fetch_assoc();
 $numRow = $query->num_rows;
 ?>
-<input type="hidden" name="numRow" value="<?php echo $numRow; ?>">
-<div class="row">                      
-	<div class="col-md-12 mb-3">                        
-		<div class="table-responsive">
-			<h4>ข้อมูลบทความ</h4>
-
-			<table class="table table-striped" >
-				<thead>
-					<tr>
-						<th scope="col" style="width: 5%">#</th>
-						<th scope="col">ชื่อบทความ</th>
-						<th scope="col" style="width: 10%">ดาวน์โหลด</th>
-						<th scope="col" style="width: 15%;text-align:center">วันที่ดำเนินการ</th>
-						<th scope="col" style="width: 5%"></th>
-					</tr>
-				</thead>
-				<tbody>
-					
-					<?php if($numRow>0){ ?>
-						<tr>
-							<th scope="row" >1</th>
-							<td><?php echo $row["article_name_th"]; ?></td>
-							<td><a href="../files_work/<?php echo $row["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
-							<td align="center">                                
-								<?php
-								$date=date_create($row["date_article"]);
-								echo date_format($date,"Y/m/d");
-								?>
-							</td>
-							<td align="center">
-								<a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
-							</td>
-						</tr>
-					<?php }else{ ?> 
-						<tr>
-							<td colspan="5"><font color="red">*ไม่พบข้อมูล</font></td>
-						</tr>
-					<?php } ?>
-				</tbody>
-			</table>     
-		</div>
-	</div>                   
-
-
-	<div class="container">
-		<hr class="mb-4">
-	</div>
-	
-	<style type="text/css">
+<input type="hidden" name="sta_work" value="<?php echo $row['sta_work']; ?>">
+<style type="text/css">
 	.form-wizard {
 		padding: 25px; 
 		background: #fff;
@@ -140,79 +93,133 @@ $numRow = $query->num_rows;
 		transform: skewX(30deg); /* Standard syntax */
 	}
 </style>
-	<div class="container">
-	<div class="container">
-		<div class="row">
-			<h4>สถานะบทความ</h4>
-		</div>
-	</div>
-	<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
-		<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
-		 <!-- style="left: 34px;bottom: 43px;" -->
-			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
-				<p>ส่งบทความ</p>
-			</div>
-			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-				<p>ผู้ทรงคุณ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-				<p>ประเมินบทความ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>รอการแก้ไข</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>กำลังตรวจสอบ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>รอการตีพิมพ์</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>ตีพิมพ์เรียบร้อย</p>
-			</div>
-		</div>
-	</div>
-</div>
 
-</div>
+<input type="hidden" name="numRow" value="<?php echo $numRow; ?>">
+<div class="row">                      
+	<div class="col-md-12 mb-3">                        
+		<div class="table-responsive">
+			<h4>ข้อมูลบทความ</h4>
 
-	
+			<table class="table table-striped" >
+				<thead>
+					<tr>
+						<th scope="col" style="width: 5%">#</th>
+						<th scope="col">ชื่อบทความ</th>
+						<th scope="col" style="width: 10%">ดาวน์โหลด</th>
+						<th scope="col" style="width: 15%;text-align:center">วันที่ดำเนินการ</th>
+						<th scope="col" style="width: 5%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<?php if($numRow>0){ ?>
+						<tr>
+							<th scope="row" >1</th>
+							<td><?php echo $row["article_name_th"]; ?></td>
+							<td><a href="../files_work/<?php echo $row["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
+							<td align="center">                                
+								<?php
+								$date=date_create($row["date_article"]);
+								echo date_format($date,"Y/m/d");
+								?>
+							</td>
+							<td align="center">
+								<a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
+							</td>
+						</tr>
+					<?php }else{ ?> 
+						<tr>
+							<td colspan="5"><font color="red">*ไม่พบข้อมูล</font></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>     
+		</div>
+	</div>                   
+
+
 	<div class="container">
 		<hr class="mb-4">
 	</div>
+	
 	<div class="container">
-		<div class="row">
-			<h4>ผลการประเมิน</h4>
+		<div class="container">
+			<div class="row">
+				<h4>สถานะบทความ</h4>
+			</div>
+		</div>
+		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
+			<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
+				<!-- style="left: 34px;bottom: 43px;" -->
+				<div class="form-wizard-step active" style="height: 110px;" >
+					<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+					<p>ส่งบทความ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+					<p>ผู้ทรงคุณ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+					<p>ประเมินบทความ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>รอการแก้ไข</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>กำลังตรวจสอบ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>รอการตีพิมพ์</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>ตีพิมพ์เรียบร้อย</p>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"></textarea>
-			</div>
-			<div class="col-md-3">
+
+</div>
+
+
+<div class="container">
+	<hr class="mb-4">
+</div>
+<div class="container">
+	<div class="row">
+		<h4>ผลการประเมิน</h4>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php echo $row['detal_comment']; ?></textarea>
+		</div>
+		<div class="col-md-3">
+			<?php if(isset($row['files_comment']) && $row['files_comment']!=""){ ?>
+				<a href="../../files_comment/<?php echo $row['files_comment']; ?>"><button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button></a>
+			<?php }else{ ?> 
 				<button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button>
-			</div>
-		</div><br>
-	</div>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 md-3">
-				<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
-				<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
-				<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
-			</div> 
+			<?php } ?>
+			
 		</div>
+	</div><br>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 md-3">
+			<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
+			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
+			<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
+		</div> 
 	</div>
+</div>
 
 
 <script type="text/javascript">
@@ -222,4 +229,12 @@ $numRow = $query->num_rows;
 	}else {
 		$('#sent').prop('disabled', false );
 	}
+
+	var sta_work = $('[name=sta_work]').val();
+	var i;
+	for(i=0; i<=sta_work; i++){
+		$('.form-wizard-step').eq(i).addClass('active');
+	}
+
+	
 </script>

@@ -57,7 +57,7 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
     ?>
-    <input type="text" name="id_sendMail" value="<?php echo $row['id_sendMail']+1; ?>">
+    <input type="hidden" name="id_sendMail" value="<?php echo $row['id_sendMail']+1; ?>">
 </div>
 
 
