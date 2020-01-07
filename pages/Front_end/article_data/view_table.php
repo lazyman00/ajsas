@@ -236,14 +236,15 @@ $row_a =$query_a->fetch_assoc();
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 md-3">
-			<a>ส่งบทความแก้ไข :</a>&nbsp;
+
+			<span>ส่งบทความแก้ไข : </span>
 			<?php if($row['sta_work']>=2){ ?>
 				<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
 			<?php }else{ ?> 
 				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
 			<?php } ?>
-			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด : <?php echo $row_a['date_comback']; ?></a>&nbsp;&nbsp;&nbsp;
-			ดาวน์โหลดบทความ :<?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>" style="border-left-width: -;padding-left: 72px;"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a style="border-left-width: -;padding-left: 72px;">เอกสาร</a><?php } ?>
+			<span>วันที่อัพโหลด : </span><span><?php echo $row_a['date_comback']; ?></span>
+			<span>ดาวน์โหลดบทความ : </span><?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a>เอกสาร</a><?php } ?>
 		</div> 
 	</div>
 </div>

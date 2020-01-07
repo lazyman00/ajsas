@@ -91,6 +91,8 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ผลประเมินวารสาร..</button>    
                             <?php }else if($fetch["sta_work"]==2){ ?>
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
+                            <?php }else if($fetch["sta_work"]==3){ ?>
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบ..</button>    
                             <?php } ?>
                             
                         </td>
@@ -272,7 +274,7 @@ if ($total_record > 0) {
                             <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">การแก้ไขบทความ</a>
+                            <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">ตรวจสอบบทความ</a>
                         </li>
                     </ul>
                     <span id="view_del_all"></span>
@@ -363,7 +365,7 @@ if ($total_record > 0) {
         }if(pages==3){
             var  url = "allarticle/send_comment_sender.php";
         }if(pages==4){
-            var  url = "allarticle/view_checkMail.php";
+            var  url = "allarticle/view_files_comsender.php";
         }
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
@@ -388,7 +390,7 @@ if ($total_record > 0) {
         }if(sta_work==2){
             var  url = "allarticle/send_comment_sender.php";
         }if(sta_work==3){
-            var  url = "allarticle/view_checkMail.php";
+            var  url = "allarticle/view_files_comsender.php";
         }
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
