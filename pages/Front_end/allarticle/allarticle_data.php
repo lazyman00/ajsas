@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
- <div class="table-responsive">
+   <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -86,7 +86,11 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
                         <td style="padding-bottom: 6px; padding-top: 6px;">
                             <?php if($fetch["sta_work"]==0){ ?> 
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
+                            <?php }else if($fetch["sta_work"]==1){ ?>
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ผลประเมินวารสาร..</button>    
+                            <?php }else if($fetch["sta_work"]==2){ ?>
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
                             <?php } ?>
                             
                         </td>
@@ -258,17 +262,17 @@ if ($total_record > 0) {
 
                     <hr>
                     <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
+                        <li class="nav-item ">
+                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link li" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-pages="3" data-type_article_id="" data-article_id="" href="#">การแก้ไขบทความ</a>
+                            <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">การแก้ไขบทความ</a>
                         </li>
                     </ul>
                     <span id="view_del_all"></span>
@@ -355,9 +359,9 @@ if ($total_record > 0) {
         if(pages==1){
             var  url = "allarticle/view_Professional_pages.php";
         }if(pages==2){
-            var  url = "allarticle/view_checkMail.php";
+            var  url = "allarticle/view_comment.php";
         }if(pages==3){
-            var  url = "allarticle/view_checkMail.php";
+            var  url = "allarticle/send_comment_sender.php";
         }if(pages==4){
             var  url = "allarticle/view_checkMail.php";
         }
@@ -372,6 +376,24 @@ if ($total_record > 0) {
     $('.btnUp').click(function(event) {
         var type_article_id = $(this).attr('data-type_article_id');
         var article_id = $(this).attr('data-article_id');
+        var sta_work = $(this).attr('data-sta_work');
+
+        $('.li').removeClass('active');
+        $('.li').eq(sta_work).toggleClass('active');
+
+        if(sta_work==0){
+            var  url = "allarticle/view_Professional_pages.php";
+        }if(sta_work==1){
+            var  url = "allarticle/view_comment.php";
+        }if(sta_work==2){
+            var  url = "allarticle/send_comment_sender.php";
+        }if(sta_work==3){
+            var  url = "allarticle/view_checkMail.php";
+        }
+
+        $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+            $('#view_del_all').html(data);
+        });
 
         $('#article_id').val(article_id);
         $('.nav-link').attr({
@@ -383,9 +405,6 @@ if ($total_record > 0) {
             $('#view_allaricle_data').html(data);
         });
 
-        $.get('allarticle/view_Professional_pages.php',{ type_article_id: type_article_id, article_id: article_id }, function(data) {
-            $('#view_del_all').html(data);
-        });
 
         $("#myModalA").modal({backdrop: true});
         $('body').removeAttr('style');
@@ -423,7 +442,7 @@ if ($total_record > 0) {
 
 
             $('#modal_Professional').modal('hide').next('#msg').modal('show');
-            
+
             var type_article_id = $('[name=type_article_id]').val();
             var article_id = $('[name=article_id]').val();
 

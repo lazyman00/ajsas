@@ -10,19 +10,29 @@ $cl2 = "";
 if($_POST['user_id']){
 	$cl2 = $_POST['user_id'];
 }
-$cl3 = "0";
-if($_POST['accept_status']){
-	$cl3 = $_POST['accept_status'];
-}
+$cl3 = $_POST['accept_status'];
+
+// if($_POST['accept_status']==1){
+// 	$cl3 = $_POST['accept_status'];
+	// $date_end = $_POST['date_end'];
+	// $date_now = date("Y-m-d");
+
+	// if($date_end<$date_now){
+	// 	$cl3 = '3';
+	// }else{
+	// 	$cl3 = $_POST['accept_status'];
+	// } //รอคำอธิบายจากอาจารย์
+// }else{
+// 	$cl3 = $_POST['accept_status'];
+// }
 
 
 
-$sql = sprintf("INSERT INTO `read_article`(`article_id`, `user_id`, `accept_status`) VALUES (%s,%s,%s)",
-	GetSQLValueString($cl1,'text'),
-	GetSQLValueString($cl2,'text'),
-	GetSQLValueString($cl3,'text'));
+$sql = sprintf("UPDATE `tb_sendmail` SET `sta_sendMail`=%s WHERE `id_sendMail`=%s",
+	GetSQLValueString($cl3,'text'),
+	GetSQLValueString($_POST['sm'],'text'));
 $query = $conn->query($sql);
-if(($query)&&($cl3!="0")){
+if(($query)&&($cl3=="1")){
 	$cl4 = "";
 	if($_POST['type_user_id']){
 		$cl4 = $_POST['type_user_id'];
@@ -88,13 +98,18 @@ if(($query)&&($cl3!="0")){
 		GetSQLValueString($cl15,'text'),
 		GetSQLValueString($cl2,'text'));
 	$query = $conn->query($sql);
-	
+
+
+	$sql = sprintf("UPDATE `article` SET `sta_work`=%s WHERE `article_id`=%s",
+		GetSQLValueString('1','text'),
+		GetSQLValueString($cl1,'text'));
+	$query = $conn->query($sql);
 }
 
-if($cl3==0){
-	echo "0";
-}else{
+if($cl3==1){
 	echo "1";
+}else{
+	echo "0";
 }
 
 

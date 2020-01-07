@@ -72,7 +72,7 @@ $email_content = "<!DOCTYPE html>
 <p>is done, you will receive a THB 1,000 cash prize.</p>
 
 <p style='text-indent: 50px;'>The review itself is due ".$row_article['date_article'].".</p>
-<p style='text-indent: 50px;'>Submission URL: <a href='http://localhost/ajsas/rechack_email.php?u=".$_POST['user_id'][$i]."&e=".$row_article['article_name_en']."&t=".$row_article['article_name_th']."&i=".$row_article['article_id']."'>>> ระบบวารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ <<</a></p>
+<p style='text-indent: 50px;'>Submission URL: <a href='http://localhost/ajsas/rechack_email.php?u=".$_POST['user_id'][$i]."&e=".$row_article['article_name_en']."&t=".$row_article['article_name_th']."&i=".$row_article['article_id']."&sm=".$_POST['id_sendMail']."'>>> ระบบวารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ <<</a></p>
 <br/>
 <p>Assoc. Prof. Dr. Issara Inchan </p>
 <p>Faculty of Science and Technology, Uttaradit Rajabhat University.</p>
@@ -89,7 +89,8 @@ if($email_receiver){
 	$mail->msgHTML($email_content);
 
 	if ($mail->send()) {  
-		$sql = sprintf("INSERT INTO `tb_sendmail`(`user_id`, `article_id`) VALUES (%s,%s)",
+		$sql = sprintf("INSERT INTO `tb_sendmail`(`id_sendMail`, `user_id`, `article_id`) VALUES (%s,%s,%s)",
+			GetSQLValueString($_POST['id_sendMail'],'text'),
 			GetSQLValueString($_POST['user_id'][$i],'text'),
 			GetSQLValueString($row_article['article_id'],'text'));
 		$query = $conn->query($sql);

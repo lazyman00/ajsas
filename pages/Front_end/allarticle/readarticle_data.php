@@ -111,7 +111,7 @@ if($type=="showdata_table"){
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]  ?></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]  ?></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"] ?>">ดาวน์โหลด</a></td>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" <button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" > <button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;">1 มิถุนายน 2558</td>
                     </tr>
                     

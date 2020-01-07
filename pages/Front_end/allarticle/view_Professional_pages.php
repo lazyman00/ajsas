@@ -27,7 +27,7 @@ $n = $query->num_rows;
                     <?php if($row['sta_sendMail']==0){ ?> 
                         <button type="button" class="btn btn-warning">รอการตอบกลับ</button> 
                     <?php }else if($row['sta_sendMail']==1){ ?> 
-                        <button type="button" class="btn btn-success">รับเป็นผู้้ทรงคุณวุฒิ</button> 
+                        <button type="button" class="btn btn-success">รับเป็นผู้ทรงคุณวุฒิ</button> 
                     <?php }else{ ?> 
                         <button type="button" class="btn btn-dark">หมดเวลา</button> 
                     <?php } ?>

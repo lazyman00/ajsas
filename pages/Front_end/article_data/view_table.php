@@ -1,8 +1,26 @@
 <?php  include('../../../connect/connect.php'); ?>
 <?php 
+if(isset($_POST['mm']) && $_POST['mm']=='sent_files'){
+	$files_comback = Convert_name_file($_FILES['files_comback']["name"]);
+	$sql = sprintf("INSERT INTO `tb_sentcomment_back`(`files_comback`, `article_id`) VALUES (%s,%s)",
+		GetSQLValueString($files_comback, 'text'),
+		GetSQLValueString($_POST['article_id'], 'text'));
+	$query = $conn->query($sql);
+	if($query){
+		if(isset($_FILES['files_comback']["name"])&&($_FILES['files_comback']["name"]!="")){			
+			move_uploaded_file($_FILES["files_comback"]["tmp_name"],"../../../files_comment/".$files_comback);
+		}
+		$sql = sprintf('UPDATE `article` SET `sta_work`=%s WHERE `article_id`=%s',
+			GetSQLValueString(3,'text'),
+			GetSQLValueString($_POST['article_id'],'text'));
+		$query = $conn->query($sql);
+	}
+}
+?>
+<?php 
 $userid = $_SESSION['user_id'];
 
-$sql = sprintf("SELECT * FROM `article` where user_id = %s and year = %s and `time` = %s",
+$sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
 	GetSQLValueString($userid, 'text'),
 	GetSQLValueString($_POST['year'], 'text'),
 	GetSQLValueString($_POST['time'], 'text'));
@@ -10,55 +28,8 @@ $query = $conn->query($sql);
 $row = $query->fetch_assoc();
 $numRow = $query->num_rows;
 ?>
-<input type="hidden" name="numRow" value="<?php echo $numRow; ?>">
-<div class="row">                      
-	<div class="col-md-12 mb-3">                        
-		<div class="table-responsive">
-			<h4>ข้อมูลบทความ</h4>
-
-			<table class="table table-striped" >
-				<thead>
-					<tr>
-						<th scope="col" style="width: 5%">#</th>
-						<th scope="col">ชื่อบทความ</th>
-						<th scope="col" style="width: 10%">ดาวน์โหลด</th>
-						<th scope="col" style="width: 15%;text-align:center">วันที่ดำเนินการ</th>
-						<th scope="col" style="width: 5%"></th>
-					</tr>
-				</thead>
-				<tbody>
-					
-					<?php if($numRow>0){ ?>
-						<tr>
-							<th scope="row" >1</th>
-							<td><?php echo $row["article_name_th"]; ?></td>
-							<td><a href="../files_work/<?php echo $row["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
-							<td align="center">                                
-								<?php
-								$date=date_create($row["date_article"]);
-								echo date_format($date,"Y/m/d");
-								?>
-							</td>
-							<td align="center">
-								<a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
-							</td>
-						</tr>
-					<?php }else{ ?> 
-						<tr>
-							<td colspan="5"><font color="red">*ไม่พบข้อมูล</font></td>
-						</tr>
-					<?php } ?>
-				</tbody>
-			</table>     
-		</div>
-	</div>                   
-
-
-	<div class="container">
-		<hr class="mb-4">
-	</div>
-	
-	<style type="text/css">
+<input type="hidden" name="sta_work" value="<?php echo $row['sta_work']; ?>">
+<style type="text/css">
 	.form-wizard {
 		padding: 25px; 
 		background: #fff;
@@ -140,86 +111,248 @@ $numRow = $query->num_rows;
 		transform: skewX(30deg); /* Standard syntax */
 	}
 </style>
-	<div class="container">
-	<div class="container">
-		<div class="row">
-			<h4>สถานะบทความ</h4>
-		</div>
-	</div>
-	<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
-		<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
-		 <!-- style="left: 34px;bottom: 43px;" -->
-			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
-				<p>ส่งบทความ</p>
-			</div>
-			<div class="form-wizard-step active">
-				<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-				<p>ผู้ทรงคุณ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-				<p>ประเมินบทความ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>รอการแก้ไข</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>กำลังตรวจสอบ</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>รอการตีพิมพ์</p>
-			</div>
-			<div class="form-wizard-step">
-				<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-				<p>ตีพิมพ์เรียบร้อย</p>
-			</div>
-		</div>
-	</div>
-</div>
 
-</div>
+<input type="hidden" name="numRow" value="<?php echo $numRow; ?>">
+<div class="row">                      
+	<div class="col-md-12 mb-3">                        
+		<div class="table-responsive">
+			<h4>ข้อมูลบทความ</h4>
 
-	
+			<table class="table table-striped" >
+				<thead>
+					<tr>
+						<th scope="col" style="width: 5%">#</th>
+						<th scope="col">ชื่อบทความ</th>
+						<th scope="col" style="width: 10%">ดาวน์โหลด</th>
+						<th scope="col" style="width: 15%;text-align:center">วันที่ดำเนินการ</th>
+						<th scope="col" style="width: 5%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<?php if($numRow>0){ ?>
+						<tr>
+							<th scope="row" >1</th>
+							<td><?php echo $row["article_name_th"]; ?></td>
+							<td><a href="../files_work/<?php echo $row["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
+							<td align="center">                                
+								<?php
+								$date=date_create($row["date_article"]);
+								echo date_format($date,"Y/m/d");
+								?>
+							</td>
+							<td align="center">
+								<a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
+							</td>
+						</tr>
+					<?php }else{ ?> 
+						<tr>
+							<td colspan="5"><font color="red">*ไม่พบข้อมูล</font></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>     
+		</div>
+	</div>                   
+
+
 	<div class="container">
 		<hr class="mb-4">
 	</div>
+	
 	<div class="container">
-		<div class="row">
-			<h4>ผลการประเมิน</h4>
+		<div class="container">
+			<div class="row">
+				<h4>สถานะบทความ</h4>
+			</div>
+		</div>
+		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
+			<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
+				<!-- style="left: 34px;bottom: 43px;" -->
+				<div class="form-wizard-step active" style="height: 110px;" >
+					<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+					<p>ส่งบทความ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+					<p>ผู้ทรงคุณ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+					<p>ประเมินบทความ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>รอการแก้ไข</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>กำลังตรวจสอบ</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>รอการตีพิมพ์</p>
+				</div>
+				<div class="form-wizard-step">
+					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+					<p>ตีพิมพ์เรียบร้อย</p>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"></textarea>
-			</div>
-			<div class="col-md-3">
+
+</div>
+
+
+<div class="container">
+	<hr class="mb-4">
+</div>
+<div class="container">
+	<div class="row">
+		<h4>ผลการประเมิน</h4>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php echo $row['detal_comment']; ?></textarea>
+		</div>
+		<div class="col-md-3">
+			<?php if(isset($row['files_comment']) && $row['files_comment']!=""){ ?>
+				<a href="../../files_comment/<?php echo $row['files_comment']; ?>"><button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button></a>
+			<?php }else{ ?> 
 				<button type="button" class="btn btn-outline-success" style="float: center;">ดาวน์โหลดผลการประเมิน</button>
-			</div>
-		</div><br>
+			<?php } ?>
+			
+		</div>
+	</div><br>
+</div>
+
+<?php 
+$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($row['article_id'],'text'));
+$query_a = $conn->query($sql_a);
+$row_a =$query_a->fetch_assoc();
+?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 md-3">
+			<a>ส่งบทความแก้ไข :</a>&nbsp;
+			<?php if($row['sta_work']>=2){ ?>
+				<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
+			<?php }else{ ?> 
+				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+			<?php } ?>
+			<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด : <?php echo $row_a['date_comback']; ?></a>&nbsp;&nbsp;&nbsp;
+			ดาวน์โหลดบทความ :<?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>" style="border-left-width: -;padding-left: 72px;"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a style="border-left-width: -;padding-left: 72px;">เอกสาร</a><?php } ?>
+		</div> 
 	</div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="mymodel_upfilecomment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">อัพโหลดไฟล์</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="sent_commentfiles" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="exampleFormControlFile1">แบบไฟล์แก้ไขวารสาร : </label>
+						<input type="file" class="form-control-file" name="files_comback" id="exampleFormControlFile1">
+					</div>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 md-3">
-				<a>ส่งบทความแก้ไข</a>&nbsp;อัพโหลด
-				<a style="border-left-width: -;padding-left: 52px;">วันที่อัพโหลด</a>&nbsp;5/5/55
-				<a style="border-left-width: -;padding-left: 72px;">ดาวน์โหลดบทความ</a>&nbsp;ไฟล์เอกสาร
-			</div> 
+				</div>
+				<div class="modal-footer">   
+					<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+				</div>
+				<input type="text" name="article_id" value="<?php echo $row['article_id'];  ?>">
+				<input type="text" name="userid" value="<?php echo $userid; ?>">
+				<input type="text" name="year" value="<?php echo $_POST['year']; ?>">
+				<input type="text" name="time" value="<?php echo $_POST['time']; ?>">	
+
+				<input type="text" name="mm" value="sent_files">
+
+			</form>
 		</div>
 	</div>
-
+</div>
 
 <script type="text/javascript">
+	$('#upfilecomment').click(function(event) {
+		$('#mymodel_upfilecomment').modal({ show : true});
+	});
+
+	$( "#sent_commentfiles" ).validate( {
+
+		rules: {
+			files_comback: "required"
+		},
+		messages: {
+			files_comback: "*กรุณาเลือกแนบไฟล์"
+		},
+		errorElement: "em",
+		errorPlacement: function ( error, element ) {
+			error.addClass( "help-block" );
+
+			if ( element.prop( "type" ) === "checkbox" ) {
+				error.insertAfter( element.parent( "label" ) );
+			} else {
+				error.insertAfter( element );
+			}
+		},
+		highlight: function ( element, errorClass, validClass ) {
+			$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+		},
+		unhighlight: function (element, errorClass, validClass) {
+			$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+		},
+		submitHandler: function(e) {
+
+			var formData = new FormData($("#sent_commentfiles")[0]);
+			$('#mymodel_upfilecomment').modal('hide');
+			setTimeout(function(){ 
+				$.ajax({
+					url: 'article_data/view_table.php',
+					type: 'POST',
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(result) {
+						$('#view_table').html(result);
+					}
+				});
+			}, 300);
+			return false;
+		}
+	} );	
+	
+
+
 	var sent = $('[name=numRow]').val();
 	if(sent==1){
 		$('#sent').prop('disabled', true );
 	}else {
 		$('#sent').prop('disabled', false );
 	}
+
+	var sta_work = $('[name=sta_work]').val();
+
+	if(sta_work==3){
+		$('#upfilecomment').html('อัพไฟล์แล้ว');
+		$('#upfilecomment').prop('disabled', true);
+	}
+
+	var i;
+	for(i=0; i<=sta_work; i++){
+		$('.form-wizard-step').eq(i).addClass('active');
+	}
+
+	
 </script>
