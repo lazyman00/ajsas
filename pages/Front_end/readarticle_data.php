@@ -49,17 +49,19 @@ if($type=="showdata_table"){
         }else{
             $search_name3 ="";
         }
-        
+
+        // ORDER BY ma.id_sendMail DESC
+
         $sql = "SELECT * FROM ( 
-            SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+            SELECT ma.id_sendMail as row,
             m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name
-            FROM tb_sendmail AS ma
+            FROM tb_sendmail AS ma 
             left join article as m on ma.article_id = m.article_id
             left join type_article as ta on ta.type_article_id = m.type_article_id
             left join evaluation as tb on m.article_id = tb.article_id
             WHERE m.article_id is not null AND ma.user_id = ".$user_id." ".$search_name." ".$search_name2." ".$search_name3."
         ) AS tb 
-        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
+        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
 
     $result = $conn->query($sql); //or die($conn->error);
     $fetch = $result->fetch_assoc();
@@ -91,9 +93,9 @@ if($type=="showdata_table"){
 ?>                   
                     <tr>
                     <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]  ?></td>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]  ?></td>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"] ?>">ดาวน์โหลด</a></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"];  ?></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"];  ?></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"]; ?>">ดาวน์โหลด</a></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;">
                         <?php if($fetch['sta_rate']==0){ ?>
                         <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a>
@@ -128,12 +130,13 @@ if($type=="showdata_table"){
 
 
     $sql_page = "SELECT count(*) AS COUNT FROM ( 
-    SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+    SELECT @row_number:=@row_number + 1 as row,
     m.article_id, m.article_name_th, m.date_article, ta.type_article_name
     FROM article AS m
     left join type_article as ta on ta.type_article_id = m.type_article_id
-    WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+    WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3." 
 ) AS tb ";
+
 
 $result_page = $conn->query($sql_page);
 $fetch_page = $result_page->fetch_assoc();
