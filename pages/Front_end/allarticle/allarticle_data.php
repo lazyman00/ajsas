@@ -46,8 +46,8 @@ if($type=="showdata_table"){
         $search_name3 ="";
     }
 
-    $sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time, m.sta_work FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
-) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;" ";
+    $sql = "SELECT * FROM (SELECT m.article_id as row, m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time, m.sta_work FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
 
 $result = $conn->query($sql);
 $fetch = $result->fetch_assoc();
@@ -120,7 +120,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 
 $sql_page = "SELECT count(*) AS COUNT FROM ( 
-SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+SELECT m.article_id as row,
 m.article_id, m.article_name_th, m.date_article, ta.type_article_name
 FROM article AS m
 left join type_article as ta on ta.type_article_id = m.type_article_id

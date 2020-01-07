@@ -69,13 +69,13 @@ if($type=="showdata_table"){
     }else{
 
         $sql = "SELECT * FROM ( 
-            SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+            SELECT m.article_id as row,
             m.article_id, m.article_name_th , ta.type_article_name
             FROM article AS m
             left join type_article as ta on ta.type_article_id = m.type_article_id
             WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3." ) AS tb
     
-        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;
+        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
 
     }
 

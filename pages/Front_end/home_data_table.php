@@ -48,16 +48,14 @@
 <?php
             if($search_name != ""){
                         $sql = "SELECT * FROM ( 
-                            SELECT ROW_NUMBER() OVER (ORDER BY m.article_id DESC) as row,
+                            SELECT m.article_id as row,
                             m.article_id, m.article_name_th
                             FROM article AS m
                             WHERE m.article_id is not null ".$search_name." ) AS tb
                                      
-                        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last;
-
+                        WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
             }else{
                 $sql="SELECT article_id FROM article WHERE article_id = 0 ";
-                // $sql="SELECT * FROM taxs_50tavi ";
             }
 
             $result = $conn->query($sql); //or die($conn->error);

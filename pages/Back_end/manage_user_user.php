@@ -11,6 +11,7 @@
     $fetch_user = $result_user->fetch_assoc();
     $nom_row_user = $result_user->num_rows;
     $i = 1;
+    unset($_SESSION['edit_session_Add_Row']);
 ?>
 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
     <h6 class="m-0 font-weight-bold text-primary"><?php echo $name_type; ?></h6>
@@ -224,7 +225,7 @@
                         <label for="">ความเชี่ยวชาญ <span style="color: red;">* ( กรุณาเลือกอย่างน้อย 1 รายการ ) </span></label><br>
                         <div id="show_add_row"></div>
                         <select class="sele_c" id="name_add_row" name="name_add_row" style="width: 260px;"></select>&nbsp;&nbsp;
-                        <button class="btn btn-primary" type="button" id="show_table_add_row" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
+                        <button class="btn btn-primary" type="button" onclick="show_table_add_row()" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
                     </div>
                 </div>
                 <hr>
@@ -364,11 +365,20 @@
                 </div>
                 <br>
                 <div class="row">
+                    <div class="col-md-5">
+                        <label for="">ที่อยู่ปัจจุบัน <span style="color: red;">* </span></label>
+                        <textarea rows="4" cols="50" id="edit_address" name="edit_address" class="form-control" readonly></textarea>
+                    </div>
                     <div class="col-md-3">
                         <label for="">หมายเลขโทรศัพท์ <span style="color: red;">* </span></label>
                         <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="" placeholder="" readonly>
                     </div>
-                    <div class="col-md-9"></div>
+                    <div class="col-md-4" id="e_show_name_add_row" style="display:none">
+                        <label for="">ความเชี่ยวชาญ <span style="color: red;">* ( กรุณาเลือกอย่างน้อย 1 รายการ ) </span></label><br>
+                        <div id="e_show_add_row"></div>
+                        <select class="sele_c" id="e_name_add_row" name="e_name_add_row" style="width: 260px;"></select>&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="button" onclick="edit_show_table_add_row()" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
@@ -381,18 +391,6 @@
                         <label for="">อีเมล (E-mail)<span style="color: red;"> * </span></label>
                         <input type="text" class="form-control" id="edit_email" name="edit_email" value="" readonly>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for=""><h4 style="font-weight: 600;">ที่อยู่ปัจจุบัน</h4></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9"> 
-                        <textarea rows="4" cols="50" id="edit_address" name="edit_address" class="form-control" readonly></textarea>
-                    </div>
-                    <div class="col-md-9"></div>
                 </div>
                 <input type="hidden" id="id_edit_manage_user" name="id_edit_manage_user" value="">
                 <input type="hidden" id="hidden_edit_pre_name" name="hidden_edit_pre_name" value="">
@@ -516,28 +514,28 @@
                     valueNotEquals: "0"
                 },
                 add_name_thai: {
-                        required: true
+                    required: true
                 },
                 add_last_names_thai: {
-                        required: true
+                    required: true
                 },
                 add_name_eng: {
-                        required: true
+                    required: true
                 },
                 add_last_names_eng: {
-                        required: true
+                    required: true
                 },
                 add_type_user: {
-                        valueNotEquals: "0"
+                    valueNotEquals: "0"
                 },
                 add_academe:{
-                        valueNotEquals: "0"
+                    valueNotEquals: "0"
                 },
                 add_phone: {
-                        required: true
+                    required: true
                 },
                 add_address: {
-                        valueNotEquals: ""
+                    valueNotEquals: ""
                 }
 			},
 			messages: {
@@ -559,28 +557,28 @@
                     valueNotEquals: "กรุณาเลือกคำนำหน้าของท่าน"
                 },
                 add_name_thai: {
-                        required: "กรุณากรอกชื่อ (ภาษาไทย) ของท่าน"
+                    required: "กรุณากรอกชื่อ (ภาษาไทย) ของท่าน"
                 },
                 add_last_names_thai: {
-                        required: "กรุณากรอกนามสกุล (ภาษาไทย) ของท่าน"
+                    required: "กรุณากรอกนามสกุล (ภาษาไทย) ของท่าน"
                 },
                 add_name_eng: {
-                        required: "กรุณากรอกชื่อ (ภาษาอังกฤษ) ของท่าน"
+                    required: "กรุณากรอกชื่อ (ภาษาอังกฤษ) ของท่าน"
                 },
                 add_last_names_eng: {
-                        required: "กรุณากรอกนามสกุล (ภาษาอังกฤษ) ของท่าน"
+                    required: "กรุณากรอกนามสกุล (ภาษาอังกฤษ) ของท่าน"
                 },
                 add_type_user: {
-                        valueNotEquals: "กรุณาเลือกประเภทผู้ใช้ของท่าน"
+                    valueNotEquals: "กรุณาเลือกประเภทผู้ใช้ของท่าน"
                 },
                 add_academe:{
-                        valueNotEquals: "กรุณาเลือกสถานศึกษาของท่าน"
+                    valueNotEquals: "กรุณาเลือกสถานศึกษาของท่าน"
                 },
                 add_phone: {
                         required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน"
                 },
                 add_address: {
-                        valueNotEquals: "กรุณากรอกที่อยู่ของท่าน"
+                    valueNotEquals: "กรุณากรอกที่อยู่ของท่าน"
                 }
 			}
 		});
@@ -667,6 +665,7 @@
 	});
 
     $("#click_add_mange_user_user").click(function(){
+
         var myform_1 = $("#form_add_mange_user_user").validate();
         var myform_2 = $("#form_edit_mange_user_user").validate();
         myform_1.resetForm();
@@ -742,6 +741,90 @@
         });  
     }
 
+    ///////////////////////////// Edit //////////////////////////////
+    
+    function Add_Session()
+    {
+        $.ajax({
+            type: 'POST',
+            url: "Edit_Manage_Add_Row.php?action=add_session", 
+            data: {
+                ID_User_edit : $("#id_edit_manage_user").val()
+            },
+            success: function(data) {
+                $("#e_show_add_row").html(data);
+            }
+        });
+    }
+
+    function edit_show_selection()
+    {
+        $.ajax({
+            type: 'POST',
+            url: "Edit_Manage_Add_Row.php?action=show_sel", 
+            data: {
+                name_add_row : $("#e_name_add_row").val()
+            },
+            success: function(data) {
+                $("#e_name_add_row").html(data);
+            }
+        });
+    }
+
+    function edit_show_add_row_all()
+    {
+        $.ajax({
+            type: 'POST',
+            url: "Edit_Manage_Add_Row.php?action=show_add_row_all", 
+            data: {
+                ID_User_edit : $("#id_edit_manage_user").val()
+            },
+            success: function(data) {
+                $("#e_show_add_row").html(data);
+            }
+        });
+    }
+
+    function edit_show_table_add_row()
+    {
+        $.ajax({  
+            url:"Edit_Manage_Add_Row.php?action=d_add_row",  
+            method:"POST",  
+            data: {
+                name_add_row : $("#e_name_add_row").val()
+            }, 
+            success:function(data){   
+                var res_data = data.trim();		
+				if(res_data == "R_repeat")
+                {
+                    alert("ซ้ำกัน!");
+                }
+                else
+                {
+                    edit_show_selection();
+                    edit_show_add_row_all();
+                }
+                $("#e_name_add_row").val("0");
+            }
+        });  
+    }
+
+    function edit_delete_row(n_num_row)
+    {
+        $.ajax({  
+            url:"Edit_Manage_Add_Row.php?action=d_del_row",  
+            method:"POST",  
+            data: {
+                Id_Row_delete : n_num_row
+            }, 
+            success:function(data){  
+                edit_show_selection();
+                edit_show_add_row_all();
+                $("#e_name_add_row").val("0");
+            }
+        });  
+    }
+
     $("#name_add_row").change(function(){
         var form_add_mange_user_user = $( "#form_add_mange_user_user" ).validate();
         form_add_mange_user_user.resetForm();
@@ -749,16 +832,6 @@
 
     $("#show_table_add_row").click(function(){
         var form = $( "#form_add_mange_user_user" );
-
-        // if(form.valid())
-        // {
-            show_table_add_row();
-        // }
-        // else
-        // {
-        //     form ="";
-        // }
-        
     });
 
 
@@ -840,6 +913,24 @@
         /// ส่งค่า ประเภทผู้ใช้ ///
         $("#hidden_edit_type_user_id").val(t_edit_type_user_id);
 
+        $('#edit_email').attr('readonly', true);
+        $('#edit_pre_name').attr('disabled', true);
+        $('#edit_title_name').attr('disabled', true);
+        $('#edit_name_thai').attr('readonly', true);
+        $('#edit_last_names_thai').attr('readonly', true);
+        $('#edit_name_eng').attr('readonly', true);
+        $('#edit_last_names_eng').attr('readonly', true);
+        $('#edit_type_user').attr('disabled', true);
+        $('#edit_academe').attr('disabled', true);
+        $('#edit_phone').attr('readonly', true);
+        $('#edit_address').attr('readonly', true);
+
+        $("#button_edit").show();
+        $("#button_close").show();
+        $("#button_close_edit").hide();
+        $("#save_form_edit_mange_user").hide();
+        $("#e_show_name_add_row").hide();
+
         // click edit
         $("#button_edit").click(function(){
 
@@ -859,6 +950,20 @@
             $("#button_close_edit").show();
             $("#button_edit").hide();
             $("#button_close").hide();
+
+            // ตรวจสอบ ประเภทผู้ใช้ ////////
+            if(t_edit_type_user_id != 3)
+            {
+                $("#e_show_name_add_row").hide();
+            }
+            else
+            {
+                $("#e_show_name_add_row").show();
+            }
+
+            Add_Session();
+            edit_show_table_add_row();
+
         });
 
         // click not edit
@@ -882,7 +987,16 @@
             $("#save_form_edit_mange_user").hide();
         });
 
-        $('#op_mo_edit_manage_user').modal();
+        $.ajax({
+            type: 'POST',
+            url:"Edit_Manage_Add_Row.php?action=Unset_Session", 
+            data: {
+                U_session : "Unset_Session"
+            },
+            success: function(data) {
+                $('#op_mo_edit_manage_user').modal();
+            }
+        });
 
     });
 
@@ -954,6 +1068,22 @@
             $("#hid_show_add_pass").hide();
             $("#hid_show_add_conf_pass").hide();
             $("#show_name_add_row").show();
+        }
+    });
+    ///  แกไข ถ้าเปลี่ยนเป็นผู้ทรง ให้ซ้อนการกรอก password ///
+    $("#edit_type_user").change(function(){
+        var chk_add_type_user = $("#edit_type_user").val();
+
+        if(chk_add_type_user != 3)
+        {
+            $("#e_show_name_add_row").hide();
+        }
+        else
+        {
+
+            $("#e_show_name_add_row").show();
+            Add_Session();
+            edit_show_add_row_all();
         }
     });
 
@@ -1069,9 +1199,9 @@
         }
     });
 
-   
-    $("#save_form_edit_mange_user").click(function(){
 
+    function fnc_save_form_edit_mange_user()
+    {
         var form = $("#form_edit_mange_user_user");
         if(form.valid()){
 
@@ -1132,6 +1262,41 @@
         else
         {
             var form = "";
+        }
+    }
+
+   
+    $("#save_form_edit_mange_user").click(function(){
+        chk_edit_type_user = $("#edit_type_user").val();
+
+        if(chk_edit_type_user == 3)
+        {
+            $.ajax({
+                type: 'POST',
+                url: "Edit_Manage_Add_Row.php?action=e_chk_add_row", 
+                data: {
+                    e_chk_add_row : "e_chk_add_row"
+                },
+                success: function(data) {
+                    response = data.trim(); 
+                    if(response == "true")
+                    {
+                        fnc_save_form_edit_mange_user();
+                    }
+                    else
+                    {
+                        Swal.fire(
+                            '<font color=#facea8>คำเตือน!</font>',
+                            'กรุณาเลือก <font color=red><u>ความเชี่ยวชาญ</u></font> อย่างน้อย 1 รายการ!',
+                            'warning'
+                        );
+                    }
+                }
+            });
+        }
+        else
+        {
+            fnc_save_form_edit_mange_user();
         }
     });
 

@@ -59,7 +59,7 @@
       <a class="collapse-item <?php echo ($_GET['type'] == "title_t") ?  "active" :  ""; ?>" href="home_backend.php?type=title_t">คำนำหน้า</a>
       <a class="collapse-item <?php echo ($_GET['type'] == "title") ?  "active" :  ""; ?>" href="home_backend.php?type=title">คำนำหน้าทางวิชาการ</a>
       <a class="collapse-item <?php echo ($_GET['type'] == "type_article") ?  "active" :  ""; ?>" href="home_backend.php?type=type_article">ประเภทบทความ</a>
-      <a class="collapse-item <?php echo ($_GET['type'] == "expertise") ?  "active" :  ""; ?>" href="home_backend.php?type=expertise">ความชำนาญ</a>
+      <!-- <a class="collapse-item <?php echo ($_GET['type'] == "expertise") ?  "active" :  ""; ?>" href="home_backend.php?type=expertise">ความชำนาญ</a> -->
     </div>
   </div>
 

@@ -334,6 +334,23 @@ else if($type=="edit_manage_user_user")
         WHERE user_id = '$id_edit_manage_user'";
     
         $result = $conn->query($sql);
+        
+  
+        // $sql_top_user ="SELECT MAX(user_id) AS t_top FROM user"; // ตรวจสอบ ค่าแรก
+        // $result_top_user = $conn->query($sql_top_user);
+        // $fetch_top_user = $result_top_user->fetch_assoc(); 
+
+        // $t_top_id = $fetch_top_user['t_top'];
+
+        // foreach ($_SESSION['edit_session_Add_Row'] as $key_se => $value_se) {  
+
+        //     $inser_name_ex = $value_se['Id_Add_Row'];
+        //     $sql_int = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$t_top_id', '$inser_name_ex')";
+        //     $result_int = $conn->query($sql_int);
+            
+        // }
+        // unset($_SESSION['edit_session_Add_Row']);
+
 
     echo "true";
 }
