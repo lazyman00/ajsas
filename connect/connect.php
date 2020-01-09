@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
 
 // echo $_SERVER["SCRIPT_NAME"];
 if($_SESSION['sta_login'] != 'Active'){
-	header('Location: ../../index.php');
+	//header('Location: ../../index.php');
 }
 // Check connection
 if (!function_exists("GetSQLValueString")) {
