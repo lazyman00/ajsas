@@ -616,8 +616,6 @@ $("#aaa").click(function(){
                 var form = "";
             }
        
-
-
         }
         else
         {   
