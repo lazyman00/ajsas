@@ -93,9 +93,9 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
                             <?php }else if($fetch["sta_work"]==3){ ?>
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบ..</button>    
-                            <?php }else if($fetch["sta_work"]==4){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบแล้ว</button>    
-                            <?php } ?>
+                                <?php }else if($fetch["sta_work"]==4){ ?>
+                                    <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบแล้ว</button>    
+                                <?php } ?>
                             
                         </td>
                     </tr>
