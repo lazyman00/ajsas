@@ -8,7 +8,7 @@
         font-size: 14px;
     }
     .bg-white{
-        background-color:rgb(21, 144, 124)!important;
+        background-color:rgb(14, 130,0,1)!important;
     }
     .border-bottom{
         border-bottom:1px solid #e4ff00!important;

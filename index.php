@@ -107,9 +107,6 @@
             <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center">วารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ </h3>
         </div>
         <div class="col-md-12">
-            <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center">วารสารวิชาการวิทยาศาสตร์และวิทยาศาสตร์ประยุกต์ </h3>
-        </div>
-        <div class="col-md-12">
             <h3 style="fontfa: prompt;font-size: 18px;font-weight: 500;color: #555;text-align:center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ </h3>
         </div><br>
         <div class="col-md-12">
