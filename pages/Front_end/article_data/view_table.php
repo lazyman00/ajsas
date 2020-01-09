@@ -117,7 +117,6 @@ $numRow = $query->num_rows;
 	<div class="col-md-12 mb-3">                        
 		<div class="table-responsive">
 			<h4>ข้อมูลบทความ</h4>
-
 			<table class="table table-striped" >
 				<thead>
 					<tr>
@@ -142,7 +141,9 @@ $numRow = $query->num_rows;
 								?>
 							</td>
 							<td align="center">
-								<a href="update_article.php?article_id=<?php echo $row['article_id']; ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
+
+								<?php echo $row['article_id']; ?>
+								<a href="update_article.php?article_id=<?php echo urlencode($row['article_id']); ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
 							</td>
 						</tr>
 					<?php }else{ ?> 
@@ -271,12 +272,12 @@ $row_a =$query_a->fetch_assoc();
 					<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
 				</div>
-				<input type="text" name="article_id" value="<?php echo $row['article_id'];  ?>">
-				<input type="text" name="userid" value="<?php echo $userid; ?>">
-				<input type="text" name="year" value="<?php echo $_POST['year']; ?>">
-				<input type="text" name="time" value="<?php echo $_POST['time']; ?>">	
+				<input type="hidden" name="article_id" value="<?php echo $row['article_id'];  ?>">
+				<input type="hidden" name="userid" value="<?php echo $userid; ?>">
+				<input type="hidden" name="year" value="<?php echo $_POST['year']; ?>">
+				<input type="hidden" name="time" value="<?php echo $_POST['time']; ?>">	
 
-				<input type="text" name="mm" value="sent_files">
+				<input type="hidden" name="mm" value="sent_files">
 
 			</form>
 		</div>
@@ -284,6 +285,14 @@ $row_a =$query_a->fetch_assoc();
 </div>
 
 <script type="text/javascript">
+	var sta_work = $('[name=sta_work]').val();
+
+	if(sta_work>3){
+		$('#upfilecomment').html('อัพไฟล์แล้ว');
+		$('#upfilecomment').prop('disabled', true);
+	}
+
+
 	$('#upfilecomment').click(function(event) {
 		$('#mymodel_upfilecomment').modal({ show : true});
 	});
@@ -343,13 +352,7 @@ $row_a =$query_a->fetch_assoc();
 		$('#sent').prop('disabled', false );
 	}
 
-	var sta_work = $('[name=sta_work]').val();
-
-	if(sta_work==3){
-		$('#upfilecomment').html('อัพไฟล์แล้ว');
-		$('#upfilecomment').prop('disabled', true);
-	}
-
+	
 	var i;
 	for(i=0; i<=sta_work; i++){
 		$('.form-wizard-step').eq(i).addClass('active');

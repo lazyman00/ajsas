@@ -394,6 +394,7 @@ if ($total_record > 0) {
         }if(sta_work==3){
             var  url = "allarticle/view_files_comsender.php";
         }if(sta_work==4){
+            $('.li').eq(3).toggleClass('active');
             var  url = "allarticle/view_files_comsender.php";
         }
 
