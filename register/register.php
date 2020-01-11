@@ -242,7 +242,7 @@ if (!isset($_SESSION)) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
+                                            <input type="text" name="position_eng_hide" id="position_eng_hide" value="">
                                             <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
                                                     <label for="name">ตำแหน่งทางวิชาการภาษาอังกฤษ</label>
