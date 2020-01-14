@@ -4,8 +4,8 @@
               
             $user_id = $_POST['user_id']; 
 
-            $type_title_id = $_POST['type_title_id']; 
-            $pre_id = $_POST['pre_id'];
+           // $type_title_id = $_POST['type_title_id']; 
+            $position_thai = $_POST['position_thai'];
             $name_th = $_POST['name_th'];
             $surname_th = $_POST['surname_th'];
             $name_en = $_POST['name_en'];
@@ -14,7 +14,7 @@
             $phonenumber_user = $_POST['phonenumber_user'];
             
            echo $sql = "UPDATE `user` 
-           set `type_title_id`='$type_title_id',`pre_id`='$pre_id', `name_th`='$name_th', 
+           set `pre_id`='$position_thai', `name_th`='$name_th', 
            `name_en`='$name_en', `surname_en`='$surname_en', `address_user`='$address_user', `phonenumber_user`='$phonenumber_user' 
            where `user_id` = '$user_id' ";
 

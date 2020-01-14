@@ -58,13 +58,13 @@ if (!isset($_SESSION)) {
         display: block;
         text-align: -webkit-center;
     }.bg-white {
-        background-color: #429476!important;
+        background-color: #008000!important;
         
     }
 </style>
 <!-- background-color: #5d3333!important; -->
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
-    <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../img/banner3-01.png"></h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="../"><img src="../img/banner3-01.png"></a></h5>
     
 </div>       
 
@@ -242,7 +242,7 @@ if (!isset($_SESSION)) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
+                                            <input type="text" name="position_eng_hide" id="position_eng_hide" value="">
                                             <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
                                                     <label for="name">ตำแหน่งทางวิชาการภาษาอังกฤษ</label>

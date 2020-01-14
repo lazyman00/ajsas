@@ -96,49 +96,55 @@
       <div class="modal-body">
         <form action="sql_editUser.php" method="post">
 
-        <div class="form-row">        
-            <div class="form-group col-md-2">
-                <label for="inputEmail4"><b>คำนำหน้า</b></label>
-                <?php
-                    $sql_d = "SELECT type_title_id, type_title_name FROM type_title ";  
-                    $query_title = $conn->query($sql_d);   
-                ?>
-                <select  name="type_title_id" class="form-control" required>
-                    <option value="">กรุณาเลือก</option>
-                    <?php  while($row_query_title = $query_title->fetch_assoc()) { ?>
-                    <option <?php if ($row_data['type_title_id']==$row_query_title['type_title_id']){ ?> selected<?php } ?> value="<?php echo $row_query_title['type_title_id']; ?>"><?php echo $row_query_title['type_title_name']; ?>  </option>
-                    <?php  }?>
-                </select> 
-            </div>
+        <!-- <div class="form-row">        
             <div class="form-group col-md-5">
                 <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย</b></label>
                 <?php
-                    $sql_pre = "SELECT * FROM pre ";  
-                    $query_pre = $conn->query($sql_pre);  
+                   // $sql_pre = "SELECT * FROM pre ";  
+                   // $query_pre = $conn->query($sql_pre);  
                 ?>
                     <select  name="pre_id" class="form-control" required>
                         <option value="">กรุณาเลือก</option>
-                        <?php  while($row_query_pre = $query_pre->fetch_assoc()) { ?>
-                        <option <?php if ($row_data['pre_id']==$row_query_pre['pre_id']){ ?> selected<?php } ?> value="<?php echo $row_query_pre['pre_id']; ?>"><?php echo $row_query_pre['pre_th']; ?>  </option>
-                        <?php  }?>
+                        <?php // while($row_query_pre = $query_pre->fetch_assoc()) { ?>
+                        <option <?php// if ($row_data['pre_id']==$row_query_pre['pre_id']){ ?> selected<?php // } ?> value="<?php // echo $row_query_pre['pre_id']; ?>"><?php // echo $row_query_pre['pre_th']; ?>  </option>
+                        <?php //  }?>
                     </select> 
             </div>
-            <div class="form-group col-md-5">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาอังฤษ</b></label>
-                <input type="text" class="form-control form-control-sm" id="pre_en" readonly="">
-            </div>
-        </div>
-
-        <div class="form-row">    
-            <div class="form-group col-md-5">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย(ย่อ)</b></label>
-                <input type="text" class="form-control form-control-sm" id="pre_th_short" readonly="">
-            </div>
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-4">
                 <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาอังกฤษ(ย่อ)</b></label>
                 <input type="text" class="form-control form-control-sm" id="pre_en_short" readonly="">
             </div>
+        </div> -->
+
+<!-- สสสส        -->
+        <div class="row" >
+            <div class="form-group col-md-6">
+                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย</b></label>
+                <select class="form-control form-control-sm" id="position_thai" name="position_thai">
+                    <option value="">กรุณาเลือก</option>
+<?php
+                   $sql_pre_thai = "SELECT * FROM pre ";
+                   $result_pre_thai = $conn->query($sql_pre_thai);
+                   $fetch_pre_thai = $result_pre_thai->fetch_assoc();
+
+                    // $sql_pre = "SELECT * FROM pre ";  
+                   // $query_pre = $conn->query($sql_pre);  
+
+                    do{
+?>
+                    <option <?php if ($row_data['pre_id']==$fetch_pre_thai['pre_id']){ ?> selected<?php  } ?> value="<?php echo $fetch_pre_thai['pre_id'];?>"><?php echo $fetch_pre_thai['pre_th'];?></option>
+<?php
+                    }while($fetch_pre_thai = $result_pre_thai->fetch_assoc());
+?>
+                </select>
+            </div>
+            <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
+            <div class="form-group col-md-6">
+            <label for="inputEmail4"><b>ตำแหน่งทางวิชาการภาษาอังกฤษ</b></label>
+                <div id="sh_data_register_position_eng" name="sh_data_register_position_eng" readonly=""></div>
+            </div>
         </div>
+<!-- สสส -->
 
         <div class="form-row">    
             <div class="form-group col-md-6">
@@ -150,6 +156,17 @@
                 <input type="text" class="form-control form-control-sm" id="surname_th" name ="surname_th">
             </div>
         </div>
+
+        <div class="form-row">    
+            <!-- <div class="form-group col-md-5">
+                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย(ย่อ)</b></label>
+                <input type="text" class="form-control form-control-sm" id="pre_th_short" readonly="">
+            </div> -->
+            <!-- <div class="form-group col-md-6">
+                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาอังฤษ</b></label>
+                <input type="text" class="form-control form-control-sm" id="pre_en" readonly="">
+            </div> -->
+        </div>       
 
         <div class="form-row">    
             <div class="form-group col-md-6">
@@ -178,8 +195,53 @@
             <button type="submit" class="btn btn-primary">บันทึก</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>        
         </div>
+                
+
         </form>
       </div>      
+      
+
+
     </div>
   </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    aaaa();
+});
+function aaaa(){
+    var pos_thai = $("#position_thai").val();
+    $.ajax({
+        url: "menu_data.php?action=position_eng",
+        type: "POST",
+        data: {
+            ID_position_thai : pos_thai
+        },
+        success: function (data, status) {
+            $("#sh_data_register_position_eng").html(data);
+        },
+        error: function(data, status, error) {
+            $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
+        }
+    });
+}
+$("#position_thai").change(function(){
+    var pos_thai = $("#position_thai").val();
+    $.ajax({
+        url: "menu_data.php?action=position_eng",
+        type: "POST",
+        data: {
+            ID_position_thai : pos_thai
+        },
+        success: function (data, status) {
+            $("#sh_data_register_position_eng").html(data);
+        },
+        error: function(data, status, error) {
+            $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
+        }
+    });
+
+});
+</script>
