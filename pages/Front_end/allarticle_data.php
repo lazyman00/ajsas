@@ -91,7 +91,7 @@ if($type=="showdata_table"){
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"] ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"] ?>">ดาวน์โหลด</a></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><button class="btn btn-outline-secondary btn-sm">send</button></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><center><button class="btn btn-outline-secondary btn-sm">send</button></center></td>
                     </tr>
 <?php
                     $i++; 

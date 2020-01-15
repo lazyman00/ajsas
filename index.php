@@ -73,14 +73,13 @@
     </style>
 </head>
 <body>
-
     <div class="container-fluid" >
        <div class="row" style="background-color:#008000;height: 100px;">
-          <div class="container">
+         <div class="container">
+          <p style="text-align:right;color : #ffffff;font-size: 13px;margin-bottom: 0px;margin-top: 18px;">ISSN : 2586-8551 (Print)</p>
+          <p style="text-align:right;color : #ffffff;font-size: 13px;">ISSN : 2697-4568 (Online)</p>
             <div class="row">
               <div class="x1 text-center" >
-					<!-- <p style="color: #fff; padding-top: 20px; font-size: 30px; margin-top: -16px;">ระบบกิจกรรมชุมนุมออนไลน์</p>
-                       <p style="color: #fff; font-size: 20px; margin-top: -15px;"> โรงเรียนแม่จริม อำเภอแม่จริม จังหวัดน่าน</p> -->
                    </div>
                </div>
            </div>
@@ -89,7 +88,7 @@
        <div class="row box" >
          <div class="container re">
             <div class="row">
-                <nav class="navbar navbar-default">			      
+                <nav class="navbar navbar-default" style="padding-bottom: 0px;">			      
                   <div class="row">
                     <div  class="col-md-5 ">
                         <img src="img/banner.png" style="position: static;margin-top: -90px;margin-left: -110px;width: 680px;height: 140px;">
@@ -211,9 +210,185 @@
         </table>
     </div>
 
+    <div class="container">
+        <div class="col-md-12"><br>
+            <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center;margin-bottom: 26px;">รูปแบบการจัดทำบทความเพื่อตีพิมพ์ลงวารสารวิชาการ </h3>
+        </div>
+
+        <center><table>
+            <tr>
+                <td><a href="document/formatarticle.pdf" type="button" class="btn btn-outline-success" >ดาวน์โหลดไฟล์รูปแบบบทความ pdf</a></td>
+                <td><a href="document/formatarticle.docx" type="button" class="btn btn-outline-success" >ดาวน์โหลดไฟล์รูปแบบบทความ word</a></td>
+            </tr>
+        </table></center>
+
+        <div class="col-md-12"><br>
+            <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center;margin-bottom: 23px;">คณะกรรมการวารสารวิชาการ </h3>
+        </div>
+        <!-- text-align:right -->
+        <div class="form-row">  
+            <div class="form-group col-md-1" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-3" style="margin-bottom: 1px;">
+                <label for="inputEmail4"><b>บรรณาธิการ</b></label>
+            </div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.สุภาวิณี สัตยาภรณ์</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-1" style="margin-bottom: 1px;"></div> 
+            <div class="form-group col-md-3" style="margin-bottom: 1px;">
+                <label for="inputEmail4"><b>ผู้ช่วยบรรณาธิการ</b></label>
+            </div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.อิสระ อินจันทร์</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ ดร.พงษ์ศักดิ์ อ้นมอย</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์สุรพล ชุ่มกลิ่น</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">นางปิยะธิดา เทพสาธร</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4" >นายอิสรภาพ เทพกฤษณ์</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-1" style="margin-bottom: 1px;"></div> 
+            <div class="form-group col-md-3" style="margin-bottom: 1px;">
+                <label for="inputEmail4"><b>กองบรรณาธิการดำเนินงาน</b></label>
+            </div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ผู้ช่วยศาสตราจารย์ ดร.ศรัณยู เรือนจันทร์</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ ดร.สิริวดี พรหมน้อย</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ผู้ช่วยศาสตราจารย์ ดร.พรทิพพา พิญญาพงษ์</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ ดร.กิตติวรรณ จันทร์ฤทธิ์</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ ดร.ทัศนา จารุชาติ</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ ดร.จิราภรณ์ นิคมทัศน์</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์กานต์ธิดา ไชยมา</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">อาจารย์ธันยบูรณ์ ถาวรวรรณ</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-1" style="margin-bottom: 1px;"></div> 
+            <div class="form-group col-md-3" style="margin-bottom: 1px;">
+                <label for="inputEmail4"><b>กองบรรณาธิการวิชาการ</b></label>
+            </div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ศาสตราจารย์ ดร.สมยศ พลับเที่ยง</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.วิลาศ พุ่มพิมล</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.จันทร์บูรณ์ สถิตวิริยวงศ์</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.ชูศรี ไตรสนธิ</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร.วันดี ไทยพานิช</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">รองศาสตราจารย์ ดร. ศิริชัย เทพา</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">	ผู้ช่วยศาสตราจารย์ ดร.เกตุจันทร์ จําปาไชยศรี</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ผู้ช่วยศาสตราจารย์ ดร.จรูญ สารินทร์</label>
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;"></div>  
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ผู้ช่วยศาสตราจารย์ ดร.อภิวันท์ มนิมนากร</label>
+            </div>
+            <div class="form-group col-md-4" style="margin-bottom: 1px;">
+                <label for="inputEmail4">ผู้ช่วยศาสตราจารย์ ดร.สุภาภรณ์ สุดหนองบัว</label>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
 </div>
 
-</div>
+
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="background-color:#008000;height: 100px;margin-top: 1800px;">
+  <p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
+    <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+<!-- <footer class="bd-footer text-muted">
+    <div class="container-fluid p-3 p-md-5" style="margin-top: 1100px;background-color:#008000;height: 50px;">
+        <p class="text-muted">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ เลขที่ 27 ถ.อินใจมี ต.ท่าอิฐ อ.เมือง จ.อุตรดิตถ์ 53000</p>
+<p class="text-muted">Faculty of Scienceand Trchnology Uttaradit 
+Rajabhat University. All rights reserves.</p>
+        
+    </div>
+</footer> -->
+
 
 
 <div class="modal fade bd-example-modal-sm" id="loginform" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -324,5 +499,8 @@
     });
 </script>
 
+
+
 </body>
+
 </html>
