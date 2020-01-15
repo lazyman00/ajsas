@@ -87,15 +87,15 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;">
                         <center>
                             <?php if($fetch["sta_work"]==0){ ?> 
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
+                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
                             <?php }else if($fetch["sta_work"]==1){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ผลประเมินวารสาร..</button>    
+                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ผลประเมินวารสาร..</button>    
                             <?php }else if($fetch["sta_work"]==2){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
+                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
                             <?php }else if($fetch["sta_work"]==3){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบ..</button>    
+                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบ..</button>    
                             <?php }else if($fetch["sta_work"]==4){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">รอการตีพิมพ์</button>    
+                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">รอการตีพิมพ์</button>    
                             <?php } ?>
                             </center>
                         </td>
