@@ -37,8 +37,8 @@ $result = $conn->query($sql);
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
     @media (min-width: 992px){
-       .modal-lg, .modal-xl 
-       {
+     .modal-lg, .modal-xl 
+     {
         max-width: 850px;
     }
 }
@@ -108,11 +108,14 @@ $result = $conn->query($sql);
 
         <div class="card" >
             <div class="card-body">
+
+
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><b>รายการบทความวิชาการที่ผ่านการประเมินแล้ว</b></li>
+                        <li class="breadcrumb-item active" aria-current="page"><b>วารสาร</b></li>
                     </ol>
-                </nav>     
+                </nav>    
+                
                 <div id="show_allarticle" name="show_allarticle"></div>
             </div>         
         </div>
