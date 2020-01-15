@@ -66,7 +66,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                 <th scope="col" style="width: 20%">สาขา</th>
                 <th scope="col" style="width: 10%">ปี</th>
                 <th scope="col" style="width: 15%">Download</th>  
-                <th scope="col" style="width: 15%">ส่งบทความ</th>                               
+                <th scope="col" style="width: 15%" ><center>ส่งบทความ</center></th>                               
             </tr>
         </thead>
         <tbody>
@@ -85,6 +85,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
 
                         <td style="padding-bottom: 6px; padding-top: 6px;">
+                        <center>
                             <?php if($fetch["sta_work"]==0){ ?> 
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
                             <?php }else if($fetch["sta_work"]==1){ ?>
@@ -96,7 +97,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                             <?php }else if($fetch["sta_work"]==4){ ?>
                                 <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">รอการตีพิมพ์</button>    
                             <?php } ?>
-                            
+                            </center>
                         </td>
                     </tr>
                     <?php

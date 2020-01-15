@@ -32,7 +32,7 @@ if($type=="position_eng")
     $result = $conn->query($sql);
     $fetch = $result->fetch_assoc(); 
     ?>
-    <input type="text" class="form-control form-control-sm" id="position_eng" name="position_eng" readonly value="<?php echo $fetch['pre_en']; ?>">
+    <input type="text" class="form-control form-control-sm" id="position_eng" name="position_eng" readonly value="<?php echo $fetch['pre_en_short']; ?>">
     <?php
 }
 else

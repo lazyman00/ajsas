@@ -79,7 +79,7 @@ if($type=="showdata_table"){
                     <th scope="col">ชื่อบทความ</th>
                     <th scope="col">สาขา</th>
                     <th scope="col" style="width: 20%">Download</th>
-                    <th scope="col" style="width: 15%">ประเมิน</th>  
+                    <th scope="col" style="width: 15%"><center>ประเมิน</center></th>  
                     <th scope="col" style="width: 15%" >วันที่</th>                                 
                 </tr>
                 </thead>
@@ -98,9 +98,9 @@ if($type=="showdata_table"){
                     <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"]; ?>">ดาวน์โหลด</a></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;">
                         <?php if($fetch['sta_rate']==0){ ?>
-                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><button class="btn btn-outline-secondary btn-sm">ประเมิน</button></a>
+                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm">ประเมิน</button></center></a>
                     <?php }else{ ?> 
-                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><button class="btn btn-outline-secondary btn-sm">แสดงรายละเอียด *ยังไม่ได้ทำ</button></a>
+                        <center><button data-article_id="<?php echo $fetch["article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnView" >การประเมิน</button></center>
                     <?php } ?>
                     </td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
@@ -264,3 +264,32 @@ if ($total_record > 0) {
 <?php
 }
 ?>
+
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">การประเมิน</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <span id="viewbtn"></span>
+
+
+                
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $('.btnView').click(function(){
+        var article_id = $(this).attr('data-article_id');
+        $.get('editBtn.php',{ article_id : article_id }, function(data) {
+            $('#viewbtn').html(data);
+  });
+        $('#exampleModal').modal('show');
+    });
+</script>

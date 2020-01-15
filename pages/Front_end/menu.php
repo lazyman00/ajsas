@@ -82,8 +82,6 @@
     
 </div>              
 
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button> -->
-
 <div class="modal fade bd-example-modal-xl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -96,30 +94,10 @@
       <div class="modal-body">
         <form action="sql_editUser.php" method="post">
 
-        <!-- <div class="form-row">        
-            <div class="form-group col-md-5">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย</b></label>
-                <?php
-                   // $sql_pre = "SELECT * FROM pre ";  
-                   // $query_pre = $conn->query($sql_pre);  
-                ?>
-                    <select  name="pre_id" class="form-control" required>
-                        <option value="">กรุณาเลือก</option>
-                        <?php // while($row_query_pre = $query_pre->fetch_assoc()) { ?>
-                        <option <?php// if ($row_data['pre_id']==$row_query_pre['pre_id']){ ?> selected<?php // } ?> value="<?php // echo $row_query_pre['pre_id']; ?>"><?php // echo $row_query_pre['pre_th']; ?>  </option>
-                        <?php //  }?>
-                    </select> 
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาอังกฤษ(ย่อ)</b></label>
-                <input type="text" class="form-control form-control-sm" id="pre_en_short" readonly="">
-            </div>
-        </div> -->
-
 <!-- สสสส        -->
         <div class="row" >
-            <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย</b></label>
+            <div class="form-group col-md-3">
+                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการ</b></label>
                 <select class="form-control form-control-sm" id="position_thai" name="position_thai">
                     <option value="">กรุณาเลือก</option>
 <?php
@@ -139,42 +117,33 @@
                 </select>
             </div>
             <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
-            <div class="form-group col-md-6">
-            <label for="inputEmail4"><b>ตำแหน่งทางวิชาการภาษาอังกฤษ</b></label>
+            <!-- <div class="form-group col-md-6">
+            <label for="inputEmail4"><b>Academic Position</b></label>
                 <div id="sh_data_register_position_eng" name="sh_data_register_position_eng" readonly=""></div>
+            </div> -->
+
+            <div class="form-group col-md-4">
+                <label for="inputEmail4"><b>ชื่อภาษา</b></label>
+                <input type="text" class="form-control form-control-sm" id="name_th" name="name_th">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputEmail4"><b>นามสกุล</b></label>
+                <input type="text" class="form-control form-control-sm" id="surname_th" name ="surname_th">
             </div>
         </div>
 <!-- สสส -->
 
-        <div class="form-row">    
-            <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>ชื่อภาษาไทย</b></label>
-                <input type="text" class="form-control form-control-sm" id="name_th" name="name_th">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>นามสกุลภาษาไทย</b></label>
-                <input type="text" class="form-control form-control-sm" id="surname_th" name ="surname_th">
-            </div>
-        </div>
-
-        <div class="form-row">    
-            <!-- <div class="form-group col-md-5">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาไทย(ย่อ)</b></label>
-                <input type="text" class="form-control form-control-sm" id="pre_th_short" readonly="">
-            </div> -->
-            <!-- <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการภาษาอังฤษ</b></label>
-                <input type="text" class="form-control form-control-sm" id="pre_en" readonly="">
-            </div> -->
-        </div>       
-
-        <div class="form-row">    
-            <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>ชื่อภาษาอังกฤษ</b></label>
+        <div class="form-row">  
+            <div class="form-group col-md-3">
+                <label for="inputEmail4"><b>Academic Position</b></label>
+                <div id="sh_data_register_position_eng" name="sh_data_register_position_eng" readonly=""></div>
+            </div>  
+            <div class="form-group col-md-4">
+                <label for="inputEmail4"><b>Name</b></label>
                 <input type="text" class="form-control form-control-sm" id="name_en" name ="name_en">
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputEmail4"><b>นามสกุลภาษาอังกฤษ</b></label>
+            <div class="form-group col-md-4">
+                <label for="inputEmail4"><b>Surname</b></label>
                 <input type="text" class="form-control form-control-sm" id="surname_en" name="surname_en">
             </div>
         </div>
@@ -183,12 +152,15 @@
             <div class="form-group col-md-4">
                 <label for="inputEmail4"><b>เบอร์โทรศัพท์</b></label>
                 <input type="text" class="form-control form-control-sm" id="phonenumber_user" name="phonenumber_user">
-            </div>
-            <div class="form-group col-md-8">
+            </div>          
+        </div>  
+
+        <div class="form-row">  
+            <div class="form-group col-md-12">
                 <label for="inputEmail4"><b>ที่อยู่</b></label>
                 <textarea class="form-control" name="address_user" id="address_user" style="height: 110px;"></textarea>
             </div>            
-        </div>  
+        </div> 
 
         <div class="modal-footer">
             <input type="hidden" name="user_id" value="<?php echo $row_data['user_id']; ?>">
