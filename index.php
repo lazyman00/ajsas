@@ -94,7 +94,7 @@
                                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-sm" style="width: 180px;margin-left: 240px;">เข้าสู่ระบบวารสาร</button>
                                 <a href="register/register.php"><button  type="button" class="btn btn-outline-success" style="width: 190px;margin-left: 10px;">สมัครสมาชิกส่งบทความ</button></a>
                             </div>
-                        </div><br><br><br>           
+                        </div><br         
                     </nav>
                 </div>
             </div>
@@ -162,7 +162,6 @@
             </table><br>
         </div>
 
-        <br><br><br><br><br><br>
         <div class="container">
             <div class="col-md-12">
                 <h3 style="fontfa: prompt;font-size: 18px;font-weight: 500;color: #555;text-align:center">ฉบับที่ 2 กรกฎาคม – ธันวาคม</h3>
