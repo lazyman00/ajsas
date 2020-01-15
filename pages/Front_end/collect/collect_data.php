@@ -56,66 +56,69 @@ $nom_row = $result->num_rows;
 $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
-<div class="container">    
- <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col" style="width: 5%">ลำดับ</th>
-                <th scope="col" style="width: 35%">ชื่อบทความ</th>
-                <th scope="col" style="width: 20%">สาขา</th>
-                <th scope="col" style="width: 10%">ปี</th>
-                <th scope="col" style="width: 15%">Download</th>  
-                <th scope="col" style="width: 25%"><center>รายละเอียด</center></th>                               
-            </tr>
-        </thead>
-        <tbody>
-            <?php           $i=1; 
-            if($nom_row >0)
-            {
-                do{ 
-                    $select_yesr = $fetch['date_article']; 
-                    $yesr_show = date("Y",strtotime($select_yesr))+543;
+<div class="container">   
+    <div class="row" style="padding-bottom: 15px;">
+        <div class="col-md-12"><button style="float: right;" type="button" class="btn btn-primary" id="add_journal">+ รวมเล่มบทความ</button> </div>
+    </div> 
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 5%">ลำดับ</th>
+                    <th scope="col" style="width: 35%">ชื่อบทความ</th>
+                    <th scope="col" style="width: 20%">สาขา</th>
+                    <th scope="col" style="width: 10%">ปี</th>
+                    <th scope="col" style="width: 15%">Download</th>  
+                    <th scope="col" style="width: 25%"><center>รายละเอียด</center></th>                               
+                </tr>
+            </thead>
+            <tbody>
+                <?php           $i=1; 
+                if($nom_row >0)
+                {
+                    do{ 
+                        $select_yesr = $fetch['date_article']; 
+                        $yesr_show = date("Y",strtotime($select_yesr))+543;
+                        ?>
+                        <tr>
+                            <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
+                            <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
+
+                            <td style="padding-bottom: 6px; padding-top: 6px;" align="center">
+                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-primary btnUp"><i class="far fa-eye"></i></button>   
+                            </td>
+                        </tr>
+                        <?php
+                        $i++; 
+                    }while($fetch = $result->fetch_assoc()); 
+                }   
+                else
+                {
                     ?>
                     <tr>
-                        <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
-
-                        <td style="padding-bottom: 6px; padding-top: 6px;" align="center">
-                            <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-primary btnUp"><i class="far fa-eye"></i></button>   
+                        <td align="center" colspan="6">
+                            ไม่พบข้อมูลที่ท่านค้นหา
                         </td>
                     </tr>
                     <?php
-                    $i++; 
-                }while($fetch = $result->fetch_assoc()); 
-            }   
-            else
-            {
+                }
                 ?>
-                <tr>
-                    <td align="center" colspan="6">
-                        ไม่พบข้อมูลที่ท่านค้นหา
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
-        </tbody>
-    </table>   
-</div> 
+            </tbody>
+        </table>   
+    </div> 
 
-<?php
+    <?php
 
 
-$sql_page = "SELECT count(*) AS COUNT FROM ( 
-SELECT m.article_id as row,
-m.article_id, m.article_name_th, m.date_article, ta.type_article_name
-FROM article AS m
-left join type_article as ta on ta.type_article_id = m.type_article_id
-WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+    $sql_page = "SELECT count(*) AS COUNT FROM ( 
+    SELECT m.article_id as row,
+    m.article_id, m.article_name_th, m.date_article, ta.type_article_name
+    FROM article AS m
+    left join type_article as ta on ta.type_article_id = m.type_article_id
+    WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
 ) AS tb ";
 
 $result_page = $conn->query($sql_page);
@@ -288,27 +291,126 @@ if ($total_record > 0) {
 </div> 
 
 
+<div class="modal fade bd-example-modal-lg" id="add_journalModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">รวมเล่มวารสาร</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
 
-<div class="modal fade bd-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xm">
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <p><strong>ข้อความ!</strong></p> 
-            <p><img width="50px;" src="../../img/l1.gif"><span id="txt">กรุณารอสักครู่ ระบบกำลังทำการจัดส่งเมล์</span></p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">ชื่อวารสาร</label>
+                            <input type="email" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputPassword4">ปี</label>
+                            <input type="password" class="form-control" id="inputPassword4">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputPassword4">ครั้งที่</label>
+                            <input type="password" class="form-control" id="inputPassword4">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="inputAddress">สาขา</label>
+                            <select class="form-control">
+                                <option value="">กรุณาเลือก</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <p>รายการบทความวิชาการ <button style="float: right;" type="button" class="btn btn-primary" id="add_article">+ เพิ่มบทความวิชาการ</button></p>
+                    <br/>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ชื่อบทความ</th>
+                                <th scope="col">สาขา</th>
+                                <th scope="col">ปี</th>
+                                <th scope="col">หน้าที่ตีพิมพ์</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><input type="text" name=""></td>
+                          </tr>
+                      </tbody>
+                  </table>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" style="z-index: 1060;" id="add_articleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">บทความวิชาการ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <span id="view_allaricle_data"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<div id="wait" style="z-index: 2048;position:absolute;top:5%;left:34%;display:none"> 
-    <center>
-        <img src='../../img/img_icon/3ball.gif' /><br>
-        <font color="#000000"><b>กรุณารอสักครู่..</b></font>
-    </center>
-</div>
-
-
 
 <script type="text/javascript">
+
+    $('#add_article').click(function(event) {
+        $.post('/path/to/file', {param1: 'value1'}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+        });
+        $('#view_allaricle_data')
+
+        $('#add_articleModal').modal({
+            'show' : true,
+            backdrop : 'static' 
+        });
+        $('.modal-backdrop').eq(1).css("z-index", "1059");
+    });
+
+    $('#add_articleModal').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
+
+
+    $('#add_journal').click(function(event) {
+        $('#add_journalModal').modal({
+            'show' : true,
+            backdrop : 'static' 
+        });
+    });
 
     $('#modal_Professional').on('hidden.bs.modal', function () {
         $('body').addClass('modal-open');
