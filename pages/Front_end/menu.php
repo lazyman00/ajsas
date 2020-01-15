@@ -32,6 +32,8 @@
     <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../../img/banner3-01.png"></h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <?php if($_SESSION['type_user_id']==1){ // admin บรรณาธิการ?>
+            <a class="p-2 text-dark" href="../Front_end/allarticle.php">บทความวิชาการ</a>
+            <a class="p-2 text-dark" href="../Front_end/collect.php">รวมเล่มวารสาร</a>
             <a class="p-2 text-dark" href="../Back_end/home_backend.php">จัดการข้อมูลหลัก</a>
         <?php }else if($_SESSION['type_user_id']==2){ //ผู้ส่ง ?>
             <a class="p-2 text-dark" href="#">เกี่ยวกับวารสาร</a>

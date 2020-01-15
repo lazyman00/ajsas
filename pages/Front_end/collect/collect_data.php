@@ -46,7 +46,7 @@ if($type=="showdata_table"){
         $search_name3 ="";
     }
 
-    $sql = "SELECT * FROM (SELECT m.article_id as row, m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time, m.sta_work FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3."
+    $sql = "SELECT * FROM (SELECT m.article_id as row, m.article_id, m.user_id, m.type_article_id, m.article_name_th, m.article_name_en, m.abstract_th, m.abstract_en, m.keyword_th, m.attach_article, m.date_article, ta.type_article_name, m.year, m.time, m.sta_work FROM article AS m left join type_article as ta on ta.type_article_id = m.type_article_id WHERE m.article_id is not null ".$search_name." ".$search_name2." ".$search_name3." AND m.sta_work >= 4
 ) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
 
 $result = $conn->query($sql);
@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
-   <div class="table-responsive">
+ <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -66,7 +66,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                 <th scope="col" style="width: 20%">สาขา</th>
                 <th scope="col" style="width: 10%">ปี</th>
                 <th scope="col" style="width: 15%">Download</th>  
-                <th scope="col" style="width: 15%" ><center>ส่งบทความ</center></th>                               
+                <th scope="col" style="width: 25%"><center>รายละเอียด</center></th>                               
             </tr>
         </thead>
         <tbody>
@@ -84,20 +84,8 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["article_name_th"]; ?>">ดาวน์โหลด</a></td>
 
-                        <td style="padding-bottom: 6px; padding-top: 6px;">
-                        <center>
-                            <?php if($fetch["sta_work"]==0){ ?> 
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">เทียบเชิญ..</button>
-                            <?php }else if($fetch["sta_work"]==1){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ผลประเมินวารสาร..</button>    
-                            <?php }else if($fetch["sta_work"]==2){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ส่งผลการประเมิน..</button>    
-                            <?php }else if($fetch["sta_work"]==3){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">ตรวจสอบ..</button>    
-                            <?php }else if($fetch["sta_work"]==4){ ?>
-                                <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-outline-secondary btn-sm btnUp">รอการตีพิมพ์</button>    
-                            <?php } ?>
-                            </center>
+                        <td style="padding-bottom: 6px; padding-top: 6px;" align="center">
+                            <button data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-primary btnUp"><i class="far fa-eye"></i></button>   
                         </td>
                     </tr>
                     <?php
@@ -261,6 +249,10 @@ if ($total_record > 0) {
             </div>
             <form  method="POST">
                 <div class="modal-body">
+                    <div style="text-align: right;">
+                        <button>เต็ม</button><button>ย่อ</button>
+                    </div>
+                    
                     <div style="overflow-x: hidden; overflow-y: scroll; height: 350px;">
                         <span id="view_allaricle_data"></span>
                     </div>
@@ -268,22 +260,23 @@ if ($total_record > 0) {
                     <hr>
                     <ul class="nav nav-tabs">
                         <li class="nav-item ">
-                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link li" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">ตรวจสอบบทความ</a>
-                        </li>
-                    </ul>
-                    <span id="view_del_all"></span>
-                    
-                </div>
-                <div class="modal-footer">
+                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">
+                                <span class="badge badge-light">1</span> ข้อมูลผู้ทรวคุณวุฒิ</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link li" data-pages="2" data-type_article_id="" data-article_id="" href="#"><span class="badge badge-light">2</span> ผลการประเมินจากผู้ทรง</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#"><span class="badge badge-light">3</span> ส่งผลการประเมิน</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#"><span class="badge badge-light">4</span> ตรวจสอบบทความ</a>
+                            </li>
+                        </ul>
+                        <span id="view_del_all"></span>
+
+                    </div>
+                    <div class="modal-footer">
                    <!--  <button type="submit" class="btn btn-primary">ตกลง</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button> -->
 
@@ -294,29 +287,7 @@ if ($total_record > 0) {
     </div>
 </div> 
 
-<div class="modal fade bd-example-modal-lg" id="modal_Professional" style="z-index: 1060; padding-left: 0px;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">เทียบเชิญผู้ทรงคุณวุฒิ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="send_email">
-                <div class="modal-body">
-                    <span id="view_Professional"></span>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">ส่งเมล์</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
 
-                </div>
-                <input type="hidden" name="article_id" id="article_id">
-            </form>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade bd-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xm">
@@ -338,13 +309,7 @@ if ($total_record > 0) {
 
 
 <script type="text/javascript">
-    // $(document).ajaxStart(function(){
-    //     $("#wait").css("display", "block");
-    // });
 
-    // $(document).ajaxComplete(function(){
-    //     $("#wait").css("display", "none");
-    // });
     $('#modal_Professional').on('hidden.bs.modal', function () {
         $('body').addClass('modal-open');
     });
@@ -362,13 +327,13 @@ if ($total_record > 0) {
         $(this).toggleClass('active');
 
         if(pages==1){
-            var  url = "allarticle/view_Professional_pages.php";
+            var  url = "collect/view_Professional_pages.php";
         }if(pages==2){
-            var  url = "allarticle/view_comment.php";
+            var  url = "collect/view_comment.php";
         }if(pages==3){
-            var  url = "allarticle/send_comment_sender.php";
+            var  url = "collect/send_comment_sender.php";
         }if(pages==4){
-            var  url = "allarticle/view_files_comsender.php";
+            var  url = "collect/view_files_comsender.php";
         }
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
@@ -384,20 +349,10 @@ if ($total_record > 0) {
         var sta_work = $(this).attr('data-sta_work');
 
         $('.li').removeClass('active');
-        $('.li').eq(sta_work).toggleClass('active');
+        $('.li').eq(0).toggleClass('active');
 
-        if(sta_work==0){
-            var  url = "allarticle/view_Professional_pages.php";
-        }if(sta_work==1){
-            var  url = "allarticle/view_comment.php";
-        }if(sta_work==2){
-            var  url = "allarticle/send_comment_sender.php";
-        }if(sta_work==3){
-            var  url = "allarticle/view_files_comsender.php";
-        }if(sta_work==4){
-             $('.li').eq(3).toggleClass('active');
-            var  url = "allarticle/view_files_comsender.php";
-        }
+        var  url = "collect/view_Professional_pages.php";
+        
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
             $('#view_del_all').html(data);
@@ -408,8 +363,8 @@ if ($total_record > 0) {
             'data-type_article_id': type_article_id,
             'data-article_id': article_id
         });
-        
-        $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
+
+        $.post('collect/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
         });
 
@@ -457,7 +412,7 @@ if ($total_record > 0) {
             var formData = new FormData($("#send_email")[0]);
             setTimeout(function(){  
                 $.ajax({ 
-                    url: 'allarticle/send_email_1.php',
+                    url: 'collect/send_email_1.php',
                     type: 'POST',
                     data: formData,
                     async: false,
@@ -476,7 +431,7 @@ if ($total_record > 0) {
                         timer: 1500
                     });
 
-                    $.get('allarticle/view_Professional_pages.php',{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+                    $.get('collect/view_Professional_pages.php',{ type_article_id: type_article_id, article_id: article_id }, function(data) {
                         $('#view_del_all').html(data);
                     });
 
@@ -495,7 +450,7 @@ if ($total_record > 0) {
     //         var formData = new FormData($("#send_email")[0]);
     //         setTimeout(function(){  
     //             $.ajax({ 
-    //                 url: 'allarticle/send_email_1.php',
+    //                 url: 'collect/send_email_1.php',
     //                 type: 'POST',
     //                 data: formData,
     //                 async: false,

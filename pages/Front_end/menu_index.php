@@ -36,22 +36,4 @@
 		<!-- <li class="breadcrumb-item"><a href="#">ข้อมูลบทความ</a></li> -->
 		<!-- <li class="breadcrumb-item active" aria-current="page">ส่งบทความ</li> -->
 	</ol>
-	
-
-	<?php if($_SERVER["SCRIPT_NAME"]=="/villagefund/pages/homeImportData.php"){ ?>
-		<li>นำเข้าข้อมูล</li>
-	<?php } ?>
-
-	<?php if($_SERVER["SCRIPT_NAME"]=="/villagefund/pages/homeManageUser.php"){ ?>
-		<li>จัดการข้อมูลผู้ใช้</li>
-	<?php } ?>
-
-	
-	<?php if($_SERVER["SCRIPT_NAME"]=="/villagefund/pages/financial_institution.php"){ ?>
-		<li>โครงการพัฒนาเมือง</li>
-	<?php } ?>
-	<?php if($_SERVER["SCRIPT_NAME"]=="/villagefund/pages/financial_institutionView.php"){ ?>
-		<li><a href="/villagefund/pages/financial_institution.php">โครงการพัฒนาเมือง</a></li>
-		<li>รายละเอียดโครงการพัฒนาเมือง</li>
-	<?php } ?>
 </nav>
