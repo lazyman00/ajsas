@@ -15,7 +15,7 @@
             }
         }
 
-        $sql = "SELECT type_article_id, type_article_name FROM type_article WHERE type_article_id !=0 $array_insert_sql ";
+        $sql = "SELECT type_article_id, type_article_name, status_type_article FROM type_article WHERE status_type_article = 1 $array_insert_sql ";
         $result = $conn->query($sql);
         $nom_row = $result->num_rows;
 

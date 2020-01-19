@@ -28,7 +28,7 @@
                 <th width="30%">ที่อยู่สถานศึกษา</th>
                 <th width="15%">เบอร์โทรศัพท์</th>
                 <th width="5%">สถานะ</th>
-                <th width="5%">Edit</th>
+                <th width="5%">แก้ไข</th>
                 <th style ="display:none"></th>
                 <th style ="display:none"></th>
             </tr>
@@ -59,7 +59,7 @@
 ?>
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="#" data-role="edit_ac" data-id="<?php echo $fetch_ac['academe_id'] ;?>" >Edit</a>
+                    <a class="btn btn-primary btn-sm" href="#" data-role="edit_ac" data-id="<?php echo $fetch_ac['academe_id'] ;?>" >แก้ไข</a>
                 </td>
                 <td style ="display:none" data-target="t_department_id"><?php echo $fetch_ac['department_id'];?></td> 
                 <td data-target="t_status_academe" style ="display:none"><?php echo $fetch_ac['status_academe'];?></td>
@@ -127,8 +127,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="#" id="sa_academy" name="sa_academy" >บันทึก</a>
+            <a class="btn btn-primary" href="#" id="sa_academy" name="sa_academy" >บันทึก</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
         </form>
       </div>
@@ -186,8 +186,8 @@
             </div>
         </div>
         <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="#" id="sa_edit_academy" name="sa_edit_academy" >บันทึก</a>
+            <a class="btn btn-primary" href="#" id="sa_edit_academy" name="sa_edit_academy" >บันทึก</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
         </form>
     </div>

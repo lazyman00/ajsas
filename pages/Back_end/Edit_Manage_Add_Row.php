@@ -97,8 +97,6 @@
                 }
             }while($fetch_sel_IdUser = $result_sel_IdUser->fetch_assoc());
         }       
-
-
     }
     else if($type=="show_add_row_all") /// แสดงอย่างเดียว
     {

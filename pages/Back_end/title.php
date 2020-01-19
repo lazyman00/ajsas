@@ -26,7 +26,7 @@
                 <th width="21%">คำนำหน้าภาษาไทยตัวย่อ</th>
                 <th width="21%">คำนำหน้าภาษาอังกฤษตัวย่อ</th>
                 <th width="5%">สถานะ</th>
-                <th width="5%">Edit</th>
+                <th width="5%">แก้ไข</th>
                 <th style ="display:none"></th>
             </tr>
             </thead>
@@ -56,7 +56,7 @@
 ?>
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="#" data-role="id_mo_title" data-id="<?php echo $fetch_title['pre_id']; ?>" >Edit</a>
+                    <a class="btn btn-primary btn-sm" href="#" data-role="id_mo_title" data-id="<?php echo $fetch_title['pre_id']; ?>" >แก้ไข</a>
                 </td>
                 <td data-target="t_status_pre" style ="display:none"><?php echo $fetch_title['status_pre'];?></td>
             </tr>
@@ -109,8 +109,8 @@
             </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
-          <button class="btn btn-primary" type="button" id="sa_title" name="sa_title">บันทึก</button>
+            <button class="btn btn-primary" type="button" id="sa_title" name="sa_title">บันทึก</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
       </div>
     </div>
@@ -153,8 +153,8 @@
             </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
-          <button class="btn btn-primary" type="button" id="e_sa_title" name="e_sa_title">บันทึก</button>
+            <button class="btn btn-primary" type="button" id="e_sa_title" name="e_sa_title">บันทึก</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
       </div>
     </div>

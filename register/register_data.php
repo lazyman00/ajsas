@@ -1,28 +1,18 @@
 <?php
-    //include '../connect/connect.php'; 
-$hostname_connect = "localhost";
-$username_connect = "root";
-$password_connect = "1150"; //1150
-$database_connect = "ajsas"; // ajsas
-$conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
-if ($conn->connect_errno) {
-    echo $conn->connect_error;
-    exit;
-} else
-{
-  //echo "Database Connected.";
-}
+    $hostname_connect = "localhost";
+    $username_connect = "root";
+    $password_connect = "1150"; //1150
+    $database_connect = "ajsas"; // ajsas
+    $conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
+    if ($conn->connect_errno) {
+        echo $conn->connect_error;
+        exit;
+    }
 
-$conn->set_charset("utf8"); 
-mysqli_query($conn, "SET NAMES UTF8");
-date_default_timezone_set('Asia/Bangkok');
-if (!isset($_SESSION)) {
-    session_start();
-}
-?>
-<?php
-
-
+    $conn->set_charset("utf8");	
+    mysqli_query($conn, "SET NAMES UTF8");
+    date_default_timezone_set('Asia/Bangkok');
+    
 $type = $_GET["action"];  
 
 if($type=="da_depar"){ 
@@ -35,7 +25,7 @@ if($type=="da_depar"){
     <select class="form-control form-control-sm" id="e_education" name="e_education">
         <option value="">กรุณาเลือก</option>
         <?php
-        $sql_ac = "SELECT * FROM academe where department_id = '$id_d'";
+        $sql_ac = "SELECT * FROM academe where department_id = '$id_d' AND status_academe = 1";
         $result_ac = $conn->query($sql_ac);
         $fetch_ac = $result_ac->fetch_assoc();
 

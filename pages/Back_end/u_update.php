@@ -260,26 +260,6 @@ else if($type=="insert_manage_user_user")
         ('$add_type_user', '$add_email', '$add_pass', '$add_academe', '$add_title_name', '$add_pre_name', '$add_name_thai', '$add_last_names_thai', '$add_name_eng', '$add_last_names_eng', '$add_address', '$add_phone')";
         $result = $conn->query($sql);
 
-        if(isset($_SESSION["session_Add_Row"])) // ตรวจสอบ 
-        {
-            if(count($_SESSION["session_Add_Row"]) > 0) // ถ้ามีค่า 
-            {
-                $sql_top_user ="SELECT MAX(user_id) AS t_top FROM user"; // ตรวจสอบ ค่าแรก
-                $result_top_user = $conn->query($sql_top_user);
-                $fetch_top_user = $result_top_user->fetch_assoc(); 
-
-                $t_top_id = $fetch_top_user['t_top'];
-
-                foreach ($_SESSION['session_Add_Row'] as $key_se => $value_se) {  
-
-                    $inser_name_ex = $value_se['Id_Add_Row'];
-                    $sql_int = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$t_top_id', '$inser_name_ex')";
-                    $result_int = $conn->query($sql_int);
-                    
-                }
-            }
-        }
-        unset($_SESSION['session_Add_Row']);
         echo "true";
     }
     else
@@ -300,6 +280,27 @@ else if($type=="insert_manage_user_user")
         ('$add_type_user', '$add_email', '$add_academe', '$add_title_name', '$add_pre_name', '$add_name_thai', '$add_last_names_thai', '$add_name_eng', '$add_last_names_eng', '$add_address', '$add_phone')";
         $result = $conn->query($sql);
 
+        if(isset($_SESSION["session_Add_Row"])) // ตรวจสอบ 
+        {
+            if(count($_SESSION["session_Add_Row"]) > 0) // ถ้ามีค่า 
+            {
+                $sql_top_user ="SELECT MAX(user_id) AS t_top FROM user"; // ตรวจสอบ ค่าแรก
+                $result_top_user = $conn->query($sql_top_user);
+                $fetch_top_user = $result_top_user->fetch_assoc(); 
+
+                $t_top_id = $fetch_top_user['t_top'];
+
+                foreach ($_SESSION['session_Add_Row'] as $key_se => $value_se) {  
+
+                    $inser_name_ex = $value_se['Id_Add_Row'];
+                    $sql_int = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$t_top_id', '$inser_name_ex')";
+                    $result_int = $conn->query($sql_int);
+                    
+                }
+            }
+        }
+        unset($_SESSION['session_Add_Row']);
+
         echo "true";
     }
 }
@@ -319,39 +320,46 @@ else if($type=="edit_manage_user_user")
     $edit_address = $_POST['edit_address'];
     $edit_type_user = $_POST['edit_type_user'];
 
-        $sql = "UPDATE user SET 
-        type_user_id= '$edit_type_user',
-        email = '$edit_email',
-        academe_id = '$edit_academe',
-        type_title_id = '$edit_title_name',
-        pre_id = '$edit_pre_name',
-        name_th = '$edit_name_thai',
-        surname_th = '$edit_last_names_thai',
-        name_en = '$edit_name_eng',
-        surname_en = '$edit_last_names_eng',
-        address_user = '$edit_address',
-        phonenumber_user = '$edit_phone'
-        WHERE user_id = '$id_edit_manage_user'";
-    
-        $result = $conn->query($sql);
+    $sql = "UPDATE user SET 
+    type_user_id= '$edit_type_user',
+    email = '$edit_email',
+    academe_id = '$edit_academe',
+    type_title_id = '$edit_title_name',
+    pre_id = '$edit_pre_name',
+    name_th = '$edit_name_thai',
+    surname_th = '$edit_last_names_thai',
+    name_en = '$edit_name_eng',
+    surname_en = '$edit_last_names_eng',
+    address_user = '$edit_address',
+    phonenumber_user = '$edit_phone'
+    WHERE user_id = '$id_edit_manage_user'";
+
+    $result = $conn->query($sql);
         
-  
-        // $sql_top_user ="SELECT MAX(user_id) AS t_top FROM user"; // ตรวจสอบ ค่าแรก
-        // $result_top_user = $conn->query($sql_top_user);
-        // $fetch_top_user = $result_top_user->fetch_assoc(); 
+    $sql_arr = "SELECT * FROM spacialization where user_id = '$id_edit_manage_user'";
+    $result_arr = $conn->query($sql_arr);
+    $fetch_arr = $result_arr->fetch_assoc();    
 
-        // $t_top_id = $fetch_top_user['t_top'];
+    $array_add = array();
+    $array_del = array();
 
-        // foreach ($_SESSION['edit_session_Add_Row'] as $key_se => $value_se) {  
+    do{ $array_del[] = $fetch_arr['type_article_id']; }while($fetch_arr = $result_arr->fetch_assoc());
 
-        //     $inser_name_ex = $value_se['Id_Add_Row'];
-        //     $sql_int = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$t_top_id', '$inser_name_ex')";
-        //     $result_int = $conn->query($sql_int);
-            
-        // }
-        // unset($_SESSION['edit_session_Add_Row']);
+    foreach ($_SESSION['edit_session_Add_Row'] as $key => $value) { $array_add[] = $value['Id_Add_Row']; }
+       
+    $sum_data_add = array_diff($array_add, $array_del); // add
+    $sum_data_del = array_diff($array_del, $array_add); // del
 
-
+    foreach ($sum_data_add as $key_add) // active add
+    { 
+        $sql_add_spa = "INSERT INTO spacialization (user_id, type_article_id) VALUES ('$id_edit_manage_user', '$key_add')";
+        $result_add_spa = $conn->query($sql_add_spa);
+    }
+    foreach ($sum_data_del as $key_del) // active del
+    { 
+        $sql_del_spa ="DELETE FROM spacialization WHERE user_id = '$id_edit_manage_user' and type_article_id = '$key_del' ";
+        $result_del_spa = $conn->query($sql_del_spa);
+    }
     echo "true";
 }
 else if($type == "edit_status_manage_user_user")

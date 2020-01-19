@@ -1,5 +1,22 @@
 <?php
-    include '../connect/connect.php'; 
+
+    $hostname_connect = "localhost";
+    $username_connect = "root";
+    $password_connect = "1150"; //1150
+    $database_connect = "ajsas"; // ajsas
+    $conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
+    if ($conn->connect_errno) {
+        echo $conn->connect_error;
+        exit;
+    } else
+    {
+    //echo "Database Connected.";
+    }
+
+    $conn->set_charset("utf8");	
+    mysqli_query($conn, "SET NAMES UTF8");
+    date_default_timezone_set('Asia/Bangkok');
+
     $type = $_GET["action"]; 
 
     if($type == "check_email")

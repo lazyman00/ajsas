@@ -132,7 +132,7 @@
                         <select class="form-control" id="add_pre_name" name="add_pre_name">
                             <option value="">กรุณาเลือก</option>
 <?php
-                            $sql_sel_pre = "SELECT pre_id, pre_th FROM pre ";
+                            $sql_sel_pre = "SELECT pre_id, pre_th, status_pre FROM pre WHERE status_pre = 1";
                             $result_sel_pre = $conn->query($sql_sel_pre);
                             $fetch_sel_pre = $result_sel_pre->fetch_assoc();
                             do{
@@ -148,7 +148,7 @@
                         <select class="form-control" id="add_title_name" name="add_title_name">
                             <option value="0">กรุณาเลือก</option>
 <?php
-                            $sql_sel_type_title = "SELECT type_title_id, type_title_name FROM type_title ";
+                            $sql_sel_type_title = "SELECT type_title_id, type_title_name, status_type_title FROM type_title where status_type_title = 1";
                             $result_sel_type_title = $conn->query($sql_sel_type_title);
                             $fetch_sel_type_title = $result_sel_type_title->fetch_assoc();
                             do{
@@ -199,7 +199,7 @@
                         <select class="form-control" id="add_academe" name="add_academe">
                             <option value="0">กรุณาเลือก</option>
 <?php
-                            $sql_sel_academe = "SELECT academe_id, academe_name FROM academe ";
+                            $sql_sel_academe = "SELECT academe_id, academe_name, status_academe FROM academe where status_academe = 1";
                             $result_sel_academe = $conn->query($sql_sel_academe);
                             $fetch_sel_academe = $result_sel_academe->fetch_assoc();
                             do{
@@ -252,8 +252,8 @@
         </div>
         <div class="modal-footer">
             <div class="container text-center">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                 <button class="btn btn-primary" type="button" id="save_form_add_mange_user_user" name="save_form_add_mange_user_user">บันทึก</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
       </div>
@@ -438,8 +438,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                 <button class="btn btn-primary" type="button" id="save_form_edit_status_user" name="save_form_edit_status_user">บันทึก</button> 
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>
@@ -469,8 +469,8 @@
             </div>
             <div class="modal-footer">
                 <div class="container text-center">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                     <button class="btn btn-primary" type="button" id="save_form_reset_password_user" name="save_form_reset_password_user">บันทึก</button> 
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </div>
@@ -905,7 +905,7 @@
         $("#edit_type_user").val(t_edit_type_user_id);
 
         /// ส่งค่า คำนำหน้าทางวิชาการ ///
-        $("#hidden_edit_pre_name").val(t_edit_academe_id); 
+        $("#hidden_edit_pre_name").val(t_edit_pre_id); 
         /// ส่งค่า คำนำหน้า ///
         $("#hidden_edit_title_name").val(t_edit_type_title_id); 
         /// ส่งค่า สถานศึกษา ///

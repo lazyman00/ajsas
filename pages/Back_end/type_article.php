@@ -23,7 +23,7 @@
                 <th width="5%">ลำดับ</th>
                 <th width="65%">ชื่อสถานศึกษา</th>
                 <th width="15%">สถานะ</th>
-                <th width="15%">Edit</th>
+                <th width="15%">แก้ไข</th>
                 <th style ="display:none"></th>
             </tr>
             </thead>
@@ -49,7 +49,7 @@
 ?>
                 </td>
                 <td align="center">
-                    <a class="btn btn-primary btn-sm" href="#" data-role="id_type_article" data-id="<?php echo $fetch_type_ac['type_article_id'] ;?>" >Edit</a>
+                    <a class="btn btn-primary btn-sm" href="#" data-role="id_type_article" data-id="<?php echo $fetch_type_ac['type_article_id'] ;?>" >แก้ไข</a>
                 </td>
                 <td data-target="t_status_type_article" style ="display:none"><?php echo $fetch_type_ac['status_type_article'];?></td>
             </tr>
@@ -86,8 +86,8 @@
             </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
-          <button class="btn btn-primary" type="button" id="sa_type_ac" name="sa_type_ac">เพิ่ม</button>
+            <button class="btn btn-primary" type="button" id="sa_type_ac" name="sa_type_ac">เพิ่ม</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
       </div>
     </div>
@@ -113,8 +113,8 @@
             </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
-          <button class="btn btn-primary" type="button" id="e_sa_type_ac" name="e_sa_type_ac">เพิ่ม</button>
+            <button class="btn btn-primary" type="button" id="e_sa_type_ac" name="e_sa_type_ac">เพิ่ม</button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
           <input type="hidden" size="30" name="id_type_ac" id="id_type_ac" >
         </div>
       </div>
