@@ -4,7 +4,7 @@
 <style>
        .icon-color {
         color: #112314;
-    }
+    }.blackiconcolor {color:ffffff;}
 </style>
 
 <li class="nav-item">
@@ -64,7 +64,7 @@
   </div>
 
   <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-  <i class="fa fa-address-book"></i>
+  <i class="fa fa-address-book blackiconcolo"></i>
     <span>จัดการข้อมูลผู้ใช้</span>
   </a>
 <?php 
