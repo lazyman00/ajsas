@@ -38,40 +38,41 @@
                                       </nav>
                           
                           <form role="form" action="insert_article.php" method="post" enctype="multipart/form-data">
-                          <div class="row">
+                            <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
                                         <div class="row" style="height: 46px;">
                                             <div class="col-md-4 mb-3" style="text-align:right">
                                                 <label for="name" class="a" >ปี<span style="color: red">*</span></label>                                                
                                             </div>
                                             <div class="col-md-2 mb-3">
-                                            <select name="semester" class="form-control" style="width: 100px;" required>
-                                                <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
-                                                    ปี
-                                                </option>
-                                                <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
-                                                    2562
-                                                </option>
-                                                <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
-                                                    2563
-                                                </option>
-                                            </select>                                                                                    
-                                            </div>    
+                                                <select name="semester" class="form-control" style="width: 100px;" required>
+                                                    <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
+                                                        ปี
+                                                    </option>
+                                                    <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
+                                                        2562
+                                                    </option>
+                                                    <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
+                                                        2563
+                                                    </option>
+                                                </select>                                                                                    
+                                            </div> 
+                                        
                                             <div class="col-md-1 mb-3" style="text-align:right">
                                                 <label for="name" class="a" >ฉบับที่<span style="color: red">*</span></label>                                                
                                             </div>
                                             <div class="col-md-2 mb-3">
-                                            <select name="semester" class="form-control" style="width: 100px;" required>
-                                                <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
-                                                    ปี
-                                                </option>
-                                                <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
-                                                    1
-                                                </option>
-                                                <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
-                                                    2
-                                                </option>
-                                            </select>                                                                                    
+                                                <select name="semester" class="form-control" style="width: 100px;" required>
+                                                    <option value="" <?php if(@$_GET['semester']==''){ ?> selected <?php  } ?>>
+                                                        ปี
+                                                    </option>
+                                                    <option value="1" <?php if(@$_GET['semester']=='1'){ ?> selected <?php  } ?>>
+                                                        1
+                                                    </option>
+                                                    <option value="2" <?php if(@$_GET['semester']=='2'){ ?> selected <?php  } ?>>
+                                                        2
+                                                    </option>
+                                                </select>                                                                                    
                                             </div>                                      
                                         </div>
                                         <div class="row" style="height: 46px;">
@@ -165,12 +166,12 @@
 
                             
                             <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                      <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลผู้แต่งบทความร่วม</h7></li>
-                                    </ol>
-                                  </nav>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลผู้แต่งบทความร่วม</h7></li>
+                                </ol>
+                            </nav>
 
-                          <div class="row">
+                            <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
                                         <div class="row" style="height: 38px;">
                                             <div class="col-md-4 mb-3">                                               
@@ -193,11 +194,12 @@
                             </div>
 
                             <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                      <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลไฟล์บทความต้นฉบับ</h7></li>
-                                    </ol>
-                                  </nav>
-                          <div class="row">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page"><h7 class="card-title">ข้อมูลไฟล์บทความต้นฉบับ</h7></li>
+                                </ol>
+                            </nav>
+
+                            <div class="row">
                                 <div class="col-md-12 order-md-1" style="align-items: center">
                                     <!-- <form class="needs-validation" novalidate> -->
                                         <div class="row" style="height: 38px;">
@@ -235,8 +237,13 @@
                         </div>
                       </div>
 		
-	</div> 
-
+	</div> <br>
+    <footer class="page-footer font-small blue" style="clear: both;">
+        <div class="footer-copyright text-center py-3" style="background-color:#008000;  height: 100px;">
+            <p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
+            <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+        </div>
+    </footer>
 	<?php include('js.php'); ?>	
 </body>
 </html>

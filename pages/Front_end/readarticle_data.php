@@ -98,9 +98,9 @@ if($type=="showdata_table"){
                     <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"]; ?>">ดาวน์โหลด</a></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;">
                         <?php if($fetch['sta_rate']==0){ ?>
-                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm" style="width : 100px;" >ประเมิน</button></center></a>
+                        <a href="assessment.php?evaluation_id=<?php echo $fetch['evaluation_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm" style="width : 100px;" >ประเมิน</button></center></a>
                     <?php }else{ ?> 
-                        <center><button data-article_id="<?php echo $fetch["article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnView" style="width : 100px;">การประเมิน</button></center>
+                        <center><button data-evaluation_id="<?php echo $fetch["evaluation_id"]; ?>" class="btn btn-outline-secondary btn-sm btnView" style="width : 100px;">การประเมิน</button></center>
                     <?php } ?>
                     </td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>

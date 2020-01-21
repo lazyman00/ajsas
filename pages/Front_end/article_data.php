@@ -61,6 +61,14 @@
 				</div>
 			</div>
 		</div> 
+	</div><br>
+
+	<footer class="page-footer font-small blue" style="clear: both;">
+        <div class="footer-copyright text-center py-3" style="background-color:#008000;  height: 100px;">
+            <p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
+            <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+        </div>
+    </footer>
 
 		<?php include('js.php'); ?>	
 

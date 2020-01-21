@@ -1,6 +1,20 @@
 <?php
-include('connect/connect.php');
-?>  
+
+    $hostname_connect = "localhost";
+    $username_connect = "ajuru";
+    $password_connect = "ajuru2562"; //1150
+    $database_connect = "ajuru"; // ajsas
+    $conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
+    if ($conn->connect_errno) {
+        echo $conn->connect_error;
+        exit;
+    }
+    $conn->set_charset("utf8"); 
+        mysqli_query($conn, "SET NAMES UTF8");
+        date_default_timezone_set('Asia/Bangkok');
+
+
+?>   
 <?php
 $sql = sprintf("SELECT * FROM `user` left join pre on user.pre_id = pre.pre_id WHERE user.`user_id` = %s ",GetSQLValueString($_GET['u'], 'text'));
 $query = $conn->query($sql);
