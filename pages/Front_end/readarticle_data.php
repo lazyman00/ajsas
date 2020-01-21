@@ -52,7 +52,7 @@ if($type=="showdata_table"){
 
         // ORDER BY ma.id_sendMail DESC
 
-        echo $sql = "SELECT * FROM ( 
+        $sql = "SELECT * FROM ( 
             SELECT ma.id_sendMail as row,
             m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name,tb.evaluation_id
             FROM tb_sendmail AS ma 
@@ -287,13 +287,7 @@ if ($total_record > 0) {
 <script>
     $('.btnView').click(function(){
         var evaluation_id = $(this).attr('data-evaluation_id');
-<<<<<<< HEAD
         $.get('editBtn.php',{ evaluation_id : evaluation_id }, function(data) {
-=======
-        $.get('editBtn.php',{ 
-            evaluation_id : evaluation_id
-             }, function(data) {
->>>>>>> 71dd7eaac59fc1c70a9e5a843ad494aaa2b61fa8
             $('#viewbtn').html(data);
   });
         $('#exampleModal').modal('show');
