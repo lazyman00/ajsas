@@ -19,9 +19,9 @@ for($i=0; $i<count($row1); $i++){
     }  
 }
 if($num>0){
-    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `spacialization` left join user on spacialization.user_id = user.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 and user.user_id NOT IN($txt_user_id)  ORDER BY `spacialization`.`type_article_id` DESC";
+    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th, pre.pre_th FROM `spacialization` left join user on spacialization.user_id = user.user_id left join pre on user.pre_id = pre.pre_id  WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 and user.user_id NOT IN($txt_user_id)  ORDER BY `spacialization`.`type_article_id` DESC";
 }else{
-    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th FROM `spacialization` left join user on spacialization.user_id = user.user_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC"; 
+    $sql = "SELECT user.user_id, user.pre_id, user.name_th, user.surname_th, pre.pre_th FROM `spacialization` left join user on spacialization.user_id = user.user_id left join pre on user.pre_id = pre.pre_id WHERE spacialization.type_article_id = $type_article_id and user.type_user_id = 3 ORDER BY `spacialization`.`type_article_id` DESC"; 
 }
 $query = $conn->query($sql);
 $row = $query->fetch_all(MYSQLI_ASSOC);
@@ -36,7 +36,7 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
             <option value="">กรุณาเลือก</option>
             <span class="a1"></span>
             <?php for($i=0; $i<count($row); $i++){ ?>
-                <option value="<?php echo $row[$i]['user_id']; ?>"><?php echo $row[$i]['pre_id']; ?> <?php echo $row[$i]['name_th']; ?> <?php echo $row[$i]['surname_th']; ?></option>
+                <option value="<?php echo $row[$i]['user_id']; ?>"><?php echo $row[$i]['pre_th']; ?> <?php echo $row[$i]['name_th']; ?> <?php echo $row[$i]['surname_th']; ?></option>
             <?php } ?>
         </select>
     </div>

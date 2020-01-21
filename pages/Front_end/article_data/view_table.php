@@ -216,7 +216,8 @@ $numRow = $query->num_rows;
 <div class="container">
 	<div class="row">
 		<div class="col-md-9">
-			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php echo $row['detal_comment']; ?></textarea>
+			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php if(isset($row['detal_comment']) && $row['detal_comment']!=""){ echo $row['detal_comment'];  } ?>
+				</textarea>
 		</div>
 		<div class="col-md-3">
 			<?php if(isset($row['files_comment']) && $row['files_comment']!=""){ ?>
@@ -230,25 +231,45 @@ $numRow = $query->num_rows;
 </div>
 
 <?php 
-$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($row['article_id'],'text'));
+$article_id = "-1";
+if(isset($row['article_id']) && $row['article_id']!=""){
+	$article_id = $row['article_id'];
+}
+$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
 $query_a = $conn->query($sql_a);
 $row_a =$query_a->fetch_assoc();
+$num_rows = $query_a->num_rows;
 ?>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 md-3">
+<?php if($num_rows>0){ ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 md-3">
 
-			<span>ส่งบทความแก้ไข : </span>
-			<?php if($row['sta_work']>=2){ ?>
-				<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
-			<?php }else{ ?> 
-				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
-			<?php } ?>
-			<span>วันที่อัพโหลด : </span><span><?php echo $row_a['date_comback']; ?></span>
-			<span>ดาวน์โหลดบทความ : </span><?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a>เอกสาร</a><?php } ?>
-		</div> 
+				<span>ส่งบทความแก้ไข : </span>
+				<?php if($row['sta_work']>=2){ ?>
+					<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
+				<?php }else{ ?> 
+					<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+				<?php } ?>
+				<span>วันที่อัพโหลด : </span><span><?php echo $row_a['date_comback']; ?></span>
+				<span>ดาวน์โหลดบทความ : </span><?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a>เอกสาร</a><?php } ?>
+			</div> 
+		</div>
 	</div>
-</div>
+<?php }else { ?> 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 md-3">
+
+				<span>ส่งบทความแก้ไข : </span>
+				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+				
+				<span>วันที่อัพโหลด : </span><span></span>
+				<span>ดาวน์โหลดบทความ : </span>เอกสาร</a>
+			</div> 
+		</div>
+	</div>
+<?php } ?>
 
 <!-- Modal -->
 <div class="modal fade" id="mymodel_upfilecomment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

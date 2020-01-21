@@ -22,18 +22,27 @@ if($type=="da_depar"){
     $id_d = ($id_d != "" ) ? $_POST['id_d'] : 0 ;
 
     ?>
-    <select class="form-control form-control-sm" id="e_education" name="e_education">
-        <option value="">กรุณาเลือก</option>
+    <select class="form-control form-control-sm select2_re" id="e_education" name="e_education">
         <?php
         $sql_ac = "SELECT * FROM academe where department_id = '$id_d' AND status_academe = 1";
         $result_ac = $conn->query($sql_ac);
         $fetch_ac = $result_ac->fetch_assoc();
+        $nom_row_ac = $result_ac->num_rows;
 
-        do{
-            ?>
-            <option value="<?php echo $fetch_ac['academe_id'];?>"><?php echo $fetch_ac['academe_name'];?></option>
-            <?php
-        }while($fetch_ac = $result_ac->fetch_assoc());
+        if($nom_row_ac > 0)
+        {
+            do{
+                ?>
+                <option value="<?php echo $fetch_ac['academe_id'];?>"><?php echo "<font size=1>".$fetch_ac['academe_name']."</font>";?></option>
+                <?php
+            }while($fetch_ac = $result_ac->fetch_assoc());
+        }
+        else
+        {
+?>
+            <option value="">กรุณาเลือก</option>
+<?php
+        }
         ?>
     </select>
     <?php 
@@ -52,3 +61,8 @@ else{
     echo "no";
 }
 ?>
+<script>
+
+$(document).ready(function(){
+    $('.select2_re').select2();
+});

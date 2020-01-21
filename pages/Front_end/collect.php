@@ -1,4 +1,7 @@
 <?php  include('../../connect/connect.php'); ?>
+<?php 
+$_SESSION["add"] = array(); 
+?>
 <?php
 $sql = "SELECT * FROM article a
 left join type_article ta on ta.type_article_id = a.type_article_id";
@@ -37,8 +40,8 @@ $result = $conn->query($sql);
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
     @media (min-width: 992px){
-     .modal-lg, .modal-xl 
-     {
+       .modal-lg, .modal-xl 
+       {
         max-width: 850px;
     }
 }

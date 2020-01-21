@@ -1,7 +1,7 @@
 <?php  include('../../../connect/connect.php'); ?>
 <?php 
 $_SESSION['data'] = array(); 
-$_SESSION["add"] = array(); 
+
 ?>
 
 <?php
@@ -339,6 +339,8 @@ if ($total_record > 0) {
                         </div>
                         <p>รายการบทความวิชาการ <button style="float: right;" type="button" disabled="" class="btn btn-primary" id="add_article">+ เพิ่มบทความวิชาการ</button></p>
                         <br/>
+
+                        <span id="tableAdd"></span>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -365,7 +367,7 @@ if ($total_record > 0) {
 
                   </div>
                   <div class="modal-footer">
-                    
+
                     <button type="button" class="btn btn-primary">บันทึกข้อมูล</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                 </div>
@@ -388,8 +390,8 @@ if ($total_record > 0) {
                     <span id="view_aricle_data"></span>
                 </div>
                 <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-primary">ตกลง</button>
+
+                    <button type="button" class="btn btn-primary" id="add_article_use" >ตกลง</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </form>
@@ -420,7 +422,7 @@ if ($total_record > 0) {
                 backdrop : 'static' 
             });
             $('.modal-backdrop').eq(1).css("z-index", "1059");
-        }, 100);
+        });
     });
 
     $('#add_articleModal').on('hidden.bs.modal', function () {
@@ -429,6 +431,7 @@ if ($total_record > 0) {
 
 
     $('#add_journal').click(function(event) {
+
         $('#add_journalModal').modal({
             'show' : true,
             backdrop : 'static' 
@@ -477,7 +480,6 @@ if ($total_record > 0) {
         $('.li').eq(0).toggleClass('active');
 
         var  url = "collect/view_Professional_pages.php";
-        
 
         $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
             $('#view_del_all').html(data);
@@ -492,7 +494,6 @@ if ($total_record > 0) {
         $.post('collect/view_allaricle_data.php',{ article_id: article_id }, function(data) {
             $('#view_allaricle_data').html(data);
         });
-
 
         $("#myModalA").modal({backdrop: true});
         $('body').removeAttr('style');
