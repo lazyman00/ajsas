@@ -116,7 +116,7 @@
 </style>
 <!-- background-color: #5d3333!important; -->
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
-    <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../img/banner3-01.png"></h5>
+<a href="../"><h5 class="my-0 mr-md-auto font-weight-normal"><img src="../img/banner3-01.png"></h5></a>
     
 </div>       
 
