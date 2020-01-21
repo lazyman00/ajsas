@@ -100,7 +100,7 @@
         display: block;
         text-align: -webkit-center;
     }.bg-white {
-        background-color: #429476!important;
+        background-color: #008000!important;
     }
     .select2-container .select2-selection--single {
         height: 33px !important;
