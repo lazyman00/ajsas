@@ -1,8 +1,8 @@
 <?php  include('../../connect/connect.php'); ?>
       <?php 
         $cl1 = "";
-        if(isset($_REQUEST['article_id']) && $_REQUEST['article_id']!= ""){
-            $cl1 = $_REQUEST['article_id'];
+        if(isset($_REQUEST['evaluation_id']) && $_REQUEST['evaluation_id']!= ""){
+            $cl1 = $_REQUEST['evaluation_id'];
         }
 
         $sql_mo = sprintf("SELECT * FROM evaluation
@@ -11,7 +11,7 @@
         WHERE evaluation.evaluation_id = %s",GetSQLValueString($cl1, 'text'));
         $result_mo = $conn->query($sql_mo);
         $data_mo = mysqli_fetch_assoc($result_mo);
-        //$conn->close();       
+        //$conn->close();         
 ?>
 
                 <div class="form-row">  

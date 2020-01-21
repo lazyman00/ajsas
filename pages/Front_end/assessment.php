@@ -22,14 +22,14 @@
     <?php include('menu.php'); ?>
     <?php include('menu_index.php'); ?>
     <?php 
-        $sql = "SELECT `assessment_id`, `assessment_type` FROM `assessment` WHERE assessment_id in( '1','2','3')";  
+       echo $sql = "SELECT `assessment_id`, `assessment_type` FROM `assessment` WHERE assessment_id in( '1','2','3')";  
         $result = $conn->query($sql);
 
         $cl1 = "";
         if(isset($_REQUEST['article_id']) && $_REQUEST['article_id']!= ""){
             $cl1 = $_REQUEST['article_id'];
         }
-        $sql2 = sprintf("SELECT * FROM `article` WHERE article_id = %s",GetSQLValueString($cl1, 'text'));
+       echo $sql2 = sprintf("SELECT * FROM `article` WHERE article_id = %s",GetSQLValueString($cl1, 'text'));
         $result2 = $conn->query($sql2);
         $data = mysqli_fetch_assoc($result2);
         $conn->close(); 

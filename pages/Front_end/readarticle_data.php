@@ -54,7 +54,7 @@ if($type=="showdata_table"){
 
         $sql = "SELECT * FROM ( 
             SELECT ma.id_sendMail as row,
-            m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name
+            m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name,tb.evaluation_id
             FROM tb_sendmail AS ma 
             left join article as m on ma.article_id = m.article_id
             left join type_article as ta on ta.type_article_id = m.type_article_id
@@ -286,8 +286,8 @@ if ($total_record > 0) {
 </div>
 <script>
     $('.btnView').click(function(){
-        var article_id = $(this).attr('data-article_id');
-        $.get('editBtn.php',{ article_id : article_id }, function(data) {
+        var evaluation_id = $(this).attr('data-evaluation_id');
+        $.get('editBtn.php',{ evaluation_id : evaluation_id }, function(data) {
             $('#viewbtn').html(data);
   });
         $('#exampleModal').modal('show');
