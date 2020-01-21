@@ -59,7 +59,7 @@ $numRow = $query->num_rows;
 	.form-wizard-step{ /*เอียง*/
 		padding-top:10px !important;
 		border:5px solid #fff;
-		background:#f5a0a0;
+		background:#8a20204f;
 		-ms-transform: skewX(-30deg); /* IE 9 */
 		-webkit-transform: skewX(-30deg); /* Safari */
 		transform: skewX(-30deg); /* Standard syntax */
@@ -167,36 +167,36 @@ $numRow = $query->num_rows;
 				<h4>สถานะบทความ</h4>
 			</div>
 		</div>
-		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
+		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;width: 1030px;padding-left: 0px;padding-right: 0px;">
 			<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
 				<!-- style="left: 34px;bottom: 43px;" -->
-				<div class="form-wizard-step active" style="height: 110px;" >
+				<div class="form-wizard-step active" style="height: 110px;width: 140px;">
 					<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
-					<p>ส่งบทความ</p>
+					<p style="font-size:14px">ส่งบทความ</p>
 				</div>
-				<div class="form-wizard-step">
+				<div class="form-wizard-step" style="width: 140px;">
 					<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-					<p>ผู้ทรงคุณ</p>
+					<p style="font-size:14px">คัดเลือกผู้ทรงคุณ</p>
 				</div>
-				<div class="form-wizard-step">
+				<div class="form-wizard-step" style="width: 140px;">
 					<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-					<p>ประเมินบทความ</p>
+					<p style="font-size:14px">กำลังประเมินบทความ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>รอการแก้ไข</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-edit" aria-hidden="true"></i></div>
+					<p style="font-size:14px">รอการแก้ไขบทความ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>กำลังตรวจสอบ</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-filter" aria-hidden="true"></i></div>
+					<p style="font-size:14px">ตรวจสอบ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>รอการตีพิมพ์</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-hourglass-half" aria-hidden="true"></i></div>
+					<p style="font-size:14px">รอการตีพิมพ์</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>ตีพิมพ์เรียบร้อย</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+					<p style="font-size:14px">ตีพิมพ์เรียบร้อย</p>
 				</div>
 			</div>
 		</div>

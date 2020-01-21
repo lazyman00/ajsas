@@ -4,8 +4,27 @@
 // echo "\$_SERVER[\"PHP_SELF\"] = ".$_SERVER["PHP_SELF"]."<br>";
 //  echo $_SERVER["SCRIPT_NAME"];	
 ?>
+<?php
+    $userid = $_SESSION['user_id'];
+    $sql = "SELECT * FROM user u 
+    left join type_title t on t.type_title_id = u.type_title_id
+    left join pre p on p.pre_id = u.pre_id
+    where user_id =  $userid ";  
+    $query = $conn->query($sql);
+	$row_data = $query->fetch_assoc(); 
+	   
+?>
+				<div class="form-row" style="margin-left: 1155px;">  
+                        
+                    </div>  
+                </div>
+<nav aria-label="breadcrumb" style="margin-left: 1155px;">
+	<p style="text-indent: 1.5em;">สวัสดี ! <?php echo $row_data['name_th']; ?>  <?php echo $row_data['surname_th']; ?></p>
+</nav>
+
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb" style="margin-left: 15px;margin-right: 15px;">
+	
 		<?php if($_SERVER["SCRIPT_NAME"]=="/ajsas/pages/Front_end/article_data.php"){ ?>
 			<li class="breadcrumb-item"><b>ข้อมูลบทความ</b></li>
 		<?php } ?>
