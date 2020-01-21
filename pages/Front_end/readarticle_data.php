@@ -52,7 +52,7 @@ if($type=="showdata_table"){
 
         // ORDER BY ma.id_sendMail DESC
 
-        $sql = "SELECT * FROM ( 
+        echo $sql = "SELECT * FROM ( 
             SELECT ma.id_sendMail as row,
             m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name
             FROM tb_sendmail AS ma 
@@ -98,9 +98,9 @@ if($type=="showdata_table"){
                     <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"]; ?>">ดาวน์โหลด</a></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;">
                         <?php if($fetch['sta_rate']==0){ ?>
-                        <a href="assessment.php?article_id=<?php echo $fetch['article_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm" style="width : 100px;" >ประเมิน</button></center></a>
+                        <a href="assessment.php?evaluation_id=<?php echo $fetch['evaluation_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm" style="width : 100px;" >ประเมิน</button></center></a>
                     <?php }else{ ?> 
-                        <center><button data-article_id="<?php echo $fetch["article_id"]; ?>" class="btn btn-outline-secondary btn-sm btnView" style="width : 100px;">การประเมิน</button></center>
+                        <center><button data-evaluation_id="<?php echo $fetch["evaluation_id"]; ?>" class="btn btn-outline-secondary btn-sm btnView" style="width : 100px;">การประเมิน</button></center>
                     <?php } ?>
                     </td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
@@ -286,8 +286,10 @@ if ($total_record > 0) {
 </div>
 <script>
     $('.btnView').click(function(){
-        var article_id = $(this).attr('data-article_id');
-        $.get('editBtn.php',{ article_id : article_id }, function(data) {
+        var evaluation_id = $(this).attr('data-evaluation_id');
+        $.get('editBtn.php',{ 
+            evaluation_id : evaluation_id
+             }, function(data) {
             $('#viewbtn').html(data);
   });
         $('#exampleModal').modal('show');
