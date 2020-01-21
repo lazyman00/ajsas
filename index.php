@@ -91,8 +91,11 @@
                                 <img src="img/banner.png" style="position: static;margin-top: -90px;margin-left: -110px;width: 680px;height: 140px;">
                             </div>
                             <div  class="col-md-7 " style="align:right">
-                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-sm" style="width: 180px;margin-left: 240px;">เข้าสู่ระบบวารสาร</button>
-                                <a href="register/register.php"><button  type="button" class="btn btn-outline-success" style="width: 190px;margin-left: 10px;">สมัครสมาชิกส่งบทความ</button></a>
+                            <!-- <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-sm" style="width:180px;margin-left: 240px;">เข้าสู่ระบบวารสาร</button>
+                            <a href="register/register.php"><button  type="button" class="btn btn-outline-success" style="width: 190px;margin-left: 10px;">สมัครสมาชิกส่งบทความ</button></a> -->
+                            
+                            <a href="register/register.php"><button type="button" class="btn btn-outline-warning"  style="width:187px;margin-left: 240px;">สมัครสมาชิกส่งบทความ</button></a>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-sm" style="width: 190px;margin-left: 10px;">เข้าสู่ระบบวารสาร</button>
                             </div>
                         </div><br         
                     </nav>

@@ -59,7 +59,7 @@ $numRow = $query->num_rows;
 	.form-wizard-step{ /*เอียง*/
 		padding-top:10px !important;
 		border:5px solid #fff;
-		background:#f5a0a0;
+		background:#8a20204f;
 		-ms-transform: skewX(-30deg); /* IE 9 */
 		-webkit-transform: skewX(-30deg); /* Safari */
 		transform: skewX(-30deg); /* Standard syntax */
@@ -167,36 +167,36 @@ $numRow = $query->num_rows;
 				<h4>สถานะบทความ</h4>
 			</div>
 		</div>
-		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;">
+		<div class="col-md-12 col-md-offset-2 form-wizard" style="center;height: 124px;width: 1030px;padding-left: 0px;padding-right: 0px;">
 			<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
 				<!-- style="left: 34px;bottom: 43px;" -->
-				<div class="form-wizard-step active" style="height: 110px;" >
+				<div class="form-wizard-step active" style="height: 110px;width: 140px;">
 					<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
-					<p>ส่งบทความ</p>
+					<p style="font-size:14px">ส่งบทความ</p>
 				</div>
-				<div class="form-wizard-step">
+				<div class="form-wizard-step" style="width: 140px;">
 					<div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
-					<p>ผู้ทรงคุณ</p>
+					<p style="font-size:14px">คัดเลือกผู้ทรงคุณ</p>
 				</div>
-				<div class="form-wizard-step">
+				<div class="form-wizard-step" style="width: 140px;">
 					<div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-					<p>ประเมินบทความ</p>
+					<p style="font-size:14px">กำลังประเมินบทความ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>รอการแก้ไข</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-edit" aria-hidden="true"></i></div>
+					<p style="font-size:14px">รอการแก้ไขบทความ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>กำลังตรวจสอบ</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-filter" aria-hidden="true"></i></div>
+					<p style="font-size:14px">ตรวจสอบ</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>รอการตีพิมพ์</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-hourglass-half" aria-hidden="true"></i></div>
+					<p style="font-size:14px">รอการตีพิมพ์</p>
 				</div>
-				<div class="form-wizard-step">
-					<div class="form-wizard-step-icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-					<p>ตีพิมพ์เรียบร้อย</p>
+				<div class="form-wizard-step" style="width: 140px;">
+					<div class="form-wizard-step-icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+					<p style="font-size:14px">ตีพิมพ์เรียบร้อย</p>
 				</div>
 			</div>
 		</div>
@@ -216,7 +216,8 @@ $numRow = $query->num_rows;
 <div class="container">
 	<div class="row">
 		<div class="col-md-9">
-			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php echo $row['detal_comment']; ?></textarea>
+			<textarea class="form-control" name="abstract_en" style="width: 746px;height: 114px;"><?php if(isset($row['detal_comment']) && $row['detal_comment']!=""){ echo $row['detal_comment'];  } ?>
+				</textarea>
 		</div>
 		<div class="col-md-3">
 			<?php if(isset($row['files_comment']) && $row['files_comment']!=""){ ?>
@@ -230,25 +231,45 @@ $numRow = $query->num_rows;
 </div>
 
 <?php 
-$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($row['article_id'],'text'));
+$article_id = "-1";
+if(isset($row['article_id']) && $row['article_id']!=""){
+	$article_id = $row['article_id'];
+}
+$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
 $query_a = $conn->query($sql_a);
 $row_a =$query_a->fetch_assoc();
+$num_rows = $query_a->num_rows;
 ?>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 md-3">
+<?php if($num_rows>0){ ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 md-3">
 
-			<span>ส่งบทความแก้ไข : </span>
-			<?php if($row['sta_work']>=2){ ?>
-				<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
-			<?php }else{ ?> 
-				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
-			<?php } ?>
-			<span>วันที่อัพโหลด : </span><span><?php echo $row_a['date_comback']; ?></span>
-			<span>ดาวน์โหลดบทความ : </span><?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a>เอกสาร</a><?php } ?>
-		</div> 
+				<span>ส่งบทความแก้ไข : </span>
+				<?php if($row['sta_work']>=2){ ?>
+					<button type="button" class="btn btn-primary" id="upfilecomment">อัพโหลด</button> 
+				<?php }else{ ?> 
+					<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+				<?php } ?>
+				<span>วันที่อัพโหลด : </span><span><?php echo $row_a['date_comback']; ?></span>
+				<span>ดาวน์โหลดบทความ : </span><?php if($row_a['files_comback']!=""){ ?><a href="../../files_comment/<?php echo $row_a['files_comback']; ?>"><?php echo $row_a['files_comback']; ?></a><?php }else{ ?> <a>เอกสาร</a><?php } ?>
+			</div> 
+		</div>
 	</div>
-</div>
+<?php }else { ?> 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 md-3">
+
+				<span>ส่งบทความแก้ไข : </span>
+				<button disabled="" type="button" class="btn btn-primary" >อัพโหลด</button> 
+				
+				<span>วันที่อัพโหลด : </span><span></span>
+				<span>ดาวน์โหลดบทความ : </span>เอกสาร</a>
+			</div> 
+		</div>
+	</div>
+<?php } ?>
 
 <!-- Modal -->
 <div class="modal fade" id="mymodel_upfilecomment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
