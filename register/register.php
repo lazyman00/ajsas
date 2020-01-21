@@ -1,24 +1,17 @@
 <?php
-    //include '../connect/connect.php'; 
     $hostname_connect = "localhost";
-$username_connect = "root";
-$password_connect = "1150"; //1150
-$database_connect = "ajsas"; // ajsas
-$conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
-if ($conn->connect_errno) {
-	echo $conn->connect_error;
-	exit;
-} else
-{
-  //echo "Database Connected.";
-}
+    $username_connect = "root";
+    $password_connect = "1150"; //1150
+    $database_connect = "ajsas"; // ajsas
+    $conn = new mysqli($hostname_connect, $username_connect, $password_connect, $database_connect);
+    if ($conn->connect_errno) {
+        echo $conn->connect_error;
+        exit;
+    }
 
-$conn->set_charset("utf8");	
-mysqli_query($conn, "SET NAMES UTF8");
-date_default_timezone_set('Asia/Bangkok');
-if (!isset($_SESSION)) {
-	session_start();
-}
+    $conn->set_charset("utf8");	
+    mysqli_query($conn, "SET NAMES UTF8");
+    date_default_timezone_set('Asia/Bangkok');
 ?>
 <html lang="en">
 <head>
@@ -33,6 +26,9 @@ if (!isset($_SESSION)) {
 <script src="../bootstrap/vendor/jquery/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>   
 <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../bootstrap/css/select2.css">
+<script src="../bootstrap/js/select2.js"></script>
 
 <!-- sweetalert --> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.min.css">
@@ -50,7 +46,7 @@ if (!isset($_SESSION)) {
 <body class="bg-light">
 
 <style>
-       .modal-header {
+    .modal-header {
         background-color: #e9ecef;
         color: #585f65;
     }
@@ -58,13 +54,23 @@ if (!isset($_SESSION)) {
         display: block;
         text-align: -webkit-center;
     }.bg-white {
-        background-color: #008000!important;
-        
+        background-color: #429476!important;
+    }
+    .select2-container .select2-selection--single {
+        height: 33px !important;
+        border: 1px solid #CFCFCF;
+        border-radius: 1px;
+    }
+    .select2-results__options{
+        font-size:14px !important;
+    }
+    .select2-selection__rendered {
+        font-size: 14px;
     }
 </style>
 <!-- background-color: #5d3333!important; -->
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
-    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="../"><img src="../img/banner3-01.png"></a></h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../img/banner3-01.png"></h5>
     
 </div>       
 
@@ -161,10 +167,10 @@ if (!isset($_SESSION)) {
                                                     <label for="name">หน่วยงาน<span style="color: red">*</span></label>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <select class="form-control form-control-sm" id="department" name="department">
+                                                    <select class="form-control form-control-sm " id="department" name="department">
                                                         <option value="">กรุณาเลือก</option>
 <?php
-                                                        $sql_depar = "SELECT * FROM department ";
+                                                        $sql_depar = "SELECT * FROM department where status_department = 1";
                                                         $result_depar = $conn->query($sql_depar);
                                                         $fetch_depar = $result_depar->fetch_assoc();
 
@@ -194,7 +200,7 @@ if (!isset($_SESSION)) {
                                                     <select class="form-control form-control-sm" id="t_type_article_id" name="t_type_article_id">
                                                         <option value="">กรุณาเลือก</option>
 <?php
-                                                        $sql_t_a = "SELECT * FROM type_article ";
+                                                        $sql_t_a = "SELECT * FROM type_article where status_type_article = 1";
                                                         $result_t_a = $conn->query($sql_t_a);
                                                         $fetch_t_a = $result_t_a->fetch_assoc();
 
@@ -214,9 +220,17 @@ if (!isset($_SESSION)) {
                                                 <div class="col-md-3 mb-3">
                                                     <select class="form-control form-control-sm" id="title_name" name="title_name">
                                                         <option value="">กรุณาเลือก</option>
-                                                        <option value="1">นาย</option>
-                                                        <option value="2">นาง</option>
-                                                        <option value="3">นางสาว</option>
+<?php
+                                                        $sql_u_a = "SELECT * FROM type_title where status_type_title = 1";
+                                                        $result_u_a = $conn->query($sql_u_a);
+                                                        $fetch_u_a = $result_u_a->fetch_assoc();
+
+                                                        do{
+?>
+                                                        <option value="<?php echo $fetch_u_a['type_title_id'];?>"><?php echo $fetch_u_a['type_title_name'];?></option>
+<?php
+                                                        }while($fetch_u_a = $result_u_a->fetch_assoc());
+?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -242,7 +256,7 @@ if (!isset($_SESSION)) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <input type="text" name="position_eng_hide" id="position_eng_hide" value="">
+                                            <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
                                             <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
                                                     <label for="name">ตำแหน่งทางวิชาการภาษาอังกฤษ</label>
@@ -307,6 +321,7 @@ if (!isset($_SESSION)) {
 <script>
 
 $(document).ready(function(){
+    $('.select2_re').select2();
     fu_show_data_register();
     fu_show_data_register_position_eng();
 
