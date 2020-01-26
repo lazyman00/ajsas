@@ -31,27 +31,28 @@
 					<div class="card-body">
 
 						<form>
-							<div class="form-row">
+							<div class="form-row">ปี
 								<div class="form-group col-md-2">
-									<label for="inputEmail4">ปีที่ : </label>
+									<!-- <label for="inputEmail4">ปีที่ : </label> -->
 									<select id="year" name="year" class="form-control" required>
 										<?php for($i=date('Y')+543; $i>=date('Y')+543-20; $i--){ ?> 
 											<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
 										<?php } ?>
 
 									</select>
-								</div>
+								</div>ครั้ง
 								<div class="form-group col-md-3">
-									<label for="inputPassword4">ครั้ง : </label>
+									<!-- <label for="inputPassword4">ครั้ง : </label> -->
 									<select id="time" name="time" class="form-control" style="width: 100px;" required>
 										<?php for($i=1; $i<=2; $i++){ ?> 
 											<option <?php if($i==1){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
 										<?php } ?>
 									</select>
 								</div>
-								<div class="form-group col-md-7">
-									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" style="float: right;margin-top: 32px;" disabled="" >ส่งบทความ</button></a>
-								</div>
+								<!-- <div class="form-group col-md-4"> -->
+									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" 
+									style="  margin-left: 458px;" disabled="" >ส่งบทความ</button></a>
+								<!-- </div> -->
 							</div>
 						</form>	
 						
