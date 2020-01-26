@@ -55,9 +55,9 @@ $numrow = $query->num_rows;
 		</thead>
 		<tbody>
 			<?php if($numrow>0){ ?>
-				<?php do{ ?> 
+				<?php $i=1; do{ ?> 
 					<tr>
-						<td scope="row">1</td>
+						<td scope="row"><?php echo $i; ?></td>
 						<td><?php  echo $row['article_name_th']; ?></td>
 						<td><?php  echo $row['type_article_name']; ?></td>
 						<td><?php  echo $row['year']; ?></td>
@@ -67,7 +67,7 @@ $numrow = $query->num_rows;
 							<button type="button" data-d="<?php echo $row['article_id']; ?>" class="badge badge-danger delete"><i class="fas fa-minus"></i></button>
 						</td>
 					</tr>
-				<?php  }while($row = $query->fetch_assoc()); ?>
+				<?php $i++; }while($row = $query->fetch_assoc()); ?>
 			<?php } ?>
 		</tbody>
 	</table>
@@ -96,9 +96,9 @@ $numrow = $query->num_rows;
 		</thead>
 		<tbody>
 			<?php if($numrow>0){ ?>
-				<?php do{ ?> 
+				<?php $i=1; do{ ?> 
 					<tr>
-						<td scope="row">1</td>
+						<td scope="row"><?php echo $i; ?></td>
 						<td><?php echo $row['article_name_th']; ?></td>
 						<td><?php echo $row['type_article_name']; ?></td>
 						<td><?php echo $row['year']; ?></td>
@@ -107,11 +107,12 @@ $numrow = $query->num_rows;
 							<button type="button" data-a="<?php echo $row['article_id']; ?>" class="badge badge-success add"><i class="fas fa-plus"></i></button>
 						</td>
 					</tr>
-				<?php  }while($row = $query->fetch_assoc()); ?>
+				<?php $i++;  }while($row = $query->fetch_assoc()); ?>
 			<?php } ?>
 		</tbody>
 	</table>
 </div>
+<input type="hidden" name="type_article_id" value="<?php echo $_REQUEST['type_article_id']; ?>">
 
 <script type="text/javascript">
 	$('.delete').click(function(event) {
