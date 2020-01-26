@@ -247,6 +247,10 @@ if($type=="showdata_table"){
 
 <?php
 }
+else
+{
+    echo "no";
+}
 ?>
 
 
