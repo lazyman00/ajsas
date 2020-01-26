@@ -57,20 +57,30 @@ $num_row = $query->num_rows;
 		color: red;
 	}
 </style>
+<input type="hidden" name="num_row_view" value="<?php echo $num_row; ?>">
 <div class="card-body">
 	<form id="send_commentall" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">ความคิดเห็น : </label>
-			<textarea name="detal_comment" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $row['detal_comment']; ?></textarea>
+			<textarea name="detal_comment" readonly="" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $row['detal_comment']; ?></textarea>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlFile1">ไฟลฺ์แนบ : </label>
 			<p><a href="../../files_comment/<?php echo $row['files_comment']; ?>"><?php echo $row['files_comment']; ?></a></p>
-			<input type="file" name="files_comment" class="form-control-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+			<span id="fiie_view">
+				<input type="file" name="files_comment" class="form-control-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+			</span>
 
 		</div>
 		<center>
-			<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+			<span id="a1">
+				<button type="button" class="btn btn-primary" id="editComment">แก้ไขข้อมูล</button>
+			</span>
+			<span id="a2">
+				<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+			</span>
+
+			
 		</center>
 		<input type="hidden" name="mm" value="<?php if($num_row>0){ echo 'update'; }else{ echo 'insert'; }?>">
 		<input type="hidden" name="id_allComment" value="<?php echo $row['id_allComment']; ?>">
@@ -82,6 +92,28 @@ $num_row = $query->num_rows;
 </div>
 
 <script type="text/javascript">
+	var num_row_view = $('[name=num_row_view]').val();
+	if(num_row_view>0){
+		$('[name=detal_comment]').prop('readonly', true);
+		$('#fiie_view').css('display', 'none');
+		$('#a1').css('display', '');
+		$('#a2').css('display', 'none');
+	}else{
+		$('[name=detal_comment]').prop('readonly', false);
+		$('#fiie_view').css('display', '');
+		$('#a1').css('display', 'none');
+		$('#a2').css('display', '');
+	}
+	
+
+	$('#editComment').click(function(event) {
+		$('[name=detal_comment]').prop('readonly', false);
+		$('#fiie_view').css('display', '');
+		$('#a1').css('display', 'none');
+		$('#a2').css('display', '');
+	});
+
+
 	$( "#send_commentall" ).validate( {
 		rules: {
 			detal_comment: "required",

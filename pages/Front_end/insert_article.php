@@ -9,9 +9,13 @@
           $keyword_th = $_POST['keyword_th'];	
           $keyword_en = $_POST['keyword_en'];
 
+          $year = $_POST['year'];
+          $time = $_POST['time'];
+          $user_id = $_POST['user_id'];
+
           $attach_article = Convert_name_file($_FILES['attach_article']["name"]);
 
-          $sql = "INSERT INTO `article`(`type_article_id`,`article_name_th`, `article_name_en`, `abstract_th`, `abstract_en`, `keyword_th`, `keyword_en`, `attach_article`) VALUES ( '$type_article_id','$article_name_th','$article_name_en','$abstract_th' ,'$abstract_en' ,'$keyword_th' ,'$keyword_en','$attach_article' )";
+          $sql = "INSERT INTO `article`(`type_article_id`,`article_name_th`, `article_name_en`, `abstract_th`, `abstract_en`, `keyword_th`, `keyword_en`, `attach_article`, `year`, `time`, `user_id`) VALUES ( '$type_article_id','$article_name_th','$article_name_en','$abstract_th' ,'$abstract_en' ,'$keyword_th' ,'$keyword_en','$attach_article','$year','$time','$user_id' )";
           
           
           $result = $conn->query($sql);

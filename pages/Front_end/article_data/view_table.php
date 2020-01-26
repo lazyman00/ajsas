@@ -235,7 +235,7 @@ $article_id = "-1";
 if(isset($row['article_id']) && $row['article_id']!=""){
 	$article_id = $row['article_id'];
 }
-$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
+echo $sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
 $query_a = $conn->query($sql_a);
 $row_a =$query_a->fetch_assoc();
 $num_rows = $query_a->num_rows;
