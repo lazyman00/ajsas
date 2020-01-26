@@ -4,27 +4,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../jquery-validation-1.19.0/dist/jquery.validate.js"></script>
 
-
-<script type="text/javascript">
- 
-    $('.btnUp').click(function(event) {
-        // alert(1);
-        var row = $(this).data( "row" );
-        //console.log(row);
-        $('#name_th').val(row.name_th);
-        $('#surname_th').val(row.surname_th);
-        $('#name_en').val(row.name_en);
-        $('#surname_en').val(row.surname_en);
-        $('#address_user').val(row.address_user);
-        $('#phonenumber_user').val(row.phonenumber_user);
-        $('#type_title_id').val(row.type_title_id);
-        $('#type_title_name').val(row.type_title_name);
-        $('#pre_id').val(row.pre_id);
-        $('#pre_en').val(row.pre_en); 
-        $('#pre_th_short').val(row.pre_th_short); 
-        $('#pre_en_short').val(row.pre_en_short);
-        
-
-        $("#myModal").modal({backdrop: true});
-    });
-</script>

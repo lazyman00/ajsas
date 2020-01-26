@@ -27,8 +27,8 @@ $num = $query1->num_rows;
 						<th scope="row">1</th>
 						<td><?php echo $row1['pre_th']." ".$row1['name_th']." ".$row1['surname_th']; ?></td>
 						<td><?php if($row1['assessment_id']==1){ ?> <i class="far fa-check-circle fa-1x"></i> ยอมรับการตีพิมพ์ แบบไม่ต้องแก้ไข</button> 
-							<?php }else if($row1['assessment_id']==2){ ?> <button type="button" class="btn btn-warning">ยอมรับการตีพิมพ์ แบบมีเงื่อนแก้ไข</button> 
-							<?php }else if($row1['assessment_id']==3){ ?> <button type="button" class="btn btn-danger">ไม่ยอมรับการตีพิมพ์</button>
+							<?php }else if($row1['assessment_id']==2){ ?> ! ยอมรับการตีพิมพ์ แบบมีเงื่อนแก้ไข 
+							<?php }else if($row1['assessment_id']==3){ ?> x ไม่ยอมรับการตีพิมพ์</button>
 							<?php } ?></td>
 							<td><a target="_blank" href="../../files_comment/<?php echo $row1['comment_eva']; ?>"><?php echo $row1['comment_eva']; ?></a></td>
 						</tr>
@@ -36,9 +36,4 @@ $num = $query1->num_rows;
 				</tbody>
 			</table>
 		</div>
-		<center>
-			<button disabled="" type="button" class="btn btn-primary">ส่งผลการประเมิน</button>
-		</center>
-		
-
 	</div>
