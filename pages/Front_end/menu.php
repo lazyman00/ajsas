@@ -1,36 +1,36 @@
 <?php
-    $userid = $_SESSION['user_id'];
-    $sql = "SELECT * FROM user u 
-    left join type_title t on t.type_title_id = u.type_title_id
-    left join pre p on p.pre_id = u.pre_id
-    where user_id =  $userid ";  
-    $query = $conn->query($sql);
-    $row_data = $query->fetch_assoc();    
+$userid = $_SESSION['user_id'];
+$sql = "SELECT * FROM user u 
+left join type_title t on t.type_title_id = u.type_title_id
+left join pre p on p.pre_id = u.pre_id
+where user_id =  $userid ";  
+$query = $conn->query($sql);
+$row_data = $query->fetch_assoc();    
 ?>
 <style>
-       .modal-header {
-        background-color: #e9ecef;
-        color: #585f65;
-    }
-    .modal-footer{
-        display: block;
-        text-align: -webkit-center;
-    }
-    .form-control:disabled, .form-control[readonly] {
-        background-color: #e9ecef00;
-        opacity: 1;
-        color: #495057;
-        background-color: #fff;
-        border-color: #bccbda;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0); 
-        cursor: default;
-    }
+ .modal-header {
+    background-color: #e9ecef;
+    color: #585f65;
+}
+.modal-footer{
+    display: block;
+    text-align: -webkit-center;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: #e9ecef00;
+    opacity: 1;
+    color: #495057;
+    background-color: #fff;
+    border-color: #bccbda;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0); 
+    cursor: default;
+}
 </style>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style="height: 111px;">
     <h5 class="my-0 mr-md-auto font-weight-normal"><img src="../../img/banner3-01.png"></h5>
-   
+    
     <nav class="my-2 my-md-0 mr-md-3">
         <?php if($_SESSION['type_user_id']==1){ // admin บรรณาธิการ?>
             <a class="p-2 text-dark" href="../Front_end/allarticle.php">บทความวิชาการ</a>
@@ -65,7 +65,7 @@
                     <p class="text-left" style="padding-right:  5px; padding-left: 5px;"><b><?php echo $row_data["name_th"]  ?> <?php echo $row_data["surname_th"]  ?></b></p>
                     <p class="text-left small" style="padding-right:  5px; padding-left: 5px;"><?php echo $row_data["email"]  ?></p>
                     <p class="text-left" style="padding-right:  5px; padding-left: 5px;">
-                        <a href="#" class="btn btn-outline-primary btn-sm btnUp" style=" width: 207.979166px;"  data-row='<?php  echo json_encode($row_data); ?>'>แก้ไขข้อมูลส่วนตัว</a>
+                        <a href="#" class="btn btn-outline-primary btn-sm btnUpProfile" style=" width: 207.979166px;"  data-row='<?php  echo json_encode($row_data); ?>'>แก้ไขข้อมูลส่วนตัว</a>
                     </p>                                      
                 </div>           
             </div>
@@ -81,44 +81,44 @@
         </div>
     </div>
 </li>
-    
+
 </div>              
 
-<div class="modal fade bd-example-modal-xl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-xl" id="myModalProfile" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลส่วนตัว</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลส่วนตัว</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
       </div>
       <div class="modal-body">
         <form action="sql_editUser.php" method="post">
 
-<!-- สสสส        -->
-        <div class="row" >
-            <div class="form-group col-md-3">
-                <label for="inputEmail4"><b>คำนำหน้าทางวิชาการ</b></label>
-                <select class="form-control form-control-sm" id="position_thai" name="position_thai">
-                    <option value="">กรุณาเลือก</option>
-<?php
-                   $sql_pre_thai = "SELECT * FROM pre ";
-                   $result_pre_thai = $conn->query($sql_pre_thai);
-                   $fetch_pre_thai = $result_pre_thai->fetch_assoc();
+            <!-- สสสส        -->
+            <div class="row" >
+                <div class="form-group col-md-3">
+                    <label for="inputEmail4"><b>คำนำหน้าทางวิชาการ</b></label>
+                    <select class="form-control form-control-sm" id="position_thai" name="position_thai">
+                        <option value="">กรุณาเลือก</option>
+                        <?php
+                        $sql_pre_thai = "SELECT * FROM pre ";
+                        $result_pre_thai = $conn->query($sql_pre_thai);
+                        $fetch_pre_thai = $result_pre_thai->fetch_assoc();
 
                     // $sql_pre = "SELECT * FROM pre ";  
                    // $query_pre = $conn->query($sql_pre);  
 
-                    do{
-?>
-                    <option <?php if ($row_data['pre_id']==$fetch_pre_thai['pre_id']){ ?> selected<?php  } ?> value="<?php echo $fetch_pre_thai['pre_id'];?>"><?php echo $fetch_pre_thai['pre_th'];?></option>
-<?php
-                    }while($fetch_pre_thai = $result_pre_thai->fetch_assoc());
-?>
-                </select>
-            </div>
-            <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
+                        do{
+                            ?>
+                            <option <?php if ($row_data['pre_id']==$fetch_pre_thai['pre_id']){ ?> selected<?php  } ?> value="<?php echo $fetch_pre_thai['pre_id'];?>"><?php echo $fetch_pre_thai['pre_th'];?></option>
+                            <?php
+                        }while($fetch_pre_thai = $result_pre_thai->fetch_assoc());
+                        ?>
+                    </select>
+                </div>
+                <input type="hidden" name="position_eng_hide" id="position_eng_hide" value="">
             <!-- <div class="form-group col-md-6">
             <label for="inputEmail4"><b>Academic Position</b></label>
                 <div id="sh_data_register_position_eng" name="sh_data_register_position_eng" readonly=""></div>
@@ -133,7 +133,7 @@
                 <input type="text" class="form-control form-control-sm" id="surname_th" name ="surname_th">
             </div>
         </div>
-<!-- สสส -->
+        <!-- สสส -->
 
         <div class="form-row">  
             <div class="form-group col-md-3">
@@ -169,79 +169,103 @@
             <button type="button" class="btn btn-primary" id="save_edit">บันทึก</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>        
         </div>
-                
+        
 
-        </form>
-      </div>      
-      
+    </form>
+</div>      
 
 
-    </div>
-  </div>
+
+</div>
+</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+   
+    $('.btnUpProfile').click(function(event) {
+     
+        var row = $(this).data( "row" );
+        console.log(row);
+        $('#name_th').val(row.name_th);
+        $('#surname_th').val(row.surname_th);
+        $('#name_en').val(row.name_en);
+        $('#surname_en').val(row.surname_en);
+        $('#address_user').val(row.address_user);
+        $('#phonenumber_user').val(row.phonenumber_user);
+        $('#type_title_id').val(row.type_title_id);
+        $('#type_title_name').val(row.type_title_name);
+        $('#pre_id').val(row.pre_id);
+        $('#pre_en').val(row.pre_en); 
+        $('#pre_th_short').val(row.pre_th_short); 
+        $('#pre_en_short').val(row.pre_en_short);
+        
+
+        $("#myModalProfile").modal({backdrop: true});
+    });
+</script>
 <script>
 
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    aaaa();    
-});
-function aaaa(){
-    var pos_thai = $("#position_thai").val();
-    $.ajax({
-        url: "menu_data.php?action=position_eng",
-        type: "POST",
-        data: {
-            ID_position_thai : pos_thai
-        },
-        success: function (data, status) {
-            $("#sh_data_register_position_eng").html(data);
-        },
-        error: function(data, status, error) {
-            $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
-        }
+        aaaa();    
     });
-}
-$("#position_thai").change(function(){
-    var pos_thai = $("#position_thai").val();
-    $.ajax({
-        url: "menu_data.php?action=position_eng",
-        type: "POST",
-        data: {
-            ID_position_thai : pos_thai
-        },
-        success: function (data, status) {
-            $("#sh_data_register_position_eng").html(data);
-        },
-        error: function(data, status, error) {
-            $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
-        }
+    function aaaa(){
+        var pos_thai = $("#position_thai").val();
+        $.ajax({
+            url: "menu_data.php?action=position_eng",
+            type: "POST",
+            data: {
+                ID_position_thai : pos_thai
+            },
+            success: function (data, status) {
+                $("#sh_data_register_position_eng").html(data);
+            },
+            error: function(data, status, error) {
+                $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
+            }
+        });
+    }
+    $("#position_thai").change(function(){
+        var pos_thai = $("#position_thai").val();
+        $.ajax({
+            url: "menu_data.php?action=position_eng",
+            type: "POST",
+            data: {
+                ID_position_thai : pos_thai
+            },
+            success: function (data, status) {
+                $("#sh_data_register_position_eng").html(data);
+            },
+            error: function(data, status, error) {
+                $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
+            }
+        });
     });
-});
 
-$("#save_edit").click(function(){
-    $.ajax({
-        url: "sql_editUser.php?action=save_editDataUser",
-        type: "POST",
-        data: {
-            user_id : $("#user_id").val(),
-            position_thai : $("#position_thai").val(),
-            name_th : $("#name_th").val(),
-            surname_th : $("#surname_th").val(),
-            name_en : $("#name_en").val(),
-            surname_en : $("#surname_en").val(),
-            address_user : $("#address_user").val(),
-            phonenumber_user : $("#phonenumber_user").val()
-        },
-        success: function (data, status) {
-            response = data.trim(); 
+    $("#save_edit").click(function(){
+        $.ajax({
+            url: "sql_editUser.php?action=save_editDataUser",
+            type: "POST",
+            data: {
+                user_id : $("#user_id").val(),
+                position_thai : $("#position_thai").val(),
+                name_th : $("#name_th").val(),
+                surname_th : $("#surname_th").val(),
+                name_en : $("#name_en").val(),
+                surname_en : $("#surname_en").val(),
+                address_user : $("#address_user").val(),
+                phonenumber_user : $("#phonenumber_user").val()
+            },
+            success: function (data, status) {
+                response = data.trim(); 
             if(response == "true") // Success
             {
                 Swal.fire({
                     title: "<font color=#009900>สำเร็จ!</font>", 
                     text: "แก้ไขข้อมูลสำเร็จ!",
                     type: "success"
-                    }).then(function(){ 
+                }).then(function(){ 
                     location.reload(true);
                 });
             }
@@ -260,6 +284,6 @@ $("#save_edit").click(function(){
             $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
         }
     });
-});
+    });
 
 </script>
