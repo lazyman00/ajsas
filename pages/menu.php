@@ -165,8 +165,8 @@
         </div> 
 
         <div class="modal-footer">
-            <input type="hidden" id="user_id" name="user_id" value="<?php echo $row_data['user_id']; ?>">
-            <button type="button" class="btn btn-primary" id="save_edit">บันทึก</button>
+            <input type="hidden" name="user_id" value="<?php echo $row_data['user_id']; ?>">
+            <button type="submit" class="btn btn-primary">บันทึก</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>        
         </div>
                 
@@ -184,7 +184,7 @@
 
 $(document).ready(function(){
 
-    aaaa();    
+    aaaa();
 });
 function aaaa(){
     var pos_thai = $("#position_thai").val();
@@ -217,49 +217,6 @@ $("#position_thai").change(function(){
             $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
         }
     });
-});
 
-$("#save_edit").click(function(){
-    $.ajax({
-        url: "sql_editUser.php?action=save_editDataUser",
-        type: "POST",
-        data: {
-            user_id : $("#user_id").val(),
-            position_thai : $("#position_thai").val(),
-            name_th : $("#name_th").val(),
-            surname_th : $("#surname_th").val(),
-            name_en : $("#name_en").val(),
-            surname_en : $("#surname_en").val(),
-            address_user : $("#address_user").val(),
-            phonenumber_user : $("#phonenumber_user").val()
-        },
-        success: function (data, status) {
-            response = data.trim(); 
-            if(response == "true") // Success
-            {
-                Swal.fire({
-                    title: "<font color=#009900>สำเร็จ!</font>", 
-                    text: "แก้ไขข้อมูลสำเร็จ!",
-                    type: "success"
-                    }).then(function(){ 
-                    location.reload(true);
-                });
-            }
-            else // Err
-            {
-                Swal.fire({
-                    icon: 'error',
-                    title: "<font color=red>ไม่สำเร็จ!</font>", 
-                    text: "เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
-        },
-        error: function(data, status, error) {
-            $('#sh_data_register_position_eng').html('<p>An error has occurred</p>');
-        }
-    });
 });
-
 </script>

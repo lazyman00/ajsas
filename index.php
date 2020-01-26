@@ -121,12 +121,107 @@
             <div class="col-md-12">
                 <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center">กำหนดการจัดทำวารสารแต่ละปี</h3>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <h3 style="fontfa: prompt;font-size: 18px;font-weight: 500;color: #555;text-align:center">ฉบับที่ 1 มกราคม – มิถุนายน</h3>
+            </div> -->
+        </div>
+
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6"><p class="text-center">ฉบับที่ 1 มกราคม – มิถุนายน</p></div>
+                    <div class="col-md-6"><p class="text-center">ฉบับที่ 2 กรกฎาคม – ธันวาคม</p></div>
+                </div>
             </div>
         </div>
 
         <div class="container">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="container">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style=" width:10%;text-align:center">ลำดับ</th> 
+                                        <th scope="col" style=" width:60%;text-align:center">กิจกรรม</th>
+                                        <th scope="col" style=" width:30%;text-align:center">ช่วงระยะเวลา</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center">1</td>
+                                        <td>ประชาสัมพันธ์</td>
+                                        <td style="text-align:center">ม.ค. - ก.พ.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">2</td>
+                                        <td>รับข้อเสนอบทความ</td>
+                                        <td style="text-align:center">ก.พ. - มี.ค.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">3</td>
+                                        <td>ส่งผู้ทรงคุณวุฒิตรวจสอบวิชาการ</td>
+                                        <td style="text-align:center">ก.พ. - เม.ย.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">4</td>
+                                        <td>ส่งคืนเพื่อปรับแก้ไขตามข้อเสนอแนะ</td>
+                                        <td style="text-align:center">เม.ย - พ.ค.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">5</td>
+                                        <td>ตรวจสอบและพิมพ์วารสาร</td>
+                                        <td style="text-align:center">มิ.ย.</td>
+                                    </tr>
+                                </tbody>
+                            </table><br>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style=" width:10%;text-align:center">ลำดับ</th> 
+                                        <th scope="col" style=" width:60%;text-align:center">กิจกรรม</th>
+                                        <th scope="col" style=" width:30%;text-align:center">ช่วงระยะเวลา</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center">1</td>
+                                        <td>ประชาสัมพันธ์</td>
+                                        <td style="text-align:center">ม.ค. - ก.พ.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">2</td>
+                                        <td>รับข้อเสนอบทความ</td>
+                                        <td style="text-align:center">ก.พ. - มี.ค.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">3</td>
+                                        <td>ส่งผู้ทรงคุณวุฒิตรวจสอบวิชาการ</td>
+                                        <td style="text-align:center">ก.พ. - เม.ย.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">4</td>
+                                        <td>ส่งคืนเพื่อปรับแก้ไขตามข้อเสนอแนะ</td>
+                                        <td style="text-align:center">เม.ย - พ.ค.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">5</td>
+                                        <td>ตรวจสอบและพิมพ์วารสาร</td>
+                                        <td style="text-align:center">มิ.ย.</td>
+                                    </tr>
+                                </tbody>
+                            </table><br>
+                        </div>
+                    </div>                
+            </div>
+        </div>
+
+        <!-- <div class="container">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -208,7 +303,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
 
         <div class="container">
             <div class="col-md-12"><br>

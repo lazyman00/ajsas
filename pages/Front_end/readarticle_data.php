@@ -52,9 +52,9 @@ if($type=="showdata_table"){
 
         // ORDER BY ma.id_sendMail DESC
 
-        echo $sql = "SELECT * FROM ( 
-            SELECT ma.id_sendMail as row,
-            m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name
+        echo    $sql = "SELECT * FROM ( 
+            SELECT ma.id_sendMail as row,m.attach_article,
+            m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name,tb.evaluation_id
             FROM tb_sendmail AS ma 
             left join article as m on ma.article_id = m.article_id
             left join type_article as ta on ta.type_article_id = m.type_article_id
@@ -95,7 +95,8 @@ if($type=="showdata_table"){
                     <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"];  ?></td>
                     <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"];  ?></td>
-                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../files_work/<?php echo $fetch["attach_article"]; ?>">ดาวน์โหลด</a></td>
+                    <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../../files_work/<?php echo $fetch["attach_article"]; ?>">ไฟล์บทความ</a></td>
+                                                                          <!-- href="../../files_comment/<?php// echo $data_mo['comment_eva']; ?>" -->
                     <td style="padding-bottom: 6px; padding-top: 6px;">
                         <?php if($fetch['sta_rate']==0){ ?>
                         <a href="assessment.php?evaluation_id=<?php echo $fetch['evaluation_id']; ?>" ><center><button class="btn btn-outline-secondary btn-sm" style="width : 100px;" >ประเมิน</button></center></a>
@@ -287,9 +288,7 @@ if ($total_record > 0) {
 <script>
     $('.btnView').click(function(){
         var evaluation_id = $(this).attr('data-evaluation_id');
-        $.get('editBtn.php',{ 
-            evaluation_id : evaluation_id
-             }, function(data) {
+        $.get('editBtn.php',{ evaluation_id : evaluation_id }, function(data) {
             $('#viewbtn').html(data);
   });
         $('#exampleModal').modal('show');
