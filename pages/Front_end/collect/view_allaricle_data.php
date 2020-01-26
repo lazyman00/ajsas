@@ -1,49 +1,87 @@
 <?php  include('../../../connect/connect.php'); ?>
-<?php 
-$sql = sprintf("SELECT * FROM `article` left join type_article on article.type_article_id = type_article.type_article_id WHERE `article_id` = %s",GetSQLValueString($_POST['article_id'], 'int'));
-$query = $conn->query($sql);
-$row = $query->fetch_assoc();
-?>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="article_name_th">ชื่อบทความภาษาไทย :</label>
-        <input type="text" readonly="" name="article_name_th" class="form-control" id="article_name_th" value="<?php echo $row['article_name_th']; ?>">
+
+
+<div class="modal-body">
+
+    <div style="overflow-x: hidden; overflow-y: scroll; height: 350px;">
+        <?php 
+        $sql = sprintf("SELECT  a.*, b.type_article_name FROM tb_collect as a left join type_article as b on a.type_article_id = b.type_article_id WHERE a.`id_collect` = %s",GetSQLValueString($_POST['id_collect'], 'int'));
+        $query = $conn->query($sql);
+        $row_1 = $query->fetch_assoc();
+        ?>
+
+        <p><b>ชื่อวารสาร :</b> <?php echo $row_1['name_collect']; ?></p>
+        <p>สาขา : <?php echo $row_1['type_article_name']; ?> ปีที่ : <?php echo $row_1['y_collect']; ?> ครั้งที่ : <?php echo $row_1['time_collect']; ?></p>
+
+        <?php 
+        $sql = sprintf("SELECT  * FROM tb_collect_list as a left join article as b on a.article_id = b.article_id WHERE a.`id_collect` = %s",GetSQLValueString($_POST['id_collect'], 'int'));
+        $query = $conn->query($sql);
+        ?>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">บทความ</th>
+                    <th scope="col">หน้าที่</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i=1; while ($row = $query->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo $i;  ?></td>
+                        <td><?php echo $row['article_name_th']; ?> :</td>
+                        <td><?php echo $row['page']; ?></td>
+                    </tr>
+                    <?php $i++; } ?>
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+
     </div>
-    <div class="form-group col-md-12">
-        <label for="abstract_th">บทคัดย่อภาษาไทย :</label>
-        <textarea readonly="" name="abstract_th" class="form-control" id="abstract_th" rows="5"><?php echo $row['abstract_th']; ?></textarea>
+    <div class="modal-footer" style="display: block; text-align: -webkit-center;">
+
+        <table>
+            <tr>
+                <td><button type="button" id="Edit_add_journalModal" data-row='<?php echo json_encode($row_1); ?>' class="btn btn-primary ">แก้ไขข้อมูล</button></td>
+                <td><button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button></td>
+            </tr>
+        </table>
+
+
+
     </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="article_name_en">ชื่อบทความภาษาอังกฤษ :</label>
-        <input type="text" readonly="" name="article_name_en" class="form-control" id="article_name_en" value="<?php echo $row['article_name_en']; ?>">
-    </div>
-    <div class="form-group col-md-12">
-        <label for="abstract_en">บทคัดย่อภาษาอังกฤษ :</label>
-        <textarea readonly="" name="abstract_en" class="form-control" id="abstract_en" rows="5"><?php echo $row['abstract_en']; ?></textarea>
-    </div>
-</div>
-<div class="form-group">
-    <label for="type_article_name">ประเภทบทความ :</label>
-    <input type="text" readonly="" class="form-control" id="type_article_name" value="<?php echo $row['type_article_name']; ?>">
-    <input type="hidden" name="type_article_name" value="">
-</div>
-<div class="form-group">
-    <label for="keyword_th">คำสำคัญภาษาไทย :</label>
-    <input type="text" readonly="" name="keyword_th" class="form-control" id="keyword_th" value="<?php echo $row['keyword_th']; ?>">
-</div>
-<div class="form-group">
-    <label for="keyword_en">คำสำคัญภาษาอังกฤษ :</label>
-    <input type="text" readonly="keyword_en" name="" class="form-control" id="keyword_en" value="<?php echo $row['keyword_en']; ?>">
-</div>
-<div class="form-group">
-    <label for="attach_article">แบบไฟล์บทความ :</label>
-    <a target="_blank" href="../../files_work/<?php echo $row['attach_article']; ?>"><?php echo $row['attach_article']; ?></a>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-4">
-        <label for="date_article">วันที่ส่งบทความ :</label>
-        <input type="text" readonly="" name="date_article" class="form-control" id="date_article" value="<?php echo $row['date_article']; ?>">
-    </div>
-</div>
+
+    <script type="text/javascript">
+        $('#Edit_add_journalModal').click(function(event) {
+            var row = $(this).data('row');
+
+            $('[name=name_collect]').val(row.name_collect);
+            $('[name=y_collect]').val(row.y_collect);
+            $('[name=time_collect]').val(row.time_collect);
+            $('[name=type_article_id]').val(row.type_article_id);
+            $('#add_article').prop('disabled', false);
+
+            var type_article_id = row.type_article_id;
+            var id_collect = row.id_collect;
+            $.post('collect/view_aricle_sec.php', { type_article_id: type_article_id, link: 'edit', id_collect: id_collect }, function(data) {
+                $('#tableAdd').html(data);
+            });
+            
+            $('#add_journalModal').modal('show');
+            $('#add_journalModal').css('z-index', '1060');
+            $('.modal-backdrop').eq(1).css("z-index", "1059");
+        });
+
+        $('#add_journalModal').on('hidden.bs.modal', function () {
+            $('body').addClass('modal-open');
+            $('#add_journalModal').removeAttr('style');
+        });
+
+    </script>
+
+
+

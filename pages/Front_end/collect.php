@@ -1,5 +1,62 @@
 <?php  include('../../connect/connect.php'); ?>
 <?php 
+if(isset($_POST['mm']) && $_POST['mm']=="add_journal"){
+    $sql = "SELECT `id_collect` FROM `tb_collect` ORDER BY id_collect DESC";
+    $query = $conn->query($sql);
+    $row = $query->fetch_assoc();
+    
+    $cl1 = $row['id_collect']+1;
+
+    $cl2 = "";
+    if(isset($_POST['name_collect']) && $_POST['name_collect']!=""){
+        $cl2 = $_POST['name_collect'];
+    }
+    $cl3 = "";
+    if(isset($_POST['y_collect']) && $_POST['y_collect']!=""){
+        $cl3 = $_POST['y_collect'];
+    }
+    $cl4 = "";
+    if(isset($_POST['time_collect']) && $_POST['time_collect']!=""){
+        $cl4 = $_POST['time_collect'];
+    }
+    $cl6 = "";
+    if(isset($_POST['type_article_id']) && $_POST['type_article_id']!=""){
+        $cl6 = $_POST['type_article_id'];
+    }
+
+
+    $sql = sprintf("INSERT INTO `tb_collect`(`id_collect`, `name_collect`, `y_collect`, `time_collect`, `type_article_id`) VALUES (%s,%s,%s,%s,%s)",
+        GetSQLValueString($cl1, 'text'),
+        GetSQLValueString($cl2, 'text'),
+        GetSQLValueString($cl3, 'text'),
+        GetSQLValueString($cl4, 'text'),
+        GetSQLValueString($cl6, 'text'));
+
+    $query = $conn->query($sql);
+    if($query){
+
+        for($i=0; $i<count($_POST['page']); $i++){
+            $cl5 = "";
+            if(isset($_POST['page'][$i]) && $_POST['page'][$i]!=""){
+                $cl5 = $_POST['page'][$i];
+            }
+            $cl7 = "";
+            if(isset($_POST['article_id'][$i]) && $_POST['article_id'][$i]!=""){
+                $cl7 = $_POST['article_id'][$i];
+            }
+            $sql = sprintf("INSERT INTO `tb_collect_list`(`page`,`article_id`, `id_collect`) VALUES (%s,%s,%s)",
+                GetSQLValueString($cl5, 'text'),
+                GetSQLValueString($cl5, 'text'),
+                GetSQLValueString($cl1, 'text'));
+            $query = $conn->query($sql); 
+        }
+    }
+
+
+
+}
+?>
+<?php 
 $_SESSION["add"] = array(); 
 ?>
 <?php
@@ -40,16 +97,19 @@ $result = $conn->query($sql);
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
     @media (min-width: 992px){
-       .modal-lg, .modal-xl 
-       {
+     .modal-lg, .modal-xl 
+     {
         max-width: 850px;
     }
+}
+.error{
+    color: red;
 }
 
 </style>
 <body class="bg-light">
-    <?php  include('menu.php'); ?>
-    <?php  include('menu_index.php'); ?>
+    <?php // include('menu.php'); ?>
+    <?php // include('menu_index.php'); ?>
     <div class="container">
         <div class="card" >
             <div class="card-body">

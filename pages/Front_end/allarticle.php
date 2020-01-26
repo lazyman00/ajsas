@@ -110,7 +110,7 @@ $result = $conn->query($sql);
     function show_date_table(page) {
 
         $.ajax({
-            url: "allarticle/allarticle_data.php?action=showdata_table&page=" +page,
+            url: "allarticle_data.php?action=showdata_table&page=" +page,
             type: "POST",
             data: {
                 search_name : $("#search_name").val(),
