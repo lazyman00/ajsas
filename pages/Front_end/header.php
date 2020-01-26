@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="../../fontawesome/css/all.css" >
 	<link rel="stylesheet" href="../../fontawesome/css/brands.css" >
 	<link rel="stylesheet" href="../../fontawesome/css/solid.css" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
 </head>
 <style>
 /* thai */

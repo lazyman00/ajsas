@@ -20,7 +20,7 @@ if(isset($_POST['mm']) && $_POST['mm']=='sent_files'){
 <?php 
 $userid = $_SESSION['user_id'];
 
-echo $sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
+ $sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
 	GetSQLValueString($userid, 'text'),
 	GetSQLValueString($_POST['year'], 'text'),
 	GetSQLValueString($_POST['time'], 'text'));
