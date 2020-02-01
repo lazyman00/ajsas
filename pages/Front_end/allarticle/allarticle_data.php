@@ -383,6 +383,11 @@ if ($total_record > 0) {
         var article_id = $(this).attr('data-article_id');
         var sta_work = $(this).attr('data-sta_work');
 
+        $('[name=detal_comment]').prop('readonly', false);
+        $('#fiie_view').css('display', '');
+        $('#a1').css('display', 'none');
+        $('#a2').css('display', '');
+
         $('.li').removeClass('active');
         $('.li').eq(sta_work).toggleClass('active');
 
