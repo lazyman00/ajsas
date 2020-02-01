@@ -1,5 +1,5 @@
 <?php  include('../../../connect/connect.php'); ?>
-<?php $_SESSION['data'] = array(); ?>
+<?php  $_SESSION['data'] = array(); ?>
 <?php
 
 $type          = $_GET["action"]; 
@@ -40,7 +40,7 @@ if($type=="showdata_table"){
         $search_name2 ="";
     }
     if(!empty($search_name3))
-    {       
+    {      
         $search_name3 = " AND YEAR(m.date_article) = $search_name3  "; 
     }else{
         $search_name3 ="";
@@ -81,7 +81,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"]; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
-                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
+                        <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["year"]; ?></td>
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../../files_work/<?php echo $fetch["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
 
                         <td style="padding-bottom: 6px; padding-top: 6px;">
