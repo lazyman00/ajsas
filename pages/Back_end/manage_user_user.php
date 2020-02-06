@@ -195,8 +195,8 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="">สถานศึกษา<span style="color: red;"> * </span></label>
-                        <select class="form-control" id="add_academe" name="add_academe">
+                        <label for="">สถานศึกษา<span style="color: red;"> * </span></label><br>
+                        <select class="form-control select2_mange" id="add_academe" name="add_academe">
                             <option value="0">กรุณาเลือก</option>
 <?php
                             $sql_sel_academe = "SELECT academe_id, academe_name, status_academe FROM academe where status_academe = 1";
@@ -219,13 +219,13 @@
                     </div>
                     <div class="col-md-3">
                         <label for="">หมายเลขโทรศัพท์ <span style="color: red;">* </span></label>
-                        <input type="text" class="form-control" id="add_phone" name="add_phone" value="" placeholder="">
+                        <input type="text" class="form-control" id="add_phone" name="add_phone" value="" placeholder="" maxlength="10">
                     </div>
                     <div class="col-md-4" id="show_name_add_row" style="display:none">
                         <label for="">ความเชี่ยวชาญ <span style="color: red;">* ( กรุณาเลือกอย่างน้อย 1 รายการ ) </span></label><br>
                         <div id="show_add_row"></div>
-                        <select class="sele_c" id="name_add_row" name="name_add_row" style="width: 260px;"></select>&nbsp;&nbsp;
-                        <button class="btn btn-primary" type="button" onclick="show_table_add_row()" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
+                        <select class="sele_c" id="name_add_row" name="name_add_row" style="width: 260px;" onchange="show_table_add_row()"></select>&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="button" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> <!-- onclick="show_table_add_row()" -->
                     </div>
                 </div>
                 <hr>
@@ -348,7 +348,7 @@
                     </div>
                     <div class="col-md-3">
                         <label for="">สถานศึกษา<span style="color: red;"> * </span></label>
-                        <select class="form-control" id="edit_academe" name="edit_academe" disabled>
+                        <select class="form-control select2_mange" id="edit_academe" name="edit_academe" disabled>
                             <option value="0">กรุณาเลือก</option>
     <?php
                             $sql_sel_academe_edit = "SELECT academe_id, academe_name FROM academe ";
@@ -371,13 +371,13 @@
                     </div>
                     <div class="col-md-3">
                         <label for="">หมายเลขโทรศัพท์ <span style="color: red;">* </span></label>
-                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="" placeholder="" readonly>
+                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="" placeholder="" readonly maxlength="10">
                     </div>
                     <div class="col-md-4" id="e_show_name_add_row" style="display:none">
                         <label for="">ความเชี่ยวชาญ <span style="color: red;">* ( กรุณาเลือกอย่างน้อย 1 รายการ ) </span></label><br>
                         <div id="e_show_add_row"></div>
-                        <select class="sele_c" id="e_name_add_row" name="e_name_add_row" style="width: 260px;"></select>&nbsp;&nbsp;
-                        <button class="btn btn-primary" type="button" onclick="edit_show_table_add_row()" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> 
+                        <select class="sele_c" id="e_name_add_row" name="e_name_add_row" style="width: 260px;" onchange="edit_show_table_add_row()"></select>&nbsp;&nbsp; 
+                        <button class="btn btn-primary" type="button" style="margin-bottom: 7px;"><i class="fa fa-plus-circle"></i></button> <!--  onclick="edit_show_table_add_row()" -->
                     </div>
                 </div>
                 <hr>
@@ -489,6 +489,8 @@
 
     $(document).ready(function() {
 
+        $('.select2_mange').select2();
+
         $.validator.addMethod("valueNotEquals", function(value, element, arg){
             return arg !== value;
         }, "Value must not equal arg.");
@@ -532,7 +534,9 @@
                     valueNotEquals: "0"
                 },
                 add_phone: {
-                    required: true
+                    required: true,
+                    number: true,
+                    minlength: 10
                 },
                 add_address: {
                     valueNotEquals: ""
@@ -575,7 +579,9 @@
                     valueNotEquals: "กรุณาเลือกสถานศึกษาของท่าน"
                 },
                 add_phone: {
-                        required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน"
+                    required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน",
+                    number: "* กรุณากรอกเฉพาะตัวเลข",
+                    minlength: "* กรุณากรอกให้ครบ 10 หลัก"
                 },
                 add_address: {
                     valueNotEquals: "กรุณากรอกที่อยู่ของท่าน"
@@ -615,7 +621,9 @@
 					required: true
 				},
                 edit_phone: {
-                        required: true
+                        required: true,
+                        number: true,
+                        minlength: 10
                 },
                 edit_address: {
                         valueNotEquals: ""
@@ -651,7 +659,9 @@
 					required: "<font color=red size=2>*เลือกก่อนสิวะ!</font>"
 				},
                 edit_phone: {
-                        required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน"
+                        required: "กรุณากรอกหมายเลขโทรศัพท์ของท่าน",
+                        number: "* กรุณากรอกเฉพาะตัวเลข",
+                        minlength: "* กรุณากรอกให้ครบ 10 หลัก"
                 },
                 edit_address: {
                         valueNotEquals: "กรุณากรอกที่อยู่ของท่าน"
@@ -910,6 +920,7 @@
         $("#hidden_edit_title_name").val(t_edit_type_title_id); 
         /// ส่งค่า สถานศึกษา ///
         $("#hidden_edit_academe").val(t_edit_academe_id);
+        $('#edit_academe').val(t_edit_academe_id).trigger('change.select2');
         /// ส่งค่า ประเภทผู้ใช้ ///
         $("#hidden_edit_type_user_id").val(t_edit_type_user_id);
 
