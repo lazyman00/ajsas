@@ -116,7 +116,7 @@ $numRow = $query->num_rows;
 <div class="row">                      
 	<div class="col-md-12 mb-3">                        
 		<div class="table-responsive">
-			<h4>ข้อมูลบทความ</h4>
+			<!-- <h4>ข้อมูลบทความ</h4> -->
 			<table class="table table-striped" >
 				<thead>
 					<tr>
@@ -171,7 +171,7 @@ $numRow = $query->num_rows;
 			<div class="form-wizard-steps form-wizard-tolal-steps-7" style="left: 34px;bottom: 43px;" >
 				<!-- style="left: 34px;bottom: 43px;" -->
 				<div class="form-wizard-step active" style="height: 110px;width: 140px;">
-					<div class="form-wizard-step-icon" ><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></div>
+					<div class="form-wizard-step-icon" ><i class="fa fa-retweet" aria-hidden="true"></i></div>
 					<p style="font-size:14px">ส่งบทความ</p>
 				</div>
 				<div class="form-wizard-step" style="width: 140px;">
@@ -235,7 +235,7 @@ $article_id = "-1";
 if(isset($row['article_id']) && $row['article_id']!=""){
 	$article_id = $row['article_id'];
 }
-$sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
+echo $sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
 $query_a = $conn->query($sql_a);
 $row_a =$query_a->fetch_assoc();
 $num_rows = $query_a->num_rows;

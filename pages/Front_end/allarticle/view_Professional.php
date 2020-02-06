@@ -53,7 +53,7 @@ $row = $query->fetch_all(MYSQLI_ASSOC);
     <input type="hidden" name="article_id" value="<?php echo $_GET['article_id']; ?>">
 
     <?php 
-    $sql = "SELECT id_sendMail FROM `tb_sendmail`  ORDER BY `id_sendMail`";        
+    $sql = "SELECT id_sendMail FROM `tb_sendmail`  ORDER BY `id_sendMail` DESC";        
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
     ?>

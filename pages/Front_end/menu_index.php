@@ -18,8 +18,8 @@
                         
                     </div>  
                 </div>
-<nav aria-label="breadcrumb">
-	<p style="text-indent: 1.5em;">สวัสดี ! <?php echo $row_data['name_th']; ?>  <?php echo $row_data['surname_th']; ?></p>
+<nav aria-label="breadcrumb" >
+	<p style="text-align: right;padding-right: 24px;">สวัสดี ! <?php echo $row_data['name_th']; ?>  <?php echo $row_data['surname_th']; ?></p>
 </nav>
 
 <nav aria-label="breadcrumb">

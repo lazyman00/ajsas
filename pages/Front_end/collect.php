@@ -46,9 +46,14 @@ if(isset($_POST['mm']) && $_POST['mm']=="add_journal"){
             }
             $sql = sprintf("INSERT INTO `tb_collect_list`(`page`,`article_id`, `id_collect`) VALUES (%s,%s,%s)",
                 GetSQLValueString($cl5, 'text'),
-                GetSQLValueString($cl5, 'text'),
+                GetSQLValueString($cl7, 'text'),
                 GetSQLValueString($cl1, 'text'));
             $query = $conn->query($sql); 
+            if($query){    
+                $sql = sprintf("UPDATE `article` SET `sta_add_collect`='1', `sta_work`='5' WHERE `article_id`=%s",
+                    GetSQLValueString($cl7, 'text'));
+                $query = $conn->query($sql); 
+            }
         }
     }
 
@@ -97,8 +102,8 @@ $result = $conn->query($sql);
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
     @media (min-width: 992px){
-     .modal-lg, .modal-xl 
-     {
+       .modal-lg, .modal-xl 
+       {
         max-width: 850px;
     }
 }

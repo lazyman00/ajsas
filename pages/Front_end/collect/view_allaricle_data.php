@@ -28,7 +28,7 @@
             <tbody>
                 <?php $i=1; while ($row = $query->fetch_assoc()) { ?>
                     <tr>
-                        <td><?php echo $i;  ?></td>
+                        <td><?php echo $i; ?></td>
                         <td><?php echo $row['article_name_th']; ?> :</td>
                         <td><?php echo $row['page']; ?></td>
                     </tr>
@@ -46,7 +46,9 @@
 
         <table>
             <tr>
-                <td><button type="button" id="Edit_add_journalModal" data-row='<?php echo json_encode($row_1); ?>' class="btn btn-primary ">แก้ไขข้อมูล</button></td>
+                <td>
+                    <button type="button" id="Edit_add_journalModal" data-row='<?php echo json_encode($row_1); ?>' class="btn btn-primary ">แก้ไขข้อมูล</button>
+                </td>
                 <td><button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button></td>
             </tr>
         </table>
