@@ -50,7 +50,7 @@ if($type=="showdata_table"){
         $search_name3 ="";
     }
 
-    $sql = "SELECT * FROM (SELECT a.id_collect as row, a.*, b.type_article_name FROM tb_collect as a left join type_article as b on a.type_article_id = b.type_article_id WHERE a.id_collect is not null ".$search_name." ".$search_name2." ".$search_name3." 
+    $sql = "SELECT * FROM (SELECT a.id_collect as row, a.* FROM tb_collect as a  WHERE a.id_collect is not null ".$search_name." ".$search_name2." ".$search_name3." 
 ) AS tb WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
 
 $result = $conn->query($sql);
@@ -70,7 +70,6 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                 <tr>
                     <th scope="col" style="width: 5%">ลำดับ</th>
                     <th scope="col" style="width: 35%">ชื่อบทความ</th>
-                    <th scope="col" style="width: 20%">สาขา</th>
                     <th scope="col" style="width: 10%">ปี</th>
                     <th scope="col" style="width: 15%">ครั้งที่</th>  
                     <th scope="col" style="width: 25%"><center>รายละเอียด</center></th>                               
@@ -87,7 +86,6 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <tr>
                             <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
                             <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["name_collect"]; ?></td>
-                            <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"]; ?></td>
                             <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo "พ.ศ. ".$yesr_show; ?></td>
                             <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["time_collect"]; ?></td>
 
@@ -256,12 +254,12 @@ if ($total_record > 0) {
             </div>
             <form  method="POST">
 
-                 <span id="view_allaricle_data"></span>
-               
-                
-            </form>
-        </div>
-    </div>
+               <span id="view_allaricle_data"></span>
+
+
+           </form>
+       </div>
+   </div>
 </div> 
 
 
@@ -284,13 +282,13 @@ if ($total_record > 0) {
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPassword4">ปี</label>
-                            <select class="form-control" id="search_name3" name="y_collect" >
-                                <option value="0"><?php echo "กรุณาเลือก ปี"; ?></option>
+                            <select class="form-control" id="y_collect" name="y_collect" >
+                                <option value=""><?php echo "กรุณาเลือก ปี"; ?></option>
                                 <?php 
                                 for ($i = date("Y"); $i >= date("Y")-9; $i--) { 
                                     $name_Y = $i+543;
                                     ?>
-                                    <option value="<?php echo $i; ?>"><?php echo "พ.ศ. ".$name_Y; ?></option>
+                                    <option value="<?php echo $i+543; ?>"><?php echo "พ.ศ. ".$name_Y; ?></option>
                                     <?php 
                                 }
                                 ?>
@@ -304,148 +302,130 @@ if ($total_record > 0) {
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="inputAddress">สาขา</label>
-                            <select class="form-control" id="type_article_id" name="type_article_id">
-                                <?php 
-                                $sql_type_article = "SELECT * FROM `type_article`"; 
-                                $query_type_article = $conn->query($sql_type_article);
-                                ?>
-                                <option value="">กรุณาเลือก</option>
-                                <?php while ($row_type_article = $query_type_article->fetch_assoc()) { ?>
-                                    <option value="<?php echo $row_type_article['type_article_id']; ?>">
-                                        <?php echo $row_type_article['type_article_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <p>รายการบทความวิชาการ <button style="float: right;" type="button" disabled="" class="btn btn-primary" id="add_article">+  เพิ่มบทความวิชาการ</button></p>
-                        <br/>
+                    <p>รายการบทความวิชาการ <button style="float: right;" type="button" class="btn btn-primary" id="add_article">+  เพิ่มบทความวิชาการ</button></p>
+                    <br/>
 
-                        <span id="tableAdd"></span>
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-
-                        <input type="hidden" name="mm" value="add_journal">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" id="add_articleModal" style="z-index: 1060;" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">บทความวิชาการ</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <span id="tableAdd"></span>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <span id="view_aricle_data"></span>
-                    </div>
-                    <div class="modal-footer">
+                <div class="modal-footer">
 
-                        <button type="button" class="btn btn-primary" id="add_article_use" >ตกลง</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
 
-                    </div>
-                </form>
-            </div>
+                    <input type="hidden" name="mm" value="add_journal">
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" tabindex="-1" id="add_articleModal" style="z-index: 1060;" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">บทความวิชาการ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <span id="view_aricle_data"></span>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" id="add_article_use" >ตกลง</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $('#add_article_use').click(function(event) {
-            var type_article_id = $('[name=type_article_id]').val();
-            $.post('collect/view_aricle_sec.php', { type_article_id: type_article_id }, function(data) {
-                $('#tableAdd').html(data);
-            }).then(function(){
-             $('#add_articleModal').modal('hide');
-         });
+    $('#add_article_use').click(function(event) {
+        var year = $('#y_collect').val();
+        var time = $('#time').val();
+        $.post('collect/view_aricle_sec.php', { year: year, time: time }, function(data) {
+            $('#tableAdd').html(data);
+        }).then(function(){
+           $('#add_articleModal').modal('hide');
+       });
 
 
+    });
+
+    // $('#y_collect').change(function(event) {
+    //     var y_collect =  $(this).val();
+
+    //     if(y_collect!=""){
+    //         $('#add_article').prop('disabled', false);
+    //     }else{
+    //         $('#add_article').prop('disabled', true);
+    //     }
+    // });
+
+
+    $('#add_article').click(function(event) {
+        $('#view_aricle_data').load('collect/view_aricle_list.php');
+        $('#add_articleModal').modal({
+            'show' : true,
+            backdrop : 'static' 
         });
+        $('.modal-backdrop').eq(1).css("z-index", "1059");
+    });
 
-        $('#type_article_id').change(function(event) {
-            var type_article_id =  $(this).val();
-            if(type_article_id!=""){
-                $('#add_article').prop('disabled', false);
-            }else{
-                $('#add_article').prop('disabled', true);
-            }
+    $('#add_articleModal').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
+
+
+    $('#add_journal').click(function(event) {
+
+        $('#add_journalModal').modal({
+            'show' : true,
+            backdrop : 'static' 
         });
+    });
 
+    $('#modal_Professional').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
 
-        $('#add_article').click(function(event) {
-            var type_article_id = $('#type_article_id').val();
-            $.post('collect/view_aricle_list.php', { type_article_id: type_article_id }, function(data) {
-                $('#view_aricle_data').html(data);
-            }).done(function() {
-                $('#add_articleModal').modal({
-                    'show' : true,
-                    backdrop : 'static' 
-                });
-                $('.modal-backdrop').eq(1).css("z-index", "1059");
-            });
+    $('#msg').on('hidden.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
+
+    $('.nav-link').click(function(e) {
+        var type_article_id = $(this).attr('data-type_article_id');
+        var article_id = $(this).attr('data-article_id');
+
+        var pages = $(this).attr('data-pages');
+        $('.nav-link').removeClass('active');
+        $(this).toggleClass('active');
+
+        if(pages==1){
+            var  url = "collect/view_Professional_pages.php";
+        }if(pages==2){
+            var  url = "collect/view_comment.php";
+        }if(pages==3){
+            var  url = "collect/send_comment_sender.php";
+        }if(pages==4){
+            var  url = "collect/view_files_comsender.php";
+        }
+
+        $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+            $('#view_del_all').html(data);
         });
+        e.preventdefault();
 
-        $('#add_articleModal').on('hidden.bs.modal', function () {
-            $('body').addClass('modal-open');
-        });
+    });
 
-
-        $('#add_journal').click(function(event) {
-
-            $('#add_journalModal').modal({
-                'show' : true,
-                backdrop : 'static' 
-            });
-        });
-
-        $('#modal_Professional').on('hidden.bs.modal', function () {
-            $('body').addClass('modal-open');
-        });
-
-        $('#msg').on('hidden.bs.modal', function () {
-            $('body').addClass('modal-open');
-        });
-
-        $('.nav-link').click(function(e) {
-            var type_article_id = $(this).attr('data-type_article_id');
-            var article_id = $(this).attr('data-article_id');
-
-            var pages = $(this).attr('data-pages');
-            $('.nav-link').removeClass('active');
-            $(this).toggleClass('active');
-
-            if(pages==1){
-                var  url = "collect/view_Professional_pages.php";
-            }if(pages==2){
-                var  url = "collect/view_comment.php";
-            }if(pages==3){
-                var  url = "collect/send_comment_sender.php";
-            }if(pages==4){
-                var  url = "collect/view_files_comsender.php";
-            }
-
-            $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
-                $('#view_del_all').html(data);
-            });
-            e.preventdefault();
-
-        });
-
-        $('.btnUp').click(function(event) {
-            var id_collect = $(this).attr('data-id_collect');
+    $('.btnUp').click(function(event) {
+        var id_collect = $(this).attr('data-id_collect');
 
             // $('.li').removeClass('active');
             // $('.li').eq(0).toggleClass('active');
@@ -472,57 +452,57 @@ if ($total_record > 0) {
         });
 
 
-        $( "#add_journal_form" ).validate( {
-            rules: {
-                name_collect: "required",
-                y_collect: "required",
-                time_collect: "required",
-                type_article_id: "required",
-                page : "required"
+    $( "#add_journal_form" ).validate( {
+        rules: {
+            name_collect: "required",
+            y_collect: "required",
+            time_collect: "required",
+            type_article_id: "required",
+            page : "required"
 
-            },
-            messages: {
-                name_collect: "*กรุณากรอกข้อมูล",
-                y_collect: "*กรุณาเลือกข้อมูล",
-                time_collect: "กรุณาเลือกครั้งที่",
-                type_article_id: "กรุณาเลือกสาขา",
-                page : "กรุณากรอกหน้าที่"
+        },
+        messages: {
+            name_collect: "*กรุณากรอกข้อมูล",
+            y_collect: "*กรุณาเลือกข้อมูล",
+            time_collect: "กรุณาเลือกครั้งที่",
+            type_article_id: "กรุณาเลือกสาขา",
+            page : "กรุณากรอกหน้าที่"
 
-            },
-            errorElement: "em",
-            errorPlacement: function ( error, element ) {
-                error.addClass( "help-block" );
+        },
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+            error.addClass( "help-block" );
 
-                if ( element.prop( "type" ) === "checkbox" ) {
-                    error.insertAfter( element.parent( "label" ) );
-                } else {
-                    error.insertAfter( element );
-                }
-            },
-            highlight: function ( element, errorClass, validClass ) {
-                $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
-            },submitHandler: function(e) {
-
-                var formData = new FormData($("#add_journal_form")[0]);
-                $.ajax({ 
-                    beforeSend: function(){
-                        $('#add_journalModal').modal('hide'); 
-                    },
-                    url: 'collect.php',
-                    type: 'POST',
-                    data: formData,
-                    async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                }); 
-
-                return false;
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
             }
-        });
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+        },submitHandler: function(e) {
+
+            var formData = new FormData($("#add_journal_form")[0]);
+            $.ajax({ 
+                beforeSend: function(){
+                    $('#add_journalModal').modal('hide'); 
+                },
+                url: 'collect.php',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false
+            }); 
+
+            return false;
+        }
+    });
 
 
     // submitHandler: function(e) {

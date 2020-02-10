@@ -34,6 +34,10 @@
   <!-- sweetalert --> 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.min.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
+
+  <!-- select2 --> 
+  <link rel="stylesheet" href="../../bootstrap/css/select2.css">
+  <script src="../../bootstrap/js/select2.js"></script>
   
   <!-- <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script> -->
@@ -95,52 +99,62 @@
         .sele_c:focus {     
             border: 1px solid #17a2b8;  
         }
-      
-
-
         /* thai */
-@font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraBGwCYdA.woff2) format('woff2');
-  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraaGwCYdA.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcrabGwCYdA.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraVGwA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-	body{
-	font-family: 'Kanit';
-}div{
-	font-family: 'Kanit';
-}h3{
-	font-family: 'Kanit';
-}
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraBGwCYdA.woff2) format('woff2');
+        unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+      }
+      /* vietnamese */
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraaGwCYdA.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcrabGwCYdA.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Kanit Regular'), local('Kanit-Regular'), url(https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraVGwA.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+        body{
+        font-family: 'Kanit';
+      }div{
+        font-family: 'Kanit';
+      }h3{
+        font-family: 'Kanit';
+      }
+      .select2-container .select2-selection--single {
+          width:260px;
+          height: 40px !important;
+          border: 1px solid #CFCFCF;
+          border-radius: 5px;
+      }
+      .select2-results__options{
+          font-size:14px !important;
+      }
+      .select2-selection__rendered {
+          font-size: 14px;
+      }
+
     </style>
 
   </head>

@@ -322,10 +322,10 @@
                                             </div>
                                             <div class="row" >
                                                 <div class="col-md-4 mb-3" style="text-align:right">
-                                                    <label for="name">รหัสไปรษณีย์<span style="color: red">*</span></label>
+                                                    <label for="name">รหัสไปรษณีย์<span style="color: red" >*</span></label>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
-                                                    <input type="text" class="form-control form-control-sm" id="zip_code" name="zip_code">
+                                                    <input type="text" class="form-control form-control-sm" id="zip_code" name="zip_code" maxlength="5">
                                                 </div>
                                             </div>
                                             <div class="row" >
@@ -333,7 +333,7 @@
                                                         <label for="name">เบอร์โทร</label>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
-                                                        <input type="text" class="form-control form-control-sm" id="p_phone" name="p_phone">
+                                                        <input type="text" class="form-control form-control-sm" id="p_phone" name="p_phone" maxlength="10">
                                                     </div>
                                                 </div>
 
@@ -371,11 +371,16 @@ $(document).ready(function(){
     fu_show_data_register();
     fu_show_data_register_position_eng();
 
+    jQuery.validator.addMethod("emailfull", function(value, element) {
+        return this.optional(element) || /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
+    }, "Please enter valid email address!");
+
     $('#form_1').validate({
         rules: {
             e_eail: {
                 required: true,
                 email: true,
+                emailfull: true,
                 remote: { 
 					url: "check_register.php?action=check_email", 
 					type: "post",
@@ -401,6 +406,7 @@ $(document).ready(function(){
             e_eail: {
                 required: "* กรุณากรอก อีเมล์",
                 email: "รูปแบของ Email ของท่านไม่ถูกต้อง!",
+                emailfull: "รูปแบของ Email ของท่านไม่ถูกต้อง!",
                 remote: "<font color=red>E-mail นี้ถูกใช้งานแล้ว</font>"
             },
             p_pass: {
@@ -447,10 +453,14 @@ $(document).ready(function(){
                 required: true
             },
             zip_code: {
-                required: true
+                required: true,
+                number: true,
+                minlength: 5
             },
             p_phone: {
-                required: true
+                required: true,
+                number: true,
+                minlength: 10
             }
         },
         messages: {
@@ -485,10 +495,14 @@ $(document).ready(function(){
                 required: "* กรุณากรอก"
             },
             zip_code: {
-                required: "* กรุณากรอก"
+                required: "* กรุณากรอก",
+                number: "* กรุณากรอกเฉพาะตัวเลข",
+                minlength: "* กรุณากรอกให้ครบ 5 หลัก"
             },
             p_phone: {
-                required: "* กรุณากรอก"
+                required: "* กรุณากรอก",
+                number: "* กรุณากรอกเฉพาะตัวเลข",
+                minlength: "* กรุณากรอกให้ครบ 10 หลัก"
             }
         }
     });

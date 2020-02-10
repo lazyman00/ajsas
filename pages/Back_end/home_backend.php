@@ -81,10 +81,6 @@
         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
         รีเซ็ตรหัสผ่าน
       </a>
-      <a class="dropdown-item" href="#">
-        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-        Change Data User
-      </a>
       <div class="dropdown-divider"></div>
       <a  class="dropdown-item" href="unset.php" >
         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
