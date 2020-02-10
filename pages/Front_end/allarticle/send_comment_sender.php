@@ -59,6 +59,7 @@ $num_row = $query->num_rows;
 </style>
 <input type="hidden" name="num_row_view" value="<?php echo $num_row; ?>">
 <div class="card-body">
+	 <p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ส่งผลการประเมิน : </span></p>
 	<form id="send_commentall" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">ความคิดเห็น : </label>

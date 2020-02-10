@@ -272,7 +272,7 @@ if ($total_record > 0) {
                                 <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">1.ตรวจสอบบทความก่อนส่ง</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link li active" data-pages="2" data-type_article_id="" data-article_id="" href="#">2.ข้อมูลผู้ทรวคุณวุฒิ</a>
+                                <a class="nav-link li active" data-pages="2" data-type_article_id="" data-article_id="" href="#">2.ข้อมูลผู้ทรงคุณวุฒิ</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">3.ผลการประเมินจากผู้ทรง</a>

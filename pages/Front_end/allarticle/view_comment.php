@@ -11,9 +11,10 @@ $num = $query1->num_rows;
 
 ?>
 <div class="card-body">
+    <p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ผลการประเมินจากผู้ทรงคุณวุฒิ : </span></p>
 	<div class="table-responsive-sm">
 		<table class="table table-sm">
-			<thead class="thead-dark">
+			<thead>
 				<tr>
 					<th scope="col">ที่</th>
 					<th scope="col">ชื่อ - นามสกุล</th>
