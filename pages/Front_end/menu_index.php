@@ -9,17 +9,19 @@
     $sql = "SELECT * FROM user u 
     left join type_title t on t.type_title_id = u.type_title_id
     left join pre p on p.pre_id = u.pre_id
+	left join type_user n on n.type_user_id = u.type_user_id
     where user_id =  $userid ";  
     $query = $conn->query($sql);
 	$row_data = $query->fetch_assoc(); 
 	   
 ?>
+
 				<div class="form-row" style="margin-left: 1155px;">  
                         
                     </div>  
                 </div>
 <nav aria-label="breadcrumb" >
-	<p style="text-align: right;padding-right: 24px;">สวัสดี ! <?php echo $row_data['name_th']; ?>  <?php echo $row_data['surname_th']; ?></p>
+	<p style="text-align: right;padding-right: 24px;">สวัสดี !  <?php echo $row_data['pre_th_short']; ?><?php echo $row_data['name_th']; ?>  <?php echo $row_data['surname_th']; ?> (<?php echo $row_data['type_user_name']; ?>)</p>
 </nav>
 
 <nav aria-label="breadcrumb">

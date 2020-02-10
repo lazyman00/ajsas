@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <select name="year" class="form-control" style="width: 100px;" required>
-                             <option value="">ปี</option>
+                             <option value="date">ปี</option>
                              <?php 
                              $y = date('Y')+543;
                              $u = date('Y')+533;
