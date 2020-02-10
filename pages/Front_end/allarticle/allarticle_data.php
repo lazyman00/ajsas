@@ -265,27 +265,31 @@ if ($total_record > 0) {
                     </div>
 
                     <hr>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item ">
-                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ตรวจสอบไฟล์บทความก่อนส่ง</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link li" data-pages="2" data-type_article_id="" data-article_id="" href="#">ผลการประเมินจากผู้ทรง</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">ส่งผลการประเมิน</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">ตรวจสอบบทความ</a>
-                        </li>
-                    </ul>
+                    <div class="card">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item ">
+                                <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">1.ตรวจสอบบทความก่อนส่ง</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link li active" data-pages="2" data-type_article_id="" data-article_id="" href="#">2.ข้อมูลผู้ทรวคุณวุฒิ</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">3.ผลการประเมินจากผู้ทรง</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">4.ส่งผลการประเมิน</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link li" data-pages="5" data-type_article_id="" data-article_id="" href="#">5.ตรวจสอบบทความ</a>
+                            </li>
+                        </ul>
+                    </div>
                     <span id="view_del_all"></span>
-                    
                 </div>
-                <div class="modal-footer">
+
+            </div>
+            <div class="modal-footer">
                    <!--  <button type="submit" class="btn btn-primary">ตกลง</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button> -->
 
@@ -364,12 +368,14 @@ if ($total_record > 0) {
         $(this).toggleClass('active');
 
         if(pages==1){
-            var  url = "allarticle/view_Professional_pages.php";
+            var  url = "allarticle/page_1_upfile.php";
         }if(pages==2){
-            var  url = "allarticle/view_comment.php";
+            var  url = "allarticle/view_Professional_pages.php";
         }if(pages==3){
-            var  url = "allarticle/send_comment_sender.php";
+            var  url = "allarticle/view_comment.php";
         }if(pages==4){
+            var  url = "allarticle/send_comment_sender.php";
+        }if(pages==5){
             var  url = "allarticle/view_files_comsender.php";
         }
 
@@ -394,15 +400,17 @@ if ($total_record > 0) {
         $('.li').eq(sta_work).toggleClass('active');
 
         if(sta_work==0){
-            var  url = "allarticle/view_Professional_pages.php";
+            var  url = "allarticle/page_1_upfile.php";
         }if(sta_work==1){
-            var  url = "allarticle/view_comment.php";
+            var  url = "allarticle/view_Professional_pages.php";
         }if(sta_work==2){
-            var  url = "allarticle/send_comment_sender.php";
+            var  url = "allarticle/view_comment.php";
         }if(sta_work==3){
-            var  url = "allarticle/view_files_comsender.php";
+            var  url = "allarticle/send_comment_sender.php";
         }if(sta_work==4){
-           $('.li').eq(3).toggleClass('active');
+            var  url = "allarticle/view_files_comsender.php";
+        }if(sta_work==5){
+           $('.li').eq(4).toggleClass('active');
            var  url = "allarticle/view_files_comsender.php";
        }
 
@@ -419,7 +427,6 @@ if ($total_record > 0) {
        $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
         $('#view_allaricle_data').html(data);
     });
-
 
        $("#myModalA").modal({backdrop: true});
        $('body').removeAttr('style');

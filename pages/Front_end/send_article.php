@@ -46,26 +46,25 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <select name="year" class="form-control" style="width: 100px;" required>
-                               <option value="">ปี</option>
-                               <?php 
-                               $y = date('Y')+543;
-                               $u = date('Y')+553;
-                               for($i=$y; $i<$u; $i++){ ?> 
-                                   <option <?php if($i==$y){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                               <?php } ?>
-                           </select>                                                                                    
-                       </div> 
+                             <option value="">ปี</option>
+                             <?php 
+                             $y = date('Y')+543;
+                             $u = date('Y')+553;
+                             for($i=$y; $i<$u; $i++){ ?> 
+                                 <option <?php if($i==$y){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                             <?php } ?>
+                         </select>                                                                                    
+                     </div> 
 
-                       <div class="col-md-1 mb-3" style="text-align:right">
+                     <div class="col-md-1 mb-3" style="text-align:right">
                         <label for="name" class="a" >ฉบับที่<span style="color: red">*</span></label>                                                
                     </div>
                     <div class="col-md-2 mb-3">
                        <?php 
-                        $m = number_format(date('m'));
-                        if($m<=6){ $mm=1; }else{ $mm=2; } ?>
+                       $m = number_format(date('m'));
+                       if($m<=6){ $mm=1; }else{ $mm=2; } 
+                       ?>
                        <select name="time" class="form-control" style="width: 100px;" required>
-
-
                         <?php for($i=1; $i<=2; $i++){ ?>
 
                             <option <?php if($mm==$i){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
