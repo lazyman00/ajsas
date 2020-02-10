@@ -4,10 +4,27 @@ $sql = sprintf("SELECT pre.pre_th, user.name_th, user.surname_th, user.email, tb
 $query = $conn->query($sql);
 $row = $query->fetch_assoc();
 $n = $query->num_rows;
+
+
+$sql_1 = sprintf("SELECT attach_article_checked FROM `article` WHERE `article_id` = %s",GetSQLValueString($_GET['article_id'],'text'));
+$query_1 = $conn->query($sql_1);
+$row_1 = $query_1->fetch_assoc();
 ?>
-<div class="row" style="padding-top: 15px;padding-bottom: 10px;">
-    <div class="col"><button style="float: right;" type="button" id="add_Professional" data-type_article_id="<?php echo $_GET['type_article_id']; ?>" data-article_id="<?php echo $_GET['article_id']; ?>" class="btn btn-primary">เพิ่มผู้ทรงคุณวุฒิ</button></div>
+<div class="row" style="padding-top: 15px;padding-bottom: 10px;margin-right: 0px;">
+    <div class="col">
+        <span id="a" style="display: none;">
+            <button style="float: right;" type="button" id="add_Professional" data-type_article_id="<?php echo $_GET['type_article_id']; ?>" data-article_id="<?php echo $_GET['article_id']; ?>" class="btn btn-primary">เพิ่มผู้ทรงคุณวุฒิ</button>
+        </span>
+        <span id="b" style="display: none;">
+            <button  data-toggle="tooltip" data-placement="top" title="*กรุณาไฟล์บทความที่ตรวจแล้วจึงจะเชิญผู้ทรงได้ (ขั้นตอนที่ 1.)" style="float: right;" type="button" class="btn btn-primary">เพิ่มผู้ทรงคุณวุฒิ</button>
+        </span>
+        
+
+        
+    </div>
 </div>
+
+<input type="hidden" name="attach_article_checked" value="<?php echo $row_1['attach_article_checked']; ?>">
 <table class="table table-sm">
     <thead>
         <tr>
@@ -40,6 +57,19 @@ $n = $query->num_rows;
 
 
     <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+
+        var ck =$('[name=attach_article_checked]').val();
+        if(ck!=""){
+            $('#a').css('display', '');
+            $('#b').css('display', 'none');
+        }else{
+           $('#a').css('display', 'none');
+           $('#b').css('display', '');
+        }
+
         $('#add_Professional').click(function(event) {
             var type_article_id = $(this).attr('data-type_article_id');
             var article_id = $(this).attr('data-article_id');
