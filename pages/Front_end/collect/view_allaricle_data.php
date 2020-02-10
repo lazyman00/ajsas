@@ -5,13 +5,13 @@
 
     <div style="overflow-x: hidden; overflow-y: scroll; height: 350px;">
         <?php 
-        $sql = sprintf("SELECT  a.*, b.type_article_name FROM tb_collect as a left join type_article as b on a.type_article_id = b.type_article_id WHERE a.`id_collect` = %s",GetSQLValueString($_POST['id_collect'], 'int'));
+        $sql = sprintf("SELECT  a.* FROM tb_collect as a  WHERE a.`id_collect` = %s",GetSQLValueString($_POST['id_collect'], 'int'));
         $query = $conn->query($sql);
         $row_1 = $query->fetch_assoc();
         ?>
 
         <p><b>ชื่อวารสาร :</b> <?php echo $row_1['name_collect']; ?></p>
-        <p>สาขา : <?php echo $row_1['type_article_name']; ?> ปีที่ : <?php echo $row_1['y_collect']; ?> ครั้งที่ : <?php echo $row_1['time_collect']; ?></p>
+        <p>ปีที่ : <?php echo $row_1['y_collect']; ?> ครั้งที่ : <?php echo $row_1['time_collect']; ?></p>
 
         <?php 
         $sql = sprintf("SELECT  * FROM tb_collect_list as a left join article as b on a.article_id = b.article_id WHERE a.`id_collect` = %s",GetSQLValueString($_POST['id_collect'], 'int'));

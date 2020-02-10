@@ -19,13 +19,9 @@ if(isset($_POST['mm']) && $_POST['mm']=="add_journal"){
     if(isset($_POST['time_collect']) && $_POST['time_collect']!=""){
         $cl4 = $_POST['time_collect'];
     }
-    $cl6 = "";
-    if(isset($_POST['type_article_id']) && $_POST['type_article_id']!=""){
-        $cl6 = $_POST['type_article_id'];
-    }
 
 
-    $sql = sprintf("INSERT INTO `tb_collect`(`id_collect`, `name_collect`, `y_collect`, `time_collect`, `type_article_id`) VALUES (%s,%s,%s,%s,%s)",
+    $sql = sprintf("INSERT INTO `tb_collect`(`id_collect`, `name_collect`, `y_collect`, `time_collect`) VALUES (%s,%s,%s,%s)",
         GetSQLValueString($cl1, 'text'),
         GetSQLValueString($cl2, 'text'),
         GetSQLValueString($cl3, 'text'),

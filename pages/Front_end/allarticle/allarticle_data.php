@@ -57,7 +57,7 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
 
 ?>  
 <div class="container">    
-   <div class="table-responsive">
+ <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -85,18 +85,18 @@ $display_n2 = ($search_name != "") ? "" :  "display:none" ;
                         <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../../files_work/<?php echo $fetch["attach_article"]; ?>">ไฟล์เอกสาร</a></td>
 
                         <td style="padding-bottom: 6px; padding-top: 6px;">
-                        <center>
-                            <?php if($fetch["sta_work"]==0){ ?> 
-                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-primary btn-sm btnUp">เทียบเชิญ..</button>
-                            <?php }else if($fetch["sta_work"]==1){ ?>
-                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-success btn-sm btnUp">ผลประเมินวารสาร..</button>    
-                            <?php }else if($fetch["sta_work"]==2){ ?>
-                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-info btn-sm btnUp">ส่งผลการประเมิน..</button>    
-                            <?php }else if($fetch["sta_work"]==3){ ?>
-                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-warning btn-sm btnUp">ตรวจสอบ..</button>    
-                            <?php }else if($fetch["sta_work"]==4){ ?>
-                                <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-danger btn-sm btnUp">รอการตีพิมพ์</button>    
-                            <?php } ?>
+                            <center>
+                                <?php if($fetch["sta_work"]==0){ ?> 
+                                    <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-primary btn-sm btnUp">เทียบเชิญ..</button>
+                                <?php }else if($fetch["sta_work"]==1){ ?>
+                                    <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-success btn-sm btnUp">ผลประเมินวารสาร..</button>    
+                                <?php }else if($fetch["sta_work"]==2){ ?>
+                                    <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-info btn-sm btnUp">ส่งผลการประเมิน..</button>    
+                                <?php }else if($fetch["sta_work"]==3){ ?>
+                                    <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-warning btn-sm btnUp">ตรวจสอบ..</button>    
+                                <?php }else if($fetch["sta_work"]==4){ ?>
+                                    <button style="width : 125px;" data-article_id="<?php echo $fetch["article_id"]; ?>" data-type_article_id="<?php echo $fetch["type_article_id"]; ?>" data-sta_work="<?php echo $fetch["sta_work"]; ?>" class="btn btn-danger btn-sm btnUp">รอการตีพิมพ์</button>    
+                                <?php } ?>
                             </center>
                         </td>
                     </tr>
@@ -249,9 +249,8 @@ if ($total_record > 0) {
 <?php } ?>
 <!-- Modal -->
 
-
 <div class="modal fade" id="myModalA" tabindex="-1" style="padding-right: 0px;" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 1024px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><b>ข้อมูลบทความวิชาการ</b></h5>
@@ -267,6 +266,9 @@ if ($total_record > 0) {
 
                     <hr>
                     <ul class="nav nav-tabs">
+                        <li class="nav-item ">
+                            <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ตรวจสอบไฟล์บทความก่อนส่ง</a>
+                        </li>
                         <li class="nav-item ">
                             <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">ข้อมูลผู้ทรวคุณวุฒิ</a>
                         </li>
@@ -400,29 +402,29 @@ if ($total_record > 0) {
         }if(sta_work==3){
             var  url = "allarticle/view_files_comsender.php";
         }if(sta_work==4){
-             $('.li').eq(3).toggleClass('active');
-            var  url = "allarticle/view_files_comsender.php";
-        }
+           $('.li').eq(3).toggleClass('active');
+           var  url = "allarticle/view_files_comsender.php";
+       }
 
-        $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
-            $('#view_del_all').html(data);
-        });
-
-        $('#article_id').val(article_id);
-        $('.nav-link').attr({
-            'data-type_article_id': type_article_id,
-            'data-article_id': article_id
-        });
-        
-        $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
-            $('#view_allaricle_data').html(data);
-        });
-
-
-        $("#myModalA").modal({backdrop: true});
-        $('body').removeAttr('style');
-        $('#myModalA').css('padding-right', '0px');
+       $.get(url,{ type_article_id: type_article_id, article_id: article_id }, function(data) {
+        $('#view_del_all').html(data);
     });
+
+       $('#article_id').val(article_id);
+       $('.nav-link').attr({
+        'data-type_article_id': type_article_id,
+        'data-article_id': article_id
+    });
+
+       $.post('allarticle/view_allaricle_data.php',{ article_id: article_id }, function(data) {
+        $('#view_allaricle_data').html(data);
+    });
+
+
+       $("#myModalA").modal({backdrop: true});
+       $('body').removeAttr('style');
+       $('#myModalA').css('padding-right', '0px');
+   });
 
 
     $( "#send_email" ).validate( {
