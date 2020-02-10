@@ -46,17 +46,43 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <select name="year" class="form-control" style="width: 100px;" required>
+<<<<<<< HEAD
                              <option value="">ปี</option>
                              <?php 
                              $y = date('Y')+543;
                              $u = date('Y')+553;
                              for($i=$y; $i<$u; $i++){ ?> 
                                  <option <?php if($i==$y){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+=======
+<<<<<<< HEAD
+                             <option value="date">ปี</option>
+                             <?php 
+                             $y = date('Y')+543;
+                             $u = date('Y')+533;
+                             for($i=$y; $i>$u; $i--){ ?> 
+                                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+>>>>>>> 6d27220197682554a40bdec5c3c64dff42401f7c
                              <?php } ?>
                          </select>                                                                                    
                      </div> 
 
                      <div class="col-md-1 mb-3" style="text-align:right">
+<<<<<<< HEAD
+=======
+=======
+                               <option value="">ปี</option>
+                               <?php 
+                               $y = date('Y')+543;
+                               $u = date('Y')+553;
+                               for($i=$y; $i<$u; $i++){ ?> 
+                                   <option <?php if($i==$y){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                               <?php } ?>
+                           </select>                                                                                    
+                       </div> 
+
+                       <div class="col-md-1 mb-3" style="text-align:right">
+>>>>>>> 4b7770e5d8335dcb59b135ee11bf3d2ad0095eef
+>>>>>>> 6d27220197682554a40bdec5c3c64dff42401f7c
                         <label for="name" class="a" >ฉบับที่<span style="color: red">*</span></label>                                                
                     </div>
                     <div class="col-md-2 mb-3">
