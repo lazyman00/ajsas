@@ -93,9 +93,9 @@
                                                 <label for="name">บทคัดย่อ(ภาษาไทย)</label>                                                
                                             </div>
                                             <div class="col-md-6 mb-3" >
-                                                <textarea class="form-control" name="abstract_th" ><?php echo $data['abstract_th']; ?></textarea>
+                                                <textarea class="form-control" name="abstract_th" style="padding-top: 9px;height: 154px;"><?php echo $data['abstract_th']; ?></textarea>
                                             </div>
-                                        </div><br><br>
+                                        </div><br><br><br><br><br>
                                         <div class="row">
                                             <div class="col-md-4 mb-3"></div>
                                             <div class="col-md-6 mb-3">
@@ -107,9 +107,9 @@
                                                 <label for="name">บทคัดย่อ(ภาษาอังกฤษ)<span style="color: red">*</span></label>                                                
                                             </div>
                                             <div class="col-md-6 mb-3" >
-                                                <textarea class="form-control" name="abstract_en"><?php echo $data['abstract_en']; ?></textarea>
+                                                <textarea class="form-control" name="abstract_en" style="padding-top: 9px;height: 154px;"><?php echo $data['abstract_en']; ?></textarea>
                                             </div>
-                                        </div><br><br>
+                                        </div><br><br><br><br><br>
                                         <div class="row">
                                             <div class="col-md-4 mb-3"></div>
                                             <div class="col-md-6 mb-3">
@@ -224,8 +224,13 @@
                             </form>                         
                         </div>
                       </div>
-</div>     
-
+</div>   <br>  
+<footer class="page-footer font-small blue" style="clear: both;">
+    <div class="footer-copyright text-center py-3" style="background-color:#008000;  height: 100px;">
+        <p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
+        <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+    </div>
+</footer>
     <?php include('js.php'); ?>	
 </body>
 </html>

@@ -35,12 +35,17 @@
 								<div class="form-group col-md-2">
 									<!-- <label for="inputEmail4">ปีที่ : </label> -->
 									<select id="year" name="year" class="form-control" required>
-										<?php for($i=date('Y')+543; $i>=date('Y')+543-20; $i--){ ?> 
-											<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+										<?php for($i=date('Y')+543; $i>=date('Y')+543-2; $i--){ ?> 
+											<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> 
+											value="<?php echo $i; ?>"><?php echo $i; ?>
+											</option>
 										<?php } ?>
 
 									</select>
-								</div>ครั้ง
+								</div>
+
+ครั้ง
+
 								<div class="form-group col-md-3">
 									<!-- <label for="inputPassword4">ครั้ง : </label> -->
 									<select id="time" name="time" class="form-control" style="width: 100px;" required>

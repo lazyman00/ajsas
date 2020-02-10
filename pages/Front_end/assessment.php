@@ -79,10 +79,10 @@
                     <div class="col-md-4 mb-3" style="text-align:right">
                         <label for="name">Comment</label>                                                
                     </div>
-                    <div class="col-md-4 mb-3" >
-                        <textarea class="form-control" name="comment_type"></textarea>
+                    <div class="col-md-6 mb-3" >
+                        <textarea class="form-control" name="comment_type" style="height: 123px;"></textarea>
                     </div>
-                </div><br><br>
+                </div><br><br><br><br>
                 <div class="row" style="height: 38px;">
                     <div class="col-md-4 mb-3" style="text-align:right">
                         <label for="name">แนบไฟล์ Comment</label>                                                

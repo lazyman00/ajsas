@@ -1,8 +1,12 @@
-<?php  include('../../connect/connect.php'); ?>
+<?php  include('../../connect/connect.php'); 
+unset($_SESSION['session_addUserArticle']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <?php include('header.php'); ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.18.3/dist/sweetalert2.all.min.js"></script>
 <style type="text/css">
 	.a{
 		font-size: 14px;
@@ -29,7 +33,7 @@
     <div class="container">
 
       <div class="card" >
-        <h5 class="card-header">บทความ</h5>
+        <!-- <h5 class="card-header">บทความ</h5> -->
         <div class="card-body">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -46,19 +50,7 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <select name="year" class="form-control" style="width: 100px;" required>
-<<<<<<< HEAD
-                             <option value="date">ปี</option>
-                             <?php 
-                             $y = date('Y')+543;
-                             $u = date('Y')+533;
-                             for($i=$y; $i>$u; $i--){ ?> 
-                                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                             <?php } ?>
-                         </select>                                                                                    
-                     </div> 
 
-                     <div class="col-md-1 mb-3" style="text-align:right">
-=======
                                <option value="">ปี</option>
                                <?php 
                                $y = date('Y')+543;
@@ -70,7 +62,6 @@
                        </div> 
 
                        <div class="col-md-1 mb-3" style="text-align:right">
->>>>>>> 4b7770e5d8335dcb59b135ee11bf3d2ad0095eef
                         <label for="name" class="a" >ฉบับที่<span style="color: red">*</span></label>                                                
                     </div>
                     <div class="col-md-2 mb-3">
@@ -78,13 +69,10 @@
                         $m = number_format(date('m'));
                         if($m<=6){ $mm=1; }else{ $mm=2; } ?>
                        <select name="time" class="form-control" style="width: 100px;" required>
-
-
-                        <?php for($i=1; $i<=2; $i++){ ?>
-
-                            <option <?php if($mm==$i){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                        <?php } ?>
-                    </select>                                                                                    
+                            <?php for($i=1; $i<=2; $i++){ ?>
+                                <option <?php if($mm==$i){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php } ?>
+                        </select>                                                                                    
                 </div>                                      
             </div>
             <div class="row" style="height: 46px;">
@@ -121,9 +109,9 @@
                     <label for="name">บทคัดย่อ(ภาษาไทย)</label>                                                
                 </div>
                 <div class="col-md-6 mb-3" >
-                    <textarea class="form-control" name="abstract_th"></textarea>
+                    <textarea class="form-control" name="abstract_th" style="padding-top: 9px;height: 154px;"></textarea>
                 </div>
-            </div><br><br>
+            </div><br><br><br><br><br>
             <div class="row">
                 <div class="col-md-4 mb-3"></div>
                 <div class="col-md-6 mb-3">
@@ -135,9 +123,9 @@
                     <label for="name">บทคัดย่อ(ภาษาอังกฤษ)<span style="color: red">*</span></label>                                                
                 </div>
                 <div class="col-md-6 mb-3" >
-                    <textarea class="form-control" name="abstract_en"></textarea>
+                    <textarea class="form-control" name="abstract_en" style="padding-top: 9px;height: 154px;"></textarea>
                 </div>
-            </div><br><br>
+            </div><br><br><br><br><br>
             <div class="row">
                 <div class="col-md-4 mb-3"></div>
                 <div class="col-md-6 mb-3">
@@ -184,26 +172,36 @@
     </nav>
 
     <div class="row">
-        <div class="col-md-12 order-md-1" style="align-items: center">
-            <div class="row" style="height: 38px;">
-                <div class="col-md-4 mb-3">                                               
-                </div>
-                <div class="col-md-6 custom-control custom-radio mb-3">
-                    <input id="credit" type="radio" class="custom-control-input" checked required>
-                    <label class="custom-control-label">ไม่มีผู้แต่งบทความร่วม</label>
-                </div>                                         
+            <div class="col-md-3" align="center">
             </div>
-            <div class="row " style="height: 38px;">
-                <div class="col-md-4 mb-3">                                               
-                </div>
-                <div class="col-md-6 custom-control custom-radio mb-3">
-                    <input id="debit" type="radio" class="custom-control-input" required>
-                    <label class="custom-control-label">มีผู้แต่งบทความร่วม</label>
-                </div>                                         
+            <div class="col-md-3" align="center">
+                <input id="credit2" type="radio" name="credit" style="width: 18px;height: 18px;" checked>  
+                <label >ไม่มีผู้แต่งบทความร่วม</label>   
             </div>
-            <hr class="mb-4">
+            <div class="col-md-3" align="center">
+                <input id="credit1" type="radio" name="credit" style="width: 18px;height: 18px;">     
+                <label >มีผู้แต่งบทความร่วม</label>
+            </div>
+            <div class="col-md-3" align="center">
+            </div>
         </div>
-    </div>
+  
+
+        <div id="show_addUserSend" style="display:none;">
+            <hr>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-7">
+                    <p id="addUserSend"></p>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-md-12 " align="center">
+                    <font> รายชื่อผู้แต่งบทความร่วม </font>&nbsp;<input class="sech" type="text" id="input_addUserSend" name="input_addUserSend" >&nbsp;<button class="btn btn-primary btn-sm" onclick="fun_addUserSend()" type="button">เพิ่ม</button>
+                </div>
+            </div>
+        </div>
+        <hr>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -246,6 +244,7 @@
             </div>
         </div>  
         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"> 
+        <input type="hidden" name="chk_checked" id="chk_checked" value="0"> 
     </form>                         
 </div>
 </div>
@@ -258,5 +257,72 @@
     </div>
 </footer>
 <?php include('js.php'); ?>	
+<script>
+$(document).ready(function() {
+    $("#chk_checked").val(0);
+});
+    $('#credit1').click(function() {
+        if($('#credit1').is(':checked')) 
+        { 
+            $("#show_addUserSend").show();
+            $("#chk_checked").val(1);
+        }
+    });
+    $('#credit2').click(function() {
+        if($('#credit2').is(':checked')) 
+        { 
+            $("#show_addUserSend").hide();
+            $("#chk_checked").val(0);
+        }
+    });
+
+    function fun_addUserSend()
+    {
+        var input_addUserSend = $("#input_addUserSend").val();
+        
+        if(input_addUserSend !="")
+        {
+            $.ajax({
+                url:"send_articleData.php?action=Add_send_article",
+                method:"POST",
+                data: {
+                    input_addUserSend: input_addUserSend
+                },
+                success:function(data)
+                {
+                    response = data.trim(); 
+                    $("#input_addUserSend").val("");
+                    $("#addUserSend").html(response);
+                }	
+            });
+        }
+        else
+        {
+            Swal.fire(
+                '<font color=#facea8>คำเตือน!</font>',
+                '<font>กรุณากรอกชื่อผู้แต่งร่วม</font>',
+                'warning'
+            );
+        }
+    }
+    
+    function delete_rowNameActicle(id_del)
+    {
+        $.ajax({
+            url:"send_articleData.php?action=del_send_article",
+            method:"POST",
+            data: {
+                id_del: id_del
+            },
+            success:function(data)
+            {
+                response = data.trim(); 
+                $("#input_addUserSend").val("");
+                $("#addUserSend").html(response);
+            }	
+        });
+    }
+
+</script>
 </body>
 </html>
