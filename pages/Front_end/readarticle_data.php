@@ -285,6 +285,7 @@ if($type=="showdata_table"){
 </div>
 </div>
 </div>
+<?php  include('js.php'); ?> 
 <script>
     $('.btnView').click(function(){
         var evaluation_id = $(this).attr('data-evaluation_id');

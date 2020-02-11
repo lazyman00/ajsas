@@ -269,19 +269,19 @@ if ($total_record > 0) {
                       <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item ">
-                                <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">1.ตรวจสอบบทความก่อนส่ง</a>
+                                <a class="nav-link li active" data-pages="1" data-type_article_id="" data-article_id="" href="#">1. ตรวจสอบบทความก่อนส่ง</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link li active" data-pages="2" data-type_article_id="" data-article_id="" href="#">2.ข้อมูลผู้ทรงคุณวุฒิ</a>
+                                <a class="nav-link li active" data-pages="2" data-type_article_id="" data-article_id="" href="#">2. ข้อมูลผู้ทรงคุณวุฒิ</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">3.ผลการประเมินจากผู้ทรง</a>
+                                <a class="nav-link li" data-pages="3" data-type_article_id="" data-article_id="" href="#">3. ผลการประเมินจากผู้ทรง</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">4.ส่งผลการประเมิน</a>
+                                <a class="nav-link li" data-pages="4" data-type_article_id="" data-article_id="" href="#">4. ส่งผลการประเมิน</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link li" data-pages="5" data-type_article_id="" data-article_id="" href="#">5.ตรวจสอบบทความ</a>
+                                <a class="nav-link li" data-pages="5" data-type_article_id="" data-article_id="" href="#">5. ตรวจสอบบทความ</a>
                             </li>
                         </ul>
                     </div>

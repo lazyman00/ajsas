@@ -1,16 +1,28 @@
 <?php  include('../../../connect/connect.php'); ?>
 <?php 
 if(isset($_POST['mm']) && $_POST['mm']=="insert"){
-	$files_comment = "";
-	$files_comment = Convert_name_file($_FILES['files_comment']["name"]);
-	$sql = sprintf('INSERT INTO `tb_allcomment`(`detal_comment`, `files_comment`, `article_id`) VALUES (%s,%s,%s)',
+	$sql = "SELECT id_allComment FROM `tb_allcomment` ORDER BY `tb_allcomment`.`id_allComment` DESC";
+	$query = $conn->query($sql);
+	$row = $query->fetch_assoc();
+	$newId = $row['id_allComment']+1;
+
+	$sql = sprintf('INSERT INTO `tb_allcomment`(`id_allComment`, `detal_comment`, `article_id`) VALUES (%s,%s,%s)',
+		GetSQLValueString($newId,'text'),
 		GetSQLValueString($_POST['detal_comment'],'text'),
-		GetSQLValueString($files_comment,'text'),
 		GetSQLValueString($_POST['article_id'],'text'));
 	$query = $conn->query($sql);
 	if($query){
-		if(isset($_FILES['files_comment']["name"])&&($_FILES['files_comment']["name"]!="")){			
-			move_uploaded_file($_FILES["files_comment"]["tmp_name"],"../../../files_comment/".$files_comment);
+		for($i=0; $i<count($_FILES['files_comment']["name"]); $i++){
+			$files_comment = Convert_name_file($_FILES['files_comment']["name"][$i]);
+
+			$sql = sprintf('INSERT INTO `tb_filecomment`(`name_cm_file`, `id_allComment`) VALUES (%s,%s)',
+				GetSQLValueString($files_comment,'text'),
+				GetSQLValueString($newId,'text'));
+			$query = $conn->query($sql);
+			if(isset($_FILES['files_comment']["name"][$i])&&($_FILES['files_comment']["name"][$i]!="")){			
+				move_uploaded_file($_FILES["files_comment"]["tmp_name"][$i],"../../../files_comment/".$files_comment);
+			}
+
 		}
 
 		$sql = sprintf('UPDATE `article` SET `sta_work`=%s WHERE `article_id`=%s',
@@ -59,7 +71,7 @@ $num_row = $query->num_rows;
 </style>
 <input type="hidden" name="num_row_view" value="<?php echo $num_row; ?>">
 <div class="card-body">
-	 <p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ส่งผลการประเมิน : </span></p>
+	<p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ส่งผลการประเมิน : </span></p>
 	<form id="send_commentall" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleFormControlTextarea1">ความคิดเห็น : </label>
@@ -67,23 +79,26 @@ $num_row = $query->num_rows;
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlFile1">ไฟลฺ์แนบ : </label>
-			<p><a href="../../files_comment/<?php echo $row['files_comment']; ?>"><?php echo $row['files_comment']; ?></a></p>
+			<?php $sql_1 = sprintf("SELECT * FROM `tb_filecomment` WHERE `id_allComment` = %s",GetSQLValueString($row['id_allComment'],'text'));
+			$query_1 = $conn->query($sql_1);
+			?>
+			<?php $o=1; while ($row_1 = $query_1->fetch_assoc()) { ?>
+				<p style="text-indent: 50px"><a target="_blank" href="../../files_comment/<?php echo $row_1['name_cm_file']; ?>"><?php echo $o; ?>) <?php echo $row_1['name_cm_file']; ?></a></p>
+			<?php $o++; } ?>
+			
 			<span id="fiie_view">
-				<input type="file" name="files_comment" class="form-control-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+				<input type="file" name="files_comment[]" class="form-control-file" accept="" multiple="">
 			</span>
 
 		</div>
 		<center>
-			<span id="a1">
-				<button type="button" class="btn btn-primary" id="editComment">แก้ไขข้อมูล</button>
-			</span>
-			<span id="a2">
+			<?php if($num_row<=0){ ?>
 				<button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-			</span>
+			<?php } ?>
 
 			
 		</center>
-		<input type="hidden" name="mm" value="<?php if($num_row>0){ echo 'update'; }else{ echo 'insert'; }?>">
+		<input type="hidden" name="mm" value="insert">
 		<input type="hidden" name="id_allComment" value="<?php echo $row['id_allComment']; ?>">
 		<input type="hidden" name="files_comment_old" value="<?php echo $row['files_comment']; ?>">
 		<input type="hidden" name="article_id" value="<?php echo $_REQUEST['article_id']; ?>">
