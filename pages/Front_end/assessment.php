@@ -120,6 +120,6 @@
             <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
         </div>
     </footer>
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<?php  include('js.php'); ?> 
 </body>
 </html>

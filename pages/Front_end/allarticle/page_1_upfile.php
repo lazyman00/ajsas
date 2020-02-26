@@ -42,10 +42,10 @@ $num_row = $query->num_rows;
 	<form id="send_commentall" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ไฟล์บทความที่ตรวจสอบแล้ว : </span></p>
-			<p><a href="../../files_comment/<?php echo $row['attach_article_checked']; ?>"><?php if(isset($row['attach_article_checked'])){  echo $row['attach_article_checked']; } ?></a></p>
+			<p>ไฟล์บทความสำหรับผู้ทรงคุณวุฒิ : <a href="../../files_comment/<?php echo $row['attach_article_checked']; ?>"><?php if(isset($row['attach_article_checked'])){  echo $row['attach_article_checked']; } ?></a></p>
 			<span id="fiie_view">
 				<input type="file" name="files_comment" class="form-control-file">
-				<em style="color: red;">*กรุณาเพิ่มไฟล์บทความที่ผ่านการตรวจสอบชื่อผู้ส่งบทความให้กับผู้ทรงคุณวุฒิ</em>
+				<em style="color: red;">*กรุณาเพิ่มไฟล์บทความสำหรับผู้ทรงคุณวุฒิ</em>
 			</span>
 
 		</div>

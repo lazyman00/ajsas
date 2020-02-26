@@ -128,6 +128,6 @@
 
 
 
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<?php  include('js.php'); ?> 
 </body>
 </html>

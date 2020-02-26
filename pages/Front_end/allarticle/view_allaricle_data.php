@@ -37,13 +37,4 @@ $row = $query->fetch_assoc();
     <label for="keyword_en">คำสำคัญภาษาอังกฤษ :</label>
     <input type="text" readonly="keyword_en" name="" class="form-control" id="keyword_en" value="<?php echo $row['keyword_en']; ?>">
 </div>
-<div class="form-group">
-    <label for="attach_article">แบบไฟล์บทความ :</label>
-    <a target="_blank" href="../../files_work/<?php echo $row['attach_article']; ?>"><?php echo $row['attach_article']; ?></a>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-4">
-        <label for="date_article">วันที่ส่งบทความ :</label>
-        <input type="text" readonly="" name="date_article" class="form-control" id="date_article" value="<?php echo $row['date_article']; ?>">
-    </div>
-</div>
+<p>ไฟล์บทความต้นฉบับ : <a target="_blank" href="../../files_work/<?php echo $row['attach_article']; ?>"><?php echo $row['attach_article']; ?></a> วันที่ส่งบทความ : <?php echo $row['date_article']; ?></p> 
