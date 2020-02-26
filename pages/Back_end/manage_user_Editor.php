@@ -5,7 +5,7 @@
     LEFT JOIN academe ON user.academe_id = academe.academe_id 
     LEFT JOIN pre ON user.pre_id = pre.pre_id 
     LEFT JOIN type_title ON user.type_title_id = type_title.type_title_id 
-    WHERE user.type_user_id = 2
+    WHERE user.type_user_id = 1
     ORDER BY type_user.type_user_id desc ";
     
     $result_user = $conn->query($sql_user);
@@ -486,10 +486,6 @@
 
         $('.select2_mange').select2();
 
-        jQuery.validator.addMethod("emailfull", function(value, element) {
-            return this.optional(element) || /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
-        }, "Please enter valid email address!");
-
         $.validator.addMethod("valueNotEquals", function(value, element, arg){
             return arg !== value;
         }, "Value must not equal arg.");
@@ -499,8 +495,7 @@
 			rules: {
                 add_email:{
                     required: true,
-                    email: true,
-                    emailfull: true
+                    email: true
                 },
                 add_pass:{
                     required: true,
@@ -545,8 +540,7 @@
 			messages: {
                 add_email:{
                     required: "กรุณากรอกอีเมล (E-mail) ของท่าน",
-                    email: "รูปแบของ Email ของท่านไม่ถูกต้อง!",
-                    emailfull: "รูปแบของ Email ของท่านไม่ถูกต้อง!"
+                    email: "รูปแบของ Email ของท่านไม่ถูกต้อง!"
                 },
                 add_pass:{
                     required: "กรุณากรอก password ของท่าน",
@@ -595,8 +589,7 @@
 			rules: {
                 edit_email:{
                     required: true,
-                    email: true,
-                    emailfull: true
+                    email: true
                 },
                 edit_pre_name: {
                     valueNotEquals: "0"
@@ -633,8 +626,7 @@
 			messages: {
                 edit_email:{
                     required: "กรุณากรอกอีเมล (E-mail) ของท่าน",
-                    email: "รูปแบของ Email ของท่านไม่ถูกต้อง!",
-                    emailfull: "รูปแบของ Email ของท่านไม่ถูกต้อง!"
+                    email: "รูปแบของ Email ของท่านไม่ถูกต้อง!"
                 },
                 edit_pre_name: {
                     valueNotEquals: "กรุณาเลือกคำนำหน้าทางวิชาการของท่าน"
@@ -925,7 +917,6 @@
         /// ส่งค่า ประเภทผู้ใช้ ///
         $("#hidden_edit_type_user_id").val(t_edit_type_user_id);
 
-        $('#edit_email').attr('readonly', true);
         $('#edit_pre_name').attr('disabled', true);
         $('#edit_title_name').attr('disabled', true);
         $('#edit_name_thai').attr('readonly', true);
@@ -946,7 +937,6 @@
         // click edit
         $("#button_edit").click(function(){
 
-            // $('#edit_email').attr('readonly', false);
             $('#edit_pre_name').attr('disabled', false);
             $('#edit_title_name').attr('disabled', false);
             $('#edit_name_thai').attr('readonly', false);
@@ -981,7 +971,7 @@
         // click not edit
         $("#button_close_edit").click(function(){
 
-            //$('#edit_email').attr('readonly', true);
+            $('#edit_email').attr('readonly', true);
             $('#edit_pre_name').attr('disabled', true);
             $('#edit_title_name').attr('disabled', true);
             $('#edit_name_thai').attr('readonly', true);

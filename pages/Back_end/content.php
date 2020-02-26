@@ -27,7 +27,7 @@
         }
         else if($type == "type_article")
         {
-            $name_type = "ประเภทบทความ";
+            $name_type = "สาขา";
             include_once "type_article.php";
         }
         else if($type == "expertise")
@@ -37,8 +37,18 @@
         }
         else if($type == "manage_user_user")
         {
-            $name_type = "ผู้ใช้";
+            $name_type = "ผู้ส่งบทความ";
             include_once "manage_user_user.php";
+        }
+        else if($type == "manage_user_Expert")
+        {
+            $name_type = "ผู้ทรงคุณวุฒิ";
+            include_once "manage_user_Expert.php";
+        }
+        else if($type == "manage_user_Editor")
+        {
+            $name_type = "บรรณาธิการ";
+            include_once "manage_user_Editor.php";
         }
         else if($type == "manage_send_email_professional")
         {

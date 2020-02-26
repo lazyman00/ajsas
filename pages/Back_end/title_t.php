@@ -119,7 +119,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" id="e_sa_title_t" name="e_sa_title_t">บันทึก</button>
+            <button class="btn btn-primary" type="button" id="e_sa_title_t" name="e_sa_title_t">แก้ไข</button>
             <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
       </div>

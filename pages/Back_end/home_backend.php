@@ -64,14 +64,10 @@
   <!-- Nav Item - User Information -->
   
 
-
-
-  <li class="nav-item dropdown no-arrow">
-    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $fetch_user_data["name_th"]  ?> <?php echo $fetch_user_data["surname_th"]  ?></span>
-      <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
+  <!-- <li class="nav-item dropdown no-arrow">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+      <span class="mr-2 d-none d-lg-inline text-gray-600 small"><font size="3"><?php //echo $fetch_user_data["pre_th"]." ".$fetch_user_data["name_th"]." ".$fetch_user_data["surname_th"]." : (บรรณาธิการ) ";  ?></font></span>
     </a>
-    <!-- Dropdown - User Information -->
     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#change_data_user">
         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -87,7 +83,63 @@
         ออกจากระบบ
       </a>
     </div>
-  </li>
+  </li> -->
+
+  <!-- <a class="btn btn-outline-warning nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+          ออกจากระบบ
+        </a> -->
+
+      <li class="nav-item dropdown no-arrow">
+
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small"><font size="3"><?php echo $fetch_user_data["pre_th"]." ".$fetch_user_data["name_th"]." ".$fetch_user_data["surname_th"]." : (บรรณาธิการ) ";  ?></font></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="position: absolute;will-change: transform;margin-top: 5px;top: 0px;left: 0px;transform: translate3d(-270px, 65px, 0px);height: 197.979166px;width: 400px;margin-left:220px;">
+          <div class="navbar-login">
+
+            <div class="row" style="width: 400px;">            
+                <div class="col-md-4">
+                    <p class="text-center">
+                        <span><img src="../../img/rr-01.png" style="height: 108px;width: 110px;margin-left: 11px;"></span>
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <p class="text-left" style="padding-right:  5px; padding-left: 5px;"><b><?php echo $fetch_user_data["pre_th"]." ".$fetch_user_data["name_th"]." ".$fetch_user_data["surname_th"];  ?></b></p>
+                    <p class="text-left" style="padding-right:  5px; padding-left: 5px;">
+                        <a href="#" class="btn btn-outline-primary btn-sm btnUpProfile" style=" width: 207.979166px;"  data-toggle="modal" data-target="#change_data_user">แก้ไขข้อมูลส่วนตัว</a>
+                    </p>   
+                    <p class="text-left small" style="padding-right:  5px; padding-left: 5px;"><a href="#" class="btn btn-outline-warning btn-sm btnUpProfile" style=" width: 207.979166px;"  data-toggle="modal" data-target="#change_pass_user">เปลี่ยนรหัสผ่าน</a></p>                                   
+                </div>           
+            </div>
+            <hr class="mb-4" style="border-bottom-width: 0px; margin-top: 0px; margin-bottom: 0px;">
+            <div class="row" style="width: 400px;">            
+                <div class="col-md-12">
+                    <p class="text-left" >
+                        <a href="unset.php" class="btn btn-outline-danger btn-sm" style="margin-left: 26px;width: 317.979166px;">ออกจากระบบ</a>
+                    </p>
+                </div>         
+            </div>
+          </div>
+        </div>
+      </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </ul>
 </nav>
   <div id="wrapper">

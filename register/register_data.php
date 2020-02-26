@@ -45,6 +45,7 @@ if($type=="da_depar"){
         }
         ?>
     </select>
+
     <?php 
 }
 else if($type=="position_eng")
@@ -66,3 +67,5 @@ else{
 $(document).ready(function(){
     $('.select2_re').select2();
 });
+
+</script>

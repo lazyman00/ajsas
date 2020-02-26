@@ -11,7 +11,7 @@
   <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
   <!-- <a class="icon-color"><i class="fa fa-edit"></i></a> -->
   <i class="fa fa-edit"></i>
-    <span>จัดการข้อมูลหลัก</span>
+    <span>จัดการข้อมูล</span>
   </a>
 <?php 
     if(!empty($_GET['type']))
@@ -58,7 +58,7 @@
       <a class="collapse-item <?php echo ($_GET['type'] == "academy") ?  "active" :  ""; ?>" href="home_backend.php?type=academy">สถานศึกษา</a>
       <a class="collapse-item <?php echo ($_GET['type'] == "title_t") ?  "active" :  ""; ?>" href="home_backend.php?type=title_t">คำนำหน้า</a>
       <a class="collapse-item <?php echo ($_GET['type'] == "title") ?  "active" :  ""; ?>" href="home_backend.php?type=title">คำนำหน้าทางวิชาการ</a>
-      <a class="collapse-item <?php echo ($_GET['type'] == "type_article") ?  "active" :  ""; ?>" href="home_backend.php?type=type_article">ประเภทบทความ</a>
+      <a class="collapse-item <?php echo ($_GET['type'] == "type_article") ?  "active" :  ""; ?>" href="home_backend.php?type=type_article">สาขา</a>
       <!-- <a class="collapse-item <?php echo ($_GET['type'] == "expertise") ?  "active" :  ""; ?>" href="home_backend.php?type=expertise">ความชำนาญ</a> -->
     </div>
   </div>
@@ -74,6 +74,14 @@
         {
           $show_Two = "show";
         }
+        else if($_GET['type'] == "manage_user_Expert") 
+        {
+          $show_Two = "show";
+        }
+        else if($_GET['type'] == "manage_user_Editor") 
+        {
+          $show_Two = "show";
+        }
         else
         {
           $show_Two = "";
@@ -86,7 +94,9 @@
 ?>
   <div id="collapseTwo" class="collapse <?php echo $show_Two; ?>" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item <?php echo ($_GET['type'] == "manage_user_user") ?  "active" :  ""; ?>" href="home_backend.php?type=manage_user_user">ผู้ใช้</a>
+      <a class="collapse-item <?php echo ($_GET['type'] == "manage_user_user") ?  "active" :  ""; ?>" href="home_backend.php?type=manage_user_user">ผู้ส่งบทความ</a>
+      <a class="collapse-item <?php echo ($_GET['type'] == "manage_user_Expert") ?  "active" :  ""; ?>" href="home_backend.php?type=manage_user_Expert">ผู้ทรงคุณวุฒิ</a>
+      <a class="collapse-item <?php echo ($_GET['type'] == "manage_user_Editor") ?  "active" :  ""; ?>" href="home_backend.php?type=manage_user_Editor">บรรณาธิการ</a>
     </div>
   </div>
 
