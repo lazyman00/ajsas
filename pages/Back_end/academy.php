@@ -186,7 +186,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="btn btn-primary" href="#" id="sa_edit_academy" name="sa_edit_academy" >บันทึก</a>
+            <a class="btn btn-primary" href="#" id="sa_edit_academy" name="sa_edit_academy" >แก้ไข</a>
             <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
         </div>
         </form>

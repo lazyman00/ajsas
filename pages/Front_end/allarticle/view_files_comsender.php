@@ -13,6 +13,7 @@ $row = $query->fetch_assoc();
 $num = $query->num_rows;
 ?>
 <div class="card-body">
+	<p style="background-color: #0062c4; color: #ffffff; height: 30px; padding-top: 3px;"><span style="padding: 7px;">ตรวจสอบบทความก่อนเผยแพร่ : </span></p>
 	<p>
 		<b>ไฟล์บทความที่แก่ไขแล้ว : </b> <a href="../../files_comment/<?php echo $row['files_comback']; ?>"><?php echo $row['files_comback']; ?></a> <span>วันที่อัพโหลด : </span><?php echo $row['date_comback']; ?>
 	</p>

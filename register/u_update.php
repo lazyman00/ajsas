@@ -1,4 +1,5 @@
 <?php
+require("../phpmailer/PHPMailerAutoload.php");
 $hostname_connect = "localhost";
 $username_connect = "root";
 $password_connect = "1150"; //1150
@@ -53,7 +54,79 @@ if($type=="insert_register"){
     VALUES ('$t_top_id', '$t_type_article_id')";
     $result_spa = $conn->query($sql_spa);
 
-    echo "true";
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $mail = new PHPMailer;
+    $mail->CharSet = "utf-8";
+    $mail->isSMTP();
+
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+
+    // $gmail_username = "darktolightll@gmail.com"; // gmail ที่ใช้ส่ง
+    // $gmail_password = "sunandmoon007"; // รหัสผ่าน gmail
+
+    $gmail_username = "darktolightll@gmail.com"; // gmail ที่ใช้ส่ง
+    $gmail_password = "SunandMoon00"; // รหัสผ่าน gmail
+
+    // $gmail_username = "testwittawat@gmail.com"; // gmail ที่ใช้ส่ง
+    // $gmail_password = "testwittawat2019"; // รหัสผ่าน gmail
+
+    // ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
+
+    $sender = "Acedemic Journal Of Science And Applied Science"; // ชื่อผู้ส่ง
+    $email_sender = "noreply@ibsone.com"; // เมล์ผู้ส่ง 
+    $email_receiver = $_POST['e_eail']; // เมล์ผู้รับ *** test2wittawat@gmail.com
+ 
+    $subject = "Register User Acedemic Journal Of Science And Applied Science"; // หัวข้อเมล์ 
+
+    $mail->Username = $gmail_username;
+    $mail->Password = $gmail_password;
+    $mail->setFrom($email_sender, $sender);
+    $mail->addAddress($email_receiver);
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+    $mail->Subject = $subject;
+    // $mail->SMTPDebug = 1;
+
+    $email_content = "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Document</title>
+    </head>
+    <body>
+        <p><b>Dear ".$name_eng." ".$last_eng."</b></p>
+        <p>Your Username and Password for login to system of Acedemic Journal Of Science And Applied Science </p>
+        <p>URL : http://ajsas.uru.ac.th/</p>
+        <p>User is: ".$email_receiver."</p>
+        <p>Pws is: <u>".$_POST['p_pass']."</u> </p> 
+    </body>
+    </html>";
+
+    //  ถ้ามี email ผู้รับ
+    if($email_receiver){
+        $mail->msgHTML($email_content);
+
+        if (!$mail->send()) {  // สั่งให้ส่ง email
+
+            // กรณีส่ง email ไม่สำเร็จ
+            echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
+            echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
+        }else{
+            // กรณีส่ง email สำเร็จ
+            echo "true";
+        }	
+    }
+
+    $mail->smtpClose();
+
 }
 else
 {

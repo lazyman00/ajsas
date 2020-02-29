@@ -54,11 +54,11 @@ if($type=="showdata_table"){
 
     $sql = "SELECT * FROM (SELECT @row_number := 0) as t,
     (SELECT (@row_number:=@row_number + 1) AS row,
-    m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name,tb.evaluation_id, m.attach_article,m.time
+    m.article_id, tb.sta_rate, m.article_name_th, m.date_article, ta.type_article_name,tb.evaluation_id, m.attach_article_checked,m.time
     FROM tb_sendmail AS ma 
     left join article as m on ma.article_id = m.article_id
     left join type_article as ta on ta.type_article_id = m.type_article_id
-    left join evaluation as tb on m.article_id = tb.article_id 
+    left join evaluation as tb on ma.user_id = tb.user_id 
     WHERE m.article_id is not null AND ma.user_id = ".$user_id." ".$search_name." ".$search_name2." ".$search_name3."
     ) AS tb 
     WHERE tb.row > ".$data_first." AND tb.row <= ".$data_last." ORDER BY row DESC"; 
@@ -95,7 +95,7 @@ if($type=="showdata_table"){
                                 <th scope="row" style="padding-bottom: 6px; padding-top: 6px;"><?php echo $i; ?></th>
                                 <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["article_name_th"];  ?></td>
                                 <td style="padding-bottom: 6px; padding-top: 6px;"><?php echo $fetch["type_article_name"];  ?></td>
-                                <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../../files_work/<?php echo $fetch["attach_article"]; ?>">ไฟล์บทความ</a></td>
+                                <td style="padding-bottom: 6px; padding-top: 6px;"><a href="../../files_work/<?php echo $fetch["attach_article_checked"]; ?>">ไฟล์บทความ</a></td>
                                 <!-- href="../../files_comment/<?php// echo $data_mo['comment_eva']; ?>" -->
                                 <td style="padding-bottom: 6px; padding-top: 6px;">
                                     <?php if($fetch['sta_rate']==0){ ?>
@@ -285,6 +285,7 @@ if($type=="showdata_table"){
 </div>
 </div>
 </div>
+<?php  include('js.php'); ?> 
 <script>
     $('.btnView').click(function(){
         var evaluation_id = $(this).attr('data-evaluation_id');

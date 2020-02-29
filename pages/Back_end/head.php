@@ -49,6 +49,10 @@
       {
           color: "rad";
       }
+      .sidebar .nav-item .collapse .collapse-inner .collapse-item.active, .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+          color: #ffb100;
+          font-weight: 700;
+      }
       .toggle-handle{
         background-color: white;
       }
@@ -154,6 +158,12 @@
       .select2-selection__rendered {
           font-size: 14px;
       }
+      .dataTable > thead > tr > th[class*="sort"]:before,
+      .dataTable > thead > tr > th[class*="sort"]:after {
+          content: "" !important;
+          color:red;
+      }
+     
 
     </style>
 

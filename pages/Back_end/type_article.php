@@ -72,7 +72,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูล ประเภทบทความ</h5>
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูล สาขา</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close" id="colse_type_ac" name="colse_type_ac">
             <span aria-hidden="true">×</span>
           </button>
@@ -80,7 +80,7 @@
         <div class="modal-body">
             <form id="fr_type_article" name="fr_type_article">
                 <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-xl-4 col-lg-4" align="right">ชื่อประเภทบทความ : </div>
+                    <div class="col-xl-4 col-lg-4" align="right">ชื่อสาขา : </div>
                     <div class="col-xl-8 col-lg-8"><input class="form-control" type="text" size="30" name="name_type" id="name_type" ></div>
                 </div>
             </form>
@@ -99,7 +99,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล ประเภทบทความ</h5>
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล สาขา</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close" id="colse_type_ac" name="colse_type_ac">
             <span aria-hidden="true">×</span>
           </button>
@@ -107,13 +107,13 @@
         <div class="modal-body">
             <form id="e_fr_type_article" name="e_fr_type_article">
                 <div class="row" style="padding-bottom: 10px;">
-                    <div class="col-xl-4 col-lg-4" align="right">ชื่อประเภทบทความ : </div>
+                    <div class="col-xl-4 col-lg-4" align="right">ชื่อสาขา : </div>
                     <div class="col-xl-8 col-lg-8"><input class="form-control" type="text" size="30" name="e_name_type" id="e_name_type" ></div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" id="e_sa_type_ac" name="e_sa_type_ac">เพิ่ม</button>
+            <button class="btn btn-primary" type="button" id="e_sa_type_ac" name="e_sa_type_ac">แก้ไข</button>
             <button class="btn btn-secondary" type="button" data-dismiss="modal">ยกเลิก</button>
           <input type="hidden" size="30" name="id_type_ac" id="id_type_ac" >
         </div>
@@ -134,7 +134,7 @@
 			},
 			messages: {
                 name_type: {
-                        required: "กรุณากรอกชื่อประเภทบทความของท่าน"
+                        required: "กรุณากรอกชื่อสาขาของท่าน"
                 }
 			}
 		});
@@ -148,7 +148,7 @@
 			},
 			messages: {
                 e_name_type: {
-                        required: "กรุณากรอกชื่อประเภทบทความของท่าน"
+                        required: "กรุณากรอกชื่อสาขาของท่าน"
                 }
 			}
 		});
