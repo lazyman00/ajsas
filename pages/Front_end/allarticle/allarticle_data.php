@@ -6,7 +6,7 @@ $type          = $_GET["action"];
 $page          = $_GET["page"];
 $search_name   = $_POST['search_name'];
 $search_name2  = $_POST['search_name2'];
-$search_name3  = $_POST['search_name3'];
+echo $search_name3  = $_POST['search_name3'];
 
 $total_record  ="";
 $total_page    ="";
@@ -41,7 +41,7 @@ if($type=="showdata_table"){
     }
     if(!empty($search_name3))
     {      
-        $search_name3 = " AND YEAR(m.date_article) = $search_name3  "; 
+        $search_name3 = " AND m.year = $search_name3  "; 
     }else{
         $search_name3 ="";
     }
