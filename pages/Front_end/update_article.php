@@ -29,21 +29,21 @@
 	<?php include('menu_index.php'); ?>
     <?php 
 
-        $article_id=$_GET['article_id'];
+      echo  $article_id=$_GET['article_id'];
 
         $sql2 = "SELECT * FROM type_article";
         $result2 = $conn->query($sql2);
 
-        $sql3 = "SELECT * FROM article WHERE article_id=$article_id";          
+        $sql3 = "SELECT * FROM article  
+        left join type_article on type_article.type_article_id = article.type_article_id
+    --    left join author on author.article_id = article.article_id
+        WHERE article_id=$article_id";          
         $result3 = $conn->query($sql3);
 
         $data = mysqli_fetch_assoc($result3);
         $conn->close(); 
     ?>
 <div class="container">
-
-
-
                 <div class="card" >
                         <h5 class="card-header">บทความ</h5>
                         <div class="card-body">

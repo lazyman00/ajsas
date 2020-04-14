@@ -65,14 +65,18 @@ $result = $conn->query($sql);
                             <select class="form-control" id="search_name3" name="search_name3" >
                             <option value="0"><?php echo "กรุณาเลือก ปี"; ?></option>
 <?php 
-                            for ($i = date("Y"); $i >= date("Y")-9; $i--) { 
-                                $name_Y = $i+543;
+                            for($i=date('Y')+547; $i>=date('Y')+543-3; $i--) { 
+                               // $name_Y = $i+543;
 ?>
-                                <option value="<?php echo $i; ?>"><?php echo "พ.ศ. ".$name_Y; ?></option>
+                                <option value="<?php echo $i; ?>"><?php echo "พ.ศ. ".$i; ?></option>
 <?php 
                             }
 ?>
                             </select>
+
+                            
+
+
                         </div> 
                         <div class="col-md-3 mb-3">
                             <button onclick="show_date_table(1)" class="btn btn-outline-success btn-sm" style="border-top-width: 3.99;margin-top: 26px;">ค้นหา</button>

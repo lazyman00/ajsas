@@ -22,6 +22,8 @@ if($type=="da_depar"){
     $id_d = ($id_d != "" ) ? $_POST['id_d'] : 0 ;
 
     ?>
+
+    
     <select class="form-control form-control-sm select2_re" id="e_education" name="e_education">
         <?php
         $sql_ac = "SELECT * FROM academe where department_id = '$id_d' AND status_academe = 1";

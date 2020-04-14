@@ -20,12 +20,13 @@ if(isset($_POST['mm']) && $_POST['mm']=='sent_files'){
 <?php 
 $userid = $_SESSION['user_id'];
 
- $sql = sprintf("SELECT * FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
+$sql = sprintf("SELECT article.article_id as id,  article.*, tb_allcomment.* FROM `article` left join tb_allcomment on article.article_id = tb_allcomment.article_id where user_id = %s and year = %s and `time` = %s",
 	GetSQLValueString($userid, 'text'),
 	GetSQLValueString($_POST['year'], 'text'),
 	GetSQLValueString($_POST['time'], 'text'));
 $query = $conn->query($sql);
 $row = $query->fetch_assoc();
+
 $numRow = $query->num_rows;
 ?>
 <input type="hidden" name="sta_work" value="<?php echo $row['sta_work']; ?>">
@@ -137,13 +138,18 @@ $numRow = $query->num_rows;
 							<td align="center">                                
 								<?php
 								$date=date_create($row["date_article"]);
-								echo date_format($date,"Y/m/d");
+								echo date_format($date,"d/m");
+								$iy = date("Y");
+								$name_Y = $iy+543;
+								echo "/".$name_Y;
 								?>
 							</td>
 							<td align="center">
-
-								<?php echo $row['article_id']; ?>
-								<a href="update_article.php?article_id=<?php echo urlencode($row['article_id']); ?>"><button class="btn btn-danger btn-sm">แก้ไข</button></a>
+							<?php // echo $row['article_id']; ?>
+							<?php // echo $row['article_id']; ?>
+								<a href="update_article.php?article_id=<?php echo $row['id']; ?>">
+									<button class="btn btn-danger btn-sm"><i class="far fa-eye"></i></button>
+								</a>
 							</td>
 						</tr>
 					<?php }else{ ?> 
@@ -235,7 +241,7 @@ $article_id = "-1";
 if(isset($row['article_id']) && $row['article_id']!=""){
 	$article_id = $row['article_id'];
 }
-echo $sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
+ $sql_a = sprintf("SELECT * FROM `tb_sentcomment_back` WHERE `article_id` = %s",GetSQLValueString($article_id,'text'));
 $query_a = $conn->query($sql_a);
 $row_a =$query_a->fetch_assoc();
 $num_rows = $query_a->num_rows;

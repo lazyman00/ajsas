@@ -31,34 +31,36 @@
 					<div class="card-body">
 
 						<form>
-							<div class="form-row">ปี
-								<div class="form-group col-md-2">
-									<!-- <label for="inputEmail4">ปีที่ : </label> -->
+
+						<div class="row" style="height: 38px;">
+								<div class="col-md-1 mb-3" style="text-align:right">
+									<label for="name">ปี</label>                                                
+								</div>
+								<div class="col-md-2 mb-3" >
 									<select id="year" name="year" class="form-control" required>
-										<?php for($i=date('Y')+543; $i>=date('Y')+543-2; $i--){ ?> 
-											<option <?php if($i==date('Y')){ ?> selected="" <?php } ?> 
-											value="<?php echo $i; ?>"><?php echo $i; ?>
+										<?php $chk_y=date('Y')+543; $name_chk_y="";
+										for($i=date('Y')+547; $i>=date('Y')+543-3; $i--){ ?> 
+										<option <?php echo ($i==$chk_y)? "selected" : ""; ?> value="<?php echo $i; ?>"><?php echo $i ?>
 											</option>
 										<?php } ?>
-
 									</select>
-								</div>
-
-ครั้ง
-
-								<div class="form-group col-md-3">
-									<!-- <label for="inputPassword4">ครั้ง : </label> -->
+								</div>ฉบับที่
+								<!-- <div class="col-md-1 mb-3" style="text-align:right">
+									<label for="name">ฉบับที่</label>                                                
+								</div> -->
+								<div class="col-md-2 mb-3" >
 									<select id="time" name="time" class="form-control" style="width: 100px;" required>
 										<?php for($i=1; $i<=2; $i++){ ?> 
 											<option <?php if($i==1){ ?> selected="" <?php } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
 										<?php } ?>
 									</select>
 								</div>
-								<!-- <div class="form-group col-md-4"> -->
-									<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" 
-									style="  margin-left: 458px;" disabled="" >ส่งบทความ</button></a>
-								<!-- </div> -->
-							</div>
+								<div class="col-md-4 mb-3" >
+								</div>
+								<div class="col-md-2 mb-3" >
+								<a href="send_article.php?user_id=<?php echo $_SESSION["user_id"]; ?>"><button id="sent" type="button" class="btn btn-outline-success" disabled="" >ส่งบทความ</button></a>
+								</div>
+            			</div>
 						</form>	
 						
 						<br>
@@ -68,13 +70,25 @@
 			</div>
 		</div> <br>
 	</div>
-	<footer class="page-footer font-small blue" style="clear: both;">
-		<div class="footer-copyright text-center py-3" style="background-color:#008000;  height: 100px;">
-			<p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
-			<p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+	<!-- <footer class="page-footer font-small blue" style="clear: both;">
+	<div class="footer-copyright py-3" style="background-color:#008000;  height: 150px;">
+	<div class="container">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<p><img src="../../img/science-04.png" style="width: 118px;margin-left: 210px;"></p>
+				</div>
+				<div class="col-md-8"><br>
+					<p style="color:#F7FF00;margin-bottom: 0px;font-size: 15px;"><i class="fa fa-copyright" style="color:#F7FF00;" aria-hidden="true"></i> คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
+					<p style="color:#F7FF00;font-size: 15px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
+					<p style="color:#F7FF00;font-size: 15px;"><i class="fa fa-envelope" style="color:#F7FF00;"  aria-hidden="true"></i> Email : ajsas.sci@gmail.com</p>
+				</div>
+			</div>
 		</div>
-	</footer>
-
+	</div>
+	</div>
+	</footer> -->
+	<?php include('footer.php'); ?>	
 	<?php include('js.php'); ?>	
 
 

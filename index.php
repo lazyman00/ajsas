@@ -221,90 +221,6 @@
             </div>
         </div>
 
-        <!-- <div class="container">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col" style=" width:10%;text-align:center">ลำดับ</th> 
-                        <th scope="col" style=" width:60%;text-align:center">กิจกรรม</th>
-                        <th scope="col" style=" width:30%;text-align:center">ช่วงระยะเวลา</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align:center">1</td>
-                        <td>ประชาสัมพันธ์</td>
-                        <td style="text-align:center">ม.ค. - ก.พ.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">2</td>
-                        <td>รับข้อเสนอบทความ</td>
-                        <td style="text-align:center">ก.พ. - มี.ค.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">3</td>
-                        <td>ส่งผู้ทรงคุณวุฒิตรวจสอบวิชาการ</td>
-                        <td style="text-align:center">ก.พ. - เม.ย.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">4</td>
-                        <td>ส่งคืนเพื่อปรับแก้ไขตามข้อเสนอแนะ</td>
-                        <td style="text-align:center">เม.ย - พ.ค.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">5</td>
-                        <td>ตรวจสอบและพิมพ์วารสาร</td>
-                        <td style="text-align:center">มิ.ย.</td>
-                    </tr>
-                </tbody>
-            </table><br>
-        </div>
-
-        <div class="container">
-            <div class="col-md-12">
-                <h3 style="fontfa: prompt;font-size: 18px;font-weight: 500;color: #555;text-align:center">ฉบับที่ 2 กรกฎาคม – ธันวาคม</h3>
-            </div>
-        </div>
-
-        <div class="container">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col" style=" width:10%;text-align:center">ลำดับ</th> 
-                        <th scope="col" style=" width:60%;text-align:center">กิจกรรม</th>
-                        <th scope="col" style=" width:30%;text-align:center">ช่วงระยะเวลา</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align:center">1</td>
-                        <td>ประชาสัมพันธ์</td>
-                        <td style="text-align:center">ก.ค. - ส.ค.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">2</td>
-                        <td>รับข้อเสนอบทความ</td>
-                        <td style="text-align:center">ส.ค. - ก.ย.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">3</td>
-                        <td>ส่งผู้ทรงคุณวุฒิตรวจสอบวิชาการ</td>
-                        <td style="text-align:center">ส.ค. - พ.ย.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">4</td>
-                        <td>ส่งคืนเพื่อปรับแก้ไขตามข้อเสนอแนะ</td>
-                        <td style="text-align:center">ต.ค. - พ.ย.</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center">5</td>
-                        <td>ตรวจสอบและพิมพ์วารสาร</td>
-                        <td style="text-align:center">ธ.ค.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
-
         <div class="container">
             <div class="col-md-12"><br>
                 <h3 style="fontfa: prompt;font-size: 28px;font-weight: 500;color: #555;text-align:center;margin-bottom: 26px;">รูปแบบการจัดทำบทความเพื่อตีพิมพ์ลงวารสารวิชาการ </h3>
@@ -460,13 +376,13 @@
         </div>
 
     </div>
-
-    <footer class="page-footer font-small blue" style="clear: both;">
+    
+    <!-- <footer class="page-footer font-small blue" style="clear: both;">
         <div class="footer-copyright text-center py-3" style="background-color:#008000;  height: 100px;">
             <p style="color:#ffffff;margin-bottom: 0px;font-size: 14px;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยราชภัฏอุตรดิตถ์ โทรศัพท์ 0-5541-1096 ต่อ 1300</p>
             <p style="color:#ffffff;font-size: 14px;">Academic Journal Of Science And Applied Science. All Rights Reserved.</p>
         </div>
-    </footer>
+    </footer> -->
 
     <div class="modal fade bd-example-modal-sm" id="loginform" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -577,6 +493,7 @@
 </script>
 
 
+<?php include('footer.php'); ?>	
 
 </body>
 

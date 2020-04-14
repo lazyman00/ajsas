@@ -5,9 +5,9 @@
 <html lang="en">
 <?php include('header.php'); ?>
 <style type="text/css">
-    .a{
+     .a{
         font-size: 14px;
-    }
+    } 
     .bg-white{
         background-color:rgb(14, 130,0,1)!important;
     }
