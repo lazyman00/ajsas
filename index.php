@@ -312,7 +312,7 @@
 
             <center><table>
                 <tr>
-                    <td><a href="document/formatarticle.pdf" type="button" class="btn btn-outline-success" >ดาวน์โหลดไฟล์รูปแบบบทความ pdf</a></td>
+                    <td><a href="document/formatarticle.pdf" type="button" class="btn btn-outline-success" target="_blank" >ดาวน์โหลดไฟล์รูปแบบบทความ pdf</a></td>
                     <td><a href="document/formatarticle.docx" type="button" class="btn btn-outline-success" >ดาวน์โหลดไฟล์รูปแบบบทความ word</a></td>
                 </tr>
             </table></center>

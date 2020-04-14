@@ -67,8 +67,8 @@ if($type=="insert_register"){
     // $gmail_username = "darktolightll@gmail.com"; // gmail ที่ใช้ส่ง
     // $gmail_password = "sunandmoon007"; // รหัสผ่าน gmail
 
-    $gmail_username = "darktolightll@gmail.com"; // gmail ที่ใช้ส่ง
-    $gmail_password = "SunandMoon00"; // รหัสผ่าน gmail
+    $gmail_username = "ajsas.sci@gmail.com"; // gmail ที่ใช้ส่ง
+    $gmail_password = "System1234"; // รหัสผ่าน gmail
 
     // $gmail_username = "testwittawat@gmail.com"; // gmail ที่ใช้ส่ง
     // $gmail_password = "testwittawat2019"; // รหัสผ่าน gmail

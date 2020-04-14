@@ -40,6 +40,16 @@ if($type == "save_editDataUser")
   
   $conn->close();
 } 
+else if($type=="update_ResetPass")
+{
+  $id_userReset = $_POST['Reset_user_id'];
+  $passNew = md5($_POST['reset_passNew']);
+
+  $sql = "UPDATE user SET password = '$passNew' WHERE user_id = '$id_userReset'";
+  $result = $conn->query($sql);
+
+  echo "true";
+}
 else
 {
   echo "No_Post_action";

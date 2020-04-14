@@ -38,8 +38,6 @@ $mail->SMTPOptions = array(
 $mail->Subject = $subject;
 // $mail->SMTPDebug = 1;
 
-
-
 $email_content = "
 	<!DOCTYPE html>
 	<html>

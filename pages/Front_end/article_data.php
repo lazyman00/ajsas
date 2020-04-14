@@ -79,6 +79,7 @@
 
 
 	<script type="text/javascript">
+
 		var year = $('[name=year]').val();
 		var time = $('[name=time]').val();
 		$.post('article_data/view_table.php', {year: year, time:time }, function(data) {
